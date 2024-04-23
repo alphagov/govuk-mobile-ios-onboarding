@@ -16,7 +16,6 @@
 		5D5018B32BD101F3005ABC1C /* OnboardingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D5018B22BD101F3005ABC1C /* OnboardingTests.swift */; };
 		5D5018BD2BD101F3005ABC1C /* OnboardingUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D5018BC2BD101F3005ABC1C /* OnboardingUITests.swift */; };
 		5D5018BF2BD101F3005ABC1C /* OnboardingUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D5018BE2BD101F3005ABC1C /* OnboardingUITestsLaunchTests.swift */; };
-		5DB0DB0E2BD7C0C70024C744 /* Onboarding in Frameworks */ = {isa = PBXBuildFile; productRef = 5DB0DB0D2BD7C0C70024C744 /* Onboarding */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,7 +56,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5DB0DB0E2BD7C0C70024C744 /* Onboarding in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -211,7 +209,6 @@
 			);
 			name = govuk_onboarding_ios;
 			packageProductDependencies = (
-				5DB0DB0D2BD7C0C70024C744 /* Onboarding */,
 			);
 			productName = "govuk-mobile-ios-onboarding";
 			productReference = 5D5018982BD101F0005ABC1C /* govuk_onboarding_ios.app */;
@@ -286,7 +283,7 @@
 			);
 			mainGroup = 5D50188F2BD101F0005ABC1C;
 			packageReferences = (
-				5DB0DB0C2BD7C0C60024C744 /* XCLocalSwiftPackageReference "../Onboarding" */,
+				5DB0DB0C2BD7C0C60024C744 /* XCLocalSwiftPackageReference ".." */,
 			);
 			productRefGroup = 5D5018992BD101F0005ABC1C /* Products */;
 			projectDirPath = "";
@@ -705,18 +702,11 @@
 /* End XCConfigurationList section */
 
 /* Begin XCLocalSwiftPackageReference section */
-		5DB0DB0C2BD7C0C60024C744 /* XCLocalSwiftPackageReference "../Onboarding" */ = {
+		5DB0DB0C2BD7C0C60024C744 /* XCLocalSwiftPackageReference ".." */ = {
 			isa = XCLocalSwiftPackageReference;
-			relativePath = ../Onboarding;
+			relativePath = ..;
 		};
 /* End XCLocalSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		5DB0DB0D2BD7C0C70024C744 /* Onboarding */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = Onboarding;
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 5D5018902BD101F0005ABC1C /* Project object */;
 }

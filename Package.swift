@@ -17,12 +17,19 @@ let package = Package(
         // Targets can depend on other targets in this package and products from dependencies.
         .target(
             name: "Onboarding",
-            path: "Onboarding/Sources"
+            path: "Onboarding",
+            sources: [
+                "Sources"
+            ]
+
         ),
         .testTarget(
             name: "OnboardingTests",
             dependencies: ["Onboarding"],
-            path: "Onboarding/Tests"
+            path: "Onboarding",
+            sources: [
+                "Tests"
+            ]
         ),
     ]
 )

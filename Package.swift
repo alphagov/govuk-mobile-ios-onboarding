@@ -21,8 +21,8 @@ let package = Package(
         ),
         .testTarget(
             name: "OnboardingTests",
-            path: "Onboarding/Tests",
-            dependencies: ["Onboarding"]
+            dependencies: ["Onboarding"],
+            path: "Onboarding/Tests"
         ),
     ]
 )

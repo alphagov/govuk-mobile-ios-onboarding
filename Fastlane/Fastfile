@@ -4,7 +4,6 @@ require_relative 'configuration'
 
 default_platform :ios
 
-# rubocop:disable Metrics/BlockLength
 platform :ios do
   desc 'Runs all the tests'
   lane :unit do
@@ -28,4 +27,3 @@ def configuration
     '.build.yml'
   )
 end
-# rubocop:enable Metrics/BlockLength

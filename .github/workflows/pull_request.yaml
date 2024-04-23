@@ -1,0 +1,34 @@
+name: Pull Request
+
+on:
+  pull_request:
+    types: [ opened, reopened, synchronize, ready_for_review ]
+    branches: [ develop, release/*, main ]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: Unit test
+    runs-on: macos-14
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          lfs: 'true'
+          fetch-depth: 0
+
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with: 
+          bundler-cache: true
+
+      - name: Unit tests
+        env:
+          LC_ALL: "en_US.UTF-8"
+          LANG: "en_US.UTF-8"
+        run: |
+          bundle exec fastlane unit

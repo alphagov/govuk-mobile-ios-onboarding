@@ -1,0 +1,11 @@
+
+default: &DEFAULTS
+  app: &APP_DEFAULTS
+    scheme: GovUK-Onboarding
+    output_directory: build_output
+  scan:
+    devices:
+      - iPhone 15 Pro
+
+unit:
+  <<: *DEFAULTS

@@ -7,7 +7,7 @@
 
 import XCTest
 
-final class govuk_mobile_ios_onboardingUITestsLaunchTests: XCTestCase {
+final class OnboardingUITestsLaunchTests: XCTestCase {
 
     override class var runsForEachTargetApplicationUIConfiguration: Bool {
         true

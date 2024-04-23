@@ -13,9 +13,9 @@
 		5D5018A32BD101F0005ABC1C /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 5D5018A22BD101F0005ABC1C /* Base */; };
 		5D5018A52BD101F3005ABC1C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5D5018A42BD101F3005ABC1C /* Assets.xcassets */; };
 		5D5018A82BD101F3005ABC1C /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 5D5018A72BD101F3005ABC1C /* Base */; };
-		5D5018B32BD101F3005ABC1C /* govuk_mobile_ios_onboardingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D5018B22BD101F3005ABC1C /* govuk_mobile_ios_onboardingTests.swift */; };
-		5D5018BD2BD101F3005ABC1C /* govuk_mobile_ios_onboardingUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D5018BC2BD101F3005ABC1C /* govuk_mobile_ios_onboardingUITests.swift */; };
-		5D5018BF2BD101F3005ABC1C /* govuk_mobile_ios_onboardingUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D5018BE2BD101F3005ABC1C /* govuk_mobile_ios_onboardingUITestsLaunchTests.swift */; };
+		5D5018B32BD101F3005ABC1C /* OnboardingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D5018B22BD101F3005ABC1C /* OnboardingTests.swift */; };
+		5D5018BD2BD101F3005ABC1C /* OnboardingUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D5018BC2BD101F3005ABC1C /* OnboardingUITests.swift */; };
+		5D5018BF2BD101F3005ABC1C /* OnboardingUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D5018BE2BD101F3005ABC1C /* OnboardingUITestsLaunchTests.swift */; };
 		5DB0DB0E2BD7C0C70024C744 /* Onboarding in Frameworks */ = {isa = PBXBuildFile; productRef = 5DB0DB0D2BD7C0C70024C744 /* Onboarding */; };
 /* End PBXBuildFile section */
 
@@ -46,10 +46,10 @@
 		5D5018A72BD101F3005ABC1C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5D5018A92BD101F3005ABC1C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5D5018AE2BD101F3005ABC1C /* govuk_onboarding_ios_unit_tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = govuk_onboarding_ios_unit_tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		5D5018B22BD101F3005ABC1C /* govuk_mobile_ios_onboardingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = govuk_mobile_ios_onboardingTests.swift; sourceTree = "<group>"; };
+		5D5018B22BD101F3005ABC1C /* OnboardingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingTests.swift; sourceTree = "<group>"; };
 		5D5018B82BD101F3005ABC1C /* govuk_onboarding_ios_ui_tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = govuk_onboarding_ios_ui_tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		5D5018BC2BD101F3005ABC1C /* govuk_mobile_ios_onboardingUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = govuk_mobile_ios_onboardingUITests.swift; sourceTree = "<group>"; };
-		5D5018BE2BD101F3005ABC1C /* govuk_mobile_ios_onboardingUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = govuk_mobile_ios_onboardingUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		5D5018BC2BD101F3005ABC1C /* OnboardingUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingUITests.swift; sourceTree = "<group>"; };
+		5D5018BE2BD101F3005ABC1C /* OnboardingUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingUITestsLaunchTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,7 +112,7 @@
 		5D5018B12BD101F3005ABC1C /* govuk_onboarding_ios_unit_tests */ = {
 			isa = PBXGroup;
 			children = (
-				5D5018B22BD101F3005ABC1C /* govuk_mobile_ios_onboardingTests.swift */,
+				5D5018B22BD101F3005ABC1C /* OnboardingTests.swift */,
 			);
 			path = govuk_onboarding_ios_unit_tests;
 			sourceTree = "<group>";
@@ -120,8 +120,8 @@
 		5D5018BB2BD101F3005ABC1C /* govuk_onboarding_ios_ui_tests */ = {
 			isa = PBXGroup;
 			children = (
-				5D5018BC2BD101F3005ABC1C /* govuk_mobile_ios_onboardingUITests.swift */,
-				5D5018BE2BD101F3005ABC1C /* govuk_mobile_ios_onboardingUITestsLaunchTests.swift */,
+				5D5018BC2BD101F3005ABC1C /* OnboardingUITests.swift */,
+				5D5018BE2BD101F3005ABC1C /* OnboardingUITestsLaunchTests.swift */,
 			);
 			path = govuk_onboarding_ios_ui_tests;
 			sourceTree = "<group>";
@@ -187,8 +187,8 @@
 		5DB0DB092BD7B97C0024C744 /* govuk_onboarding_ios */ = {
 			isa = PBXGroup;
 			children = (
-				5D5018B12BD101F3005ABC1C /* govuk_onboarding_ios_unit_tests */,
 				5D5018BB2BD101F3005ABC1C /* govuk_onboarding_ios_ui_tests */,
+				5D5018B12BD101F3005ABC1C /* govuk_onboarding_ios_unit_tests */,
 			);
 			path = govuk_onboarding_ios;
 			sourceTree = "<group>";
@@ -200,6 +200,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 5D5018C22BD101F3005ABC1C /* Build configuration list for PBXNativeTarget "govuk_onboarding_ios" */;
 			buildPhases = (
+				5DB0DB122BD7C3BD0024C744 /* Lint */,
 				5D5018942BD101F0005ABC1C /* Sources */,
 				5D5018952BD101F0005ABC1C /* Frameworks */,
 				5D5018962BD101F0005ABC1C /* Resources */,
@@ -325,6 +326,27 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		5DB0DB122BD7C3BD0024C744 /* Lint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = Lint;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if test -d \"/opt/homebrew/bin/\"; then\n  PATH=\"/opt/homebrew/bin/:${PATH}\"\nfi\n\nif which swiftlint >/dev/null; then\n    cd .. #Needed to step up a directory into project root\n    swiftlint --fix\n    swiftlint --strict\nelse\n  echo \"warning: SwiftLint not installed, please run brew install swiftlint\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		5D5018942BD101F0005ABC1C /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -340,7 +362,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5D5018B32BD101F3005ABC1C /* govuk_mobile_ios_onboardingTests.swift in Sources */,
+				5D5018B32BD101F3005ABC1C /* OnboardingTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -348,8 +370,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5D5018BF2BD101F3005ABC1C /* govuk_mobile_ios_onboardingUITestsLaunchTests.swift in Sources */,
-				5D5018BD2BD101F3005ABC1C /* govuk_mobile_ios_onboardingUITests.swift in Sources */,
+				5D5018BF2BD101F3005ABC1C /* OnboardingUITestsLaunchTests.swift in Sources */,
+				5D5018BD2BD101F3005ABC1C /* OnboardingUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -515,6 +537,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = N8W395F695;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Production/govuk_onboarding_ios/SupportingFiles/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -543,6 +566,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = N8W395F695;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Production/govuk_onboarding_ios/SupportingFiles/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;

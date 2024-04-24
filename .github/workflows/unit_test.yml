@@ -1,12 +1,10 @@
-name: Pull Request
+name: Unit Test
 
 on:
-  pull_request:
-    types: [ opened, reopened, synchronize, ready_for_review ]
-    branches: [ develop, release/*, main ]
+  workflow_call:
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
+  group: ${{ github.workflow }}-${{ github.ref }}-unit
   cancel-in-progress: true
 
 jobs:
@@ -30,8 +28,4 @@ jobs:
         run: xcodes select
 
       - name: Unit tests
-        env:
-          LC_ALL: "en_US.UTF-8"
-          LANG: "en_US.UTF-8"
-        run: |
-          bundle exec fastlane unit
+        run: bundle exec fastlane unit

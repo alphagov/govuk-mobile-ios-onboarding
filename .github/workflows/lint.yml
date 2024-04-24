@@ -1,16 +1,11 @@
 name: Lint
 
 on:
-  push:
-    branches:
-      - main
-  pull_request:
-    types: [ opened, reopened, synchronize, ready_for_review ]
-    branches: [ develop, release/*, main ]
+  workflow_call:
 
-permissions:
-  contents: read
-  pull-requests: write
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}-lint
+  cancel-in-progress: true
 
 jobs:
   run-linters:

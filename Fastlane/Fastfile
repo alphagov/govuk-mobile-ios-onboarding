@@ -1,0 +1,29 @@
+# frozen_string_literal: true
+
+require_relative 'configuration'
+
+default_platform :ios
+
+platform :ios do
+  desc 'Runs all the tests'
+  lane :unit do
+    unit_test
+  end
+
+  private_lane :unit_test do
+    scan(
+      scheme: configuration.app_scheme,
+      devices: configuration.scan_devices,
+      clean: false,
+      prelaunch_simulator: true,
+      derived_data_path: './build_for_unit_testing'
+    )
+  end
+end
+
+def configuration
+  @configuration ||= Configuration.new(
+    lane_context[SharedValues::LANE_NAME],
+    '.build.yml'
+  )
+end

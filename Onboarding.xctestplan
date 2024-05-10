@@ -1,0 +1,38 @@
+{
+  "configurations" : [
+    {
+      "id" : "8C5A89C1-03E3-4898-86F2-491E6B53E5D5",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "testTimeoutsEnabled" : true
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:GovUK-Onboarding.xcodeproj",
+        "identifier" : "5D5018B72BD101F3005ABC1C",
+        "name" : "govuk_onboarding_ios_ui_tests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:GovUK-Onboarding.xcodeproj",
+        "identifier" : "5D5018AD2BD101F3005ABC1C",
+        "name" : "govuk_onboarding_ios_unit_tests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:..",
+        "identifier" : "OnboardingTests",
+        "name" : "OnboardingTests"
+      }
+    }
+  ],
+  "version" : 1
+}

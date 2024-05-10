@@ -21,6 +21,10 @@ class Configuration
     setting(:app, :output_directory)
   end
 
+  def app_project
+    setting(:app, :project)
+  end
+
   def scan_devices
     setting(:scan, :devices)
   end

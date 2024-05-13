@@ -1,11 +1,5 @@
-//
-// GOV.UK
-//
-// Copyright © 2024 Government Digital Services.
-// All Rights Reserved.
-//
-
 import XCTest
+
 @testable import govuk_onboarding_ios
 
 final class OnboardingTests: XCTestCase {

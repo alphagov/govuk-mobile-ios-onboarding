@@ -8,15 +8,27 @@ platform :ios do
   desc 'Runs all the tests'
   lane :unit do
     unit_test
+    convert_coverage
   end
 
   private_lane :unit_test do
     scan(
+      workspace: configuration.app_workspace,
       scheme: configuration.app_scheme,
       devices: configuration.scan_devices,
+      testplan: configuration.app_test_plan,
       clean: false,
-      prelaunch_simulator: true,
-      derived_data_path: './build_for_unit_testing'
+      prelaunch_simulator: true
+    )
+  end
+
+  private_lane :convert_coverage do
+    slather(
+      workspace: configuration.app_workspace,
+      proj: configuration.app_project,
+      scheme: configuration.app_scheme,
+      output_directory: configuration.app_output_directory,
+      sonarqube_xml: true
     )
   end
 end

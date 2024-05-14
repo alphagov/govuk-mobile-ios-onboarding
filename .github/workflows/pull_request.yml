@@ -3,7 +3,7 @@ name: Pull Request
 on:
   pull_request:
     types: [ opened, reopened, synchronize, ready_for_review ]
-    branches: [ develop, release/*, main ]
+    branches: [ develop, main ]
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -14,3 +14,8 @@ jobs:
     uses: ./.github/workflows/lint.yml
   unit-test:
     uses: ./.github/workflows/unit_test.yml
+  sonar-scan:
+    uses: ./.github/workflows/sonar_scan.yml
+    needs: unit-test
+    secrets:
+      SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}

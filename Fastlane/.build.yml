@@ -3,6 +3,9 @@ default: &DEFAULTS
   app: &APP_DEFAULTS
     scheme: GovUK-Onboarding
     output_directory: build_output
+    workspace: GovUK-Onboarding.xcworkspace
+    project: Example/GovUK-Onboarding.xcodeproj
+    test_plan: Onboarding
   scan:
     devices:
       - iPhone 15 Pro

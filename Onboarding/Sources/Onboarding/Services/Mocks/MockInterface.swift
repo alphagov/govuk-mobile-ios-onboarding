@@ -5,7 +5,6 @@ protocol MockInterface: AnyObject {
 }
 
 extension MockInterface {
-
     func loadJSON(filename: String) -> [OnboardingSlideModel] {
         guard let resourceUrl = Bundle.module.url(
           forResource: "OnboardingResponse",

@@ -32,7 +32,6 @@ struct OnboardingSlideView: View {
     }
 }
 
-
 #Preview {
     OnboardingSlideView(model: OnboardingSlideModel(id: "", image: "", title: "", description: ""))
 }

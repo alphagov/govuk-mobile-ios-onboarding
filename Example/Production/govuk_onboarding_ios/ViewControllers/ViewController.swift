@@ -1,17 +1,14 @@
 import UIKit
 import Onboarding
 class ViewController: UIViewController {
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpViewController()
     }
-    
     func setUpViewController() {
         let onboardingModule =
         OnboardingModule(dismissAction: {})
         let onboardingViewController = onboardingModule.initialViewController(for: .localJSON( "OnboardingResponse"))
-        
         guard let onboardingView = onboardingViewController.view else { return }
         onboardingViewController.didMove(toParent: self)
         view.addSubview(onboardingViewController.view)

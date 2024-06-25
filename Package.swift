@@ -5,6 +5,7 @@ import PackageDescription
 
 let package = Package(
     name: "Onboarding",
+    platforms: [.iOS(.v14)],
     products: [
         // Products define the executables and libraries a package produces, making them visible to other packages.
         .library(
@@ -20,7 +21,7 @@ let package = Package(
             path: "Onboarding",
             sources: [
                 "Sources"
-            ]
+            ],resources: [.process("OnboardingResponse.json")]
 
         ),
         .testTarget(

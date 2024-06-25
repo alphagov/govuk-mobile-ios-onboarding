@@ -1,0 +1,61 @@
+import SwiftUI
+
+struct OnboardingContainerView: View {
+    @StateObject private var viewModel: OnboardingViewModel
+    private var themeColor = UIColor(Color("AccentColor", bundle: Bundle.module))
+    private var textColor =  UIColor(Color("PrimaryColor", bundle: Bundle.module))
+    @Environment(\.verticalSizeClass) var verticalSizeClass
+    init(viewModel: OnboardingViewModel) {
+        _viewModel = StateObject(wrappedValue: viewModel)
+        UIPageControl.appearance().currentPageIndicatorTintColor = themeColor
+    }
+    var body: some  View {
+        switch viewModel.state {
+        case .loading:
+            ProgressView()
+        case .loaded(let onboardingSlides):
+            VStack {
+                TabView(selection: $viewModel.tabIndex) {
+                    ForEach(0..<onboardingSlides.count, id: \.self) { index in
+                        OnboardingSlideView(model: onboardingSlides[index])
+                    }
+                }
+                .tabViewStyle(.page(indexDisplayMode: .never))
+
+                UIKitPageControl(currentPage: $viewModel.tabIndex, numberOfPages: viewModel.onboardingSlidesCount)
+                AdaptiveStack(spaceing: 0) {
+                    UIKitActionButton(onTap: {
+                        viewModel.action()
+                    }, title: viewModel.getActionButtonTitle(),
+                                      backgroundColor: themeColor,
+                                      textColor: textColor)
+                    .accessibilityLabel(
+                        Text(viewModel.isLastSlide ? viewModel.lastButtonTitle:  viewModel.primaryButtonTitle))
+                    .accessibilityHint(viewModel.actionButtonAccessibilityHint)
+                     .accessibility(sortPriority: 1)
+                    .frame(width: 383, height: 50)
+                    if !viewModel.isLastSlide {
+                        UIKitSkipbutton(onTap: {
+                            viewModel.skip()
+                        }, title: viewModel.skipButtonTitle, textColor: themeColor)
+                        .accessibilityLabel(Text(viewModel.skipButtonTitle))
+                        .accessibilityHint(viewModel.skipButtonAcessibilityHint)
+                         .accessibility(sortPriority: 0)
+                        .frame(width: 375, height: 44)
+                        .padding(.bottom)
+                    }
+                    if viewModel.isLastSlide && verticalSizeClass != .compact {
+                        Spacer().frame(height: 44)
+                            .padding([.bottom])
+                    }
+                }.accessibilityElement(children: .contain)
+            }
+        }
+    }
+
+    #Preview {
+        OnboardingContainerView(viewModel: OnboardingViewModel(onboardingService: OnboardingService(),
+                                dismissAction: {},
+                                onboardingType: .localJSON( "OnboardingResponse")))
+    }
+}

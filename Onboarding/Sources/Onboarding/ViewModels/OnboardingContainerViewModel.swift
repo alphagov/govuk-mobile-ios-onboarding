@@ -9,14 +9,14 @@ import SwiftUI
     let lastButtonTitle: String = "Done"
     let skipButtonTitle: String = "Skip"
     @Published var onboardingSlidesCount: Int = 0
-    private let onbaordingService: OnboardingServiceInterface
+    private let onboardingService: OnboardingServiceInterface
     private let dismissAction: () -> Void
     private let onboardingType: OnboardingType
 
     init(onboardingService: OnboardingServiceInterface = OnboardingService(),
          dismissAction: @escaping () -> Void,
          onboardingType: OnboardingType) {
-        self.onbaordingService = onboardingService
+        self.onboardingService = onboardingService
         self.dismissAction = dismissAction
         self.onboardingType = onboardingType
         fetchOnboarding()
@@ -59,7 +59,7 @@ import SwiftUI
     }
 
     private func fetchOnboarding() {
-        onbaordingService.downloadData(
+        onboardingService.downloadData(
             onboardingType: onboardingType,
             completionHandler: { [weak self] data in
                 guard let self = self else { return }

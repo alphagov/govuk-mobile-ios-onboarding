@@ -1,10 +1,8 @@
 import Foundation
 import UIKit
 
-public struct OnboardingSlideModel: Identifiable,
-                                    Codable {
-    public let id: String
+public struct OnboardingSlide: Codable {
     let image: String
     let title: String
-    let description: String
+    let body: String
 }

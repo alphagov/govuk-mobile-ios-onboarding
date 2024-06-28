@@ -2,7 +2,7 @@ import Foundation
 
 public protocol OnboardingServiceInterface {
     func downloadData(onboardingType: OnboardingType,
-                      completionHandler: @escaping (Result<[OnboardingSlideModel], Error>) -> Void)
+                      completionHandler: @escaping (Result<[OnboardingSlide], Error>) -> Void)
 }
 
 public class OnboardingService: OnboardingServiceInterface,
@@ -10,7 +10,7 @@ public class OnboardingService: OnboardingServiceInterface,
     public init() {}
 
     public func downloadData(onboardingType: OnboardingType,
-                             completionHandler: @escaping (Result<[OnboardingSlideModel], any Error>) -> Void) {
+                             completionHandler: @escaping (Result<[OnboardingSlide], any Error>) -> Void) {
         switch onboardingType {
         case .localJSON(let fileName):
             let data = loadJSON(filename: fileName)

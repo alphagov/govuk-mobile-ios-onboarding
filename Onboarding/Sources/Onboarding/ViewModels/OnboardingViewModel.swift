@@ -28,7 +28,7 @@ import SwiftUI
 
     enum State {
         case loading
-        case loaded([OnboardingSlideModel])
+        case loaded([OnboardingSlide])
     }
 
     func action() {

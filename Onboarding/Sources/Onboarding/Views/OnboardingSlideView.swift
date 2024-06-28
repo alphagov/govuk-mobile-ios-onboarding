@@ -1,10 +1,10 @@
 import SwiftUI
 
 struct OnboardingSlideView: View {
-    private var model: OnboardingSlideModel
+    private var model: OnboardingSlide
     @Environment(\.verticalSizeClass) var verticalSizeClass
 
-    init(model: OnboardingSlideModel) {
+    init(model: OnboardingSlide) {
         self.model = model
     }
     var body: some View {
@@ -22,8 +22,8 @@ struct OnboardingSlideView: View {
                     .accessibilityLabel(Text(model.title))
                     .accessibility(sortPriority: 3)
                     .padding(.top, verticalSizeClass == .compact ? 32 : 0)
-                Text(model.description).multilineTextAlignment(.center)
-                    .accessibilityLabel(Text(model.description))
+                Text(model.body).multilineTextAlignment(.center)
+                    .accessibilityLabel(Text(model.body))
                     .accessibility(sortPriority: 2)
                     .padding([.top])
                 Spacer()
@@ -33,5 +33,5 @@ struct OnboardingSlideView: View {
 }
 
 #Preview {
-    OnboardingSlideView(model: OnboardingSlideModel(id: "", image: "", title: "", description: ""))
+    OnboardingSlideView(model: OnboardingSlide(image: "", title: "", body: ""))
 }

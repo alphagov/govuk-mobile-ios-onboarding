@@ -6,23 +6,28 @@ struct UIKitActionButton: UIViewRepresentable {
     typealias UIViewType = UIButton
     var onTap: (() -> Void)
     var title: String
-    var backgroundColor: UIColor
-    var textColor: UIColor
+    var backgroundColor: Color
+    var textColor: Color
 
     func makeUIView(context: Context) -> UIButton {
         let button = UIButton()
         button.setTitle(title, for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .bold)
-         button.backgroundColor = backgroundColor
+         button.backgroundColor = UIColor(backgroundColor)
         button.layer.cornerRadius = 25
-        button.addTarget(context.coordinator, action: #selector(Coordinator.handlerTap), for: .touchUpInside)
+        button.addTarget(
+            context.coordinator,
+            action: #selector(Coordinator.handlerTap),
+            for: .touchUpInside
+        )
         return button
     }
 
-    func updateUIView(_ uiView: UIButton, context: Context) {
+    func updateUIView(_ uiView: UIButton,
+                      context: Context) {
         uiView.setTitle(title, for: .normal)
-        uiView.backgroundColor = backgroundColor
-        uiView.setTitleColor(textColor, for: .normal)
+        uiView.backgroundColor = UIColor(backgroundColor)
+        uiView.setTitleColor(UIColor(textColor), for: .normal)
     }
 
     func makeCoordinator() -> Coordinator {
@@ -31,7 +36,8 @@ struct UIKitActionButton: UIViewRepresentable {
 
     class Coordinator {
          @objc let onTap: (() -> Void)
-         init(onTap: @escaping (() -> Void)) {
+
+        init(onTap: @escaping (() -> Void)) {
              self.onTap = onTap
          }
 

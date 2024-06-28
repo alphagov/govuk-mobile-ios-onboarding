@@ -5,7 +5,7 @@ struct UIKitSkipButton: UIViewRepresentable {
     typealias UIViewType = UIButton
     var onTap: (() -> Void)
     var title: String
-    var textColor: UIColor
+    var textColor: Color
 
     func makeUIView(context: Context) -> UIButton {
         let button = UIButton()
@@ -15,9 +15,10 @@ struct UIKitSkipButton: UIViewRepresentable {
         return button
     }
 
-    func updateUIView(_ uiView: UIButton, context: Context) {
+    func updateUIView(_ uiView: UIButton,
+                      context: Context) {
         uiView.setTitle(title, for: .normal)
-        uiView.setTitleColor(textColor, for: .normal)
+        uiView.setTitleColor(UIColor(textColor), for: .normal)
     }
 
     func makeCoordinator() -> Coordinator {

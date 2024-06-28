@@ -3,13 +3,13 @@ import SwiftUI
 
 struct OnboardingContainerView: View {
     @StateObject private var viewModel: OnboardingContainerViewModel
-    private var themeColor = UIColor(Color("AccentColor", bundle: Bundle.module))
-    private var textColor =  UIColor(Color("PrimaryColor", bundle: Bundle.module))
+    private var themeColor = Color("AccentColor", bundle: Bundle.module)
+    private var textColor =  Color("PrimaryColor", bundle: Bundle.module)
     @Environment(\.verticalSizeClass) var verticalSizeClass
 
     init(viewModel: OnboardingContainerViewModel) {
         _viewModel = StateObject(wrappedValue: viewModel)
-        UIPageControl.appearance().currentPageIndicatorTintColor = themeColor
+        UIPageControl.appearance().currentPageIndicatorTintColor = UIColor(themeColor)
     }
 
     var body: some  View {

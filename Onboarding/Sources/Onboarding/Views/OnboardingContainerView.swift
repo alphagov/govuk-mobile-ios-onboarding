@@ -35,7 +35,7 @@ struct OnboardingContainerView: View {
                      .accessibility(sortPriority: 1)
                     .frame(width: 383, height: 50)
                     if !viewModel.isLastSlide {
-                        UIKitSkipbutton(onTap: {
+                        UIKitSkipButton(onTap: {
                             viewModel.skip()
                         }, title: viewModel.skipButtonTitle, textColor: themeColor)
                         .accessibilityLabel(Text(viewModel.skipButtonTitle))

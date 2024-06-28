@@ -13,9 +13,15 @@ public final class Onboarding {
     }
 
     public func initialViewController(for onboardingType: OnboardingType) -> UIViewController {
-        UIHostingController(rootView: OnboardingContainerView(
-            viewModel: OnboardingViewModel(dismissAction: dismissAction,
-                                           onboardingType: onboardingType))
+        let viewModel = OnboardingContainerViewModel(
+            dismissAction: dismissAction,
+            onboardingType: onboardingType
+        )
+        let containerView = OnboardingContainerView(
+            viewModel: viewModel
+        )
+        return UIHostingController(
+            rootView: containerView
         )
     }
 }

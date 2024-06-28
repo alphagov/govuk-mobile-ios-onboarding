@@ -1,7 +1,7 @@
 import Foundation
 import SwiftUI
 
-  public class OnboardingViewModel: ObservableObject {
+  class OnboardingContainerViewModel: ObservableObject {
     @Published var tabIndex: Int = 0
     @Published var state = State.loading
     @Published var primaryButtonTitle = "Continue"
@@ -13,22 +13,17 @@ import SwiftUI
     private let dismissAction: () -> Void
     private let onboardingType: OnboardingType
 
-    public init(onboardingService: OnboardingServiceInterface = OnboardingService(),
-                dismissAction: @escaping () -> Void,
-                onboardingType: OnboardingType) {
+    init(onboardingService: OnboardingServiceInterface = OnboardingService(),
+         dismissAction: @escaping () -> Void,
+         onboardingType: OnboardingType) {
         self.onbaordingService = onboardingService
         self.dismissAction = dismissAction
         self.onboardingType = onboardingType
         fetchOnboarding()
     }
 
-      var actionButtonAccessibilityHint: String {
-          return isLastSlide ? "Finish onboarding" : "Go to the next slide"
-      }
-
-    enum State {
-        case loading
-        case loaded([OnboardingSlide])
+    var actionButtonAccessibilityHint: String {
+        isLastSlide ? "Finish onboarding" : "Go to the next slide"
     }
 
     func action() {
@@ -64,21 +59,31 @@ import SwiftUI
     }
 
     private func fetchOnboarding() {
-        onbaordingService.downloadData(onboardingType: onboardingType) {[weak self] data in
-            guard let self = self else { return }
-            switch data {
-            case .success(let onboardingSlides):
-                if onboardingSlides.count > 1 {
-                    self.onboardingSlidesCount = onboardingSlides.count
+        onbaordingService.downloadData(
+            onboardingType: onboardingType,
+            completionHandler: { [weak self] data in
+                guard let self = self else { return }
+                switch data {
+                case .success(let onboardingSlides):
+                    if onboardingSlides.count > 1 {
+                        self.onboardingSlidesCount = onboardingSlides.count
+                        DispatchQueue.main.async {
+                            self.state = .loaded(onboardingSlides)
+                        }
+                    } else { self.finishOnboarding() }
+                case .failure:
                     DispatchQueue.main.async {
-                        self.state = .loaded(onboardingSlides)
+                        self.finishOnboarding()
                     }
-                } else { self.finishOnboarding() }
-            case .failure:
-                DispatchQueue.main.async {
-                    self.finishOnboarding()
                 }
             }
-        }
+        )
+    }
+}
+
+extension OnboardingContainerViewModel {
+    enum State {
+        case loading
+        case loaded([OnboardingSlide])
     }
 }

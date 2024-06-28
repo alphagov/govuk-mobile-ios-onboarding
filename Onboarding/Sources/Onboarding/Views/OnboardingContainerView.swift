@@ -1,11 +1,11 @@
 import SwiftUI
 
 struct OnboardingContainerView: View {
-    @StateObject private var viewModel: OnboardingViewModel
+    @StateObject private var viewModel: OnboardingContainerViewModel
     private var themeColor = UIColor(Color("AccentColor", bundle: Bundle.module))
     private var textColor =  UIColor(Color("PrimaryColor", bundle: Bundle.module))
     @Environment(\.verticalSizeClass) var verticalSizeClass
-    init(viewModel: OnboardingViewModel) {
+    init(viewModel: OnboardingContainerViewModel) {
         _viewModel = StateObject(wrappedValue: viewModel)
         UIPageControl.appearance().currentPageIndicatorTintColor = themeColor
     }
@@ -54,7 +54,7 @@ struct OnboardingContainerView: View {
     }
 
     #Preview {
-        OnboardingContainerView(viewModel: OnboardingViewModel(onboardingService: OnboardingService(),
+        OnboardingContainerView(viewModel: OnboardingContainerViewModel(onboardingService: OnboardingService(),
                                 dismissAction: {},
                                 onboardingType: .localJSON( "OnboardingResponse")))
     }

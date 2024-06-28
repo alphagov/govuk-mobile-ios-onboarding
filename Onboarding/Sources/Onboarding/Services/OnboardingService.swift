@@ -5,8 +5,7 @@ public protocol OnboardingServiceInterface {
                       completionHandler: @escaping (Result<[OnboardingSlide], Error>) -> Void)
 }
 
-public class OnboardingService: OnboardingServiceInterface,
-                                MockInterface {
+public class OnboardingService: OnboardingServiceInterface {
     public init() {}
 
     public func downloadData(onboardingType: OnboardingType,
@@ -19,4 +18,21 @@ public class OnboardingService: OnboardingServiceInterface,
             completionHandler(.success(slides))
         }
     }
+
+    private func loadJSON(filename: String) -> [OnboardingSlide] {
+        guard let resourceUrl = Bundle.module.url(
+          forResource: "OnboardingResponse",
+          withExtension: "json"
+        ) else {
+            return []
+        }
+        do {
+            let data = try Data(contentsOf: resourceUrl)
+            let decodedObject = try JSONDecoder().decode([OnboardingSlide].self, from: data)
+            return decodedObject
+        } catch {
+            return []
+        }
+    }
+
 }

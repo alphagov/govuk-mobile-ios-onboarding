@@ -1,3 +1,4 @@
+import Foundation
 import SwiftUI
 
 struct OnboardingContainerView: View {
@@ -5,10 +6,12 @@ struct OnboardingContainerView: View {
     private var themeColor = UIColor(Color("AccentColor", bundle: Bundle.module))
     private var textColor =  UIColor(Color("PrimaryColor", bundle: Bundle.module))
     @Environment(\.verticalSizeClass) var verticalSizeClass
+
     init(viewModel: OnboardingContainerViewModel) {
         _viewModel = StateObject(wrappedValue: viewModel)
         UIPageControl.appearance().currentPageIndicatorTintColor = themeColor
     }
+
     var body: some  View {
         switch viewModel.state {
         case .loading:
@@ -21,31 +24,42 @@ struct OnboardingContainerView: View {
                     }
                 }
                 .tabViewStyle(.page(indexDisplayMode: .never))
-
-                UIKitPageControl(currentPage: $viewModel.tabIndex, numberOfPages: viewModel.onboardingSlidesCount)
+                UIKitPageControl(
+                    currentPage: $viewModel.tabIndex,
+                    numberOfPages: viewModel.onboardingSlidesCount
+                )
                 AdaptiveStack(spaceing: 0) {
-                    UIKitActionButton(onTap: {
-                        viewModel.action()
-                    }, title: viewModel.getActionButtonTitle(),
-                                      backgroundColor: themeColor,
-                                      textColor: textColor)
+                    UIKitActionButton(
+                        onTap: {
+                            viewModel.action()
+                        },
+                        title: viewModel.getActionButtonTitle(),
+                        backgroundColor: themeColor,
+                        textColor: textColor
+                    )
                     .accessibilityLabel(
-                        Text(viewModel.isLastSlide ? viewModel.lastButtonTitle:  viewModel.primaryButtonTitle))
+                        Text(viewModel.isLastSlide ? viewModel.lastButtonTitle:  viewModel.primaryButtonTitle)
+                    )
                     .accessibilityHint(viewModel.actionButtonAccessibilityHint)
-                     .accessibility(sortPriority: 1)
+                    .accessibility(sortPriority: 1)
                     .frame(width: 383, height: 50)
                     if !viewModel.isLastSlide {
-                        UIKitSkipButton(onTap: {
-                            viewModel.skip()
-                        }, title: viewModel.skipButtonTitle, textColor: themeColor)
+                        UIKitSkipButton(
+                            onTap: {
+                                viewModel.skip()
+                            },
+                            title: viewModel.skipButtonTitle,
+                            textColor: themeColor
+                        )
                         .accessibilityLabel(Text(viewModel.skipButtonTitle))
                         .accessibilityHint(viewModel.skipButtonAcessibilityHint)
-                         .accessibility(sortPriority: 0)
+                        .accessibility(sortPriority: 0)
                         .frame(width: 375, height: 44)
                         .padding(.bottom)
                     }
                     if viewModel.isLastSlide && verticalSizeClass != .compact {
-                        Spacer().frame(height: 44)
+                        Spacer()
+                            .frame(height: 44)
                             .padding([.bottom])
                     }
                 }.accessibilityElement(children: .contain)
@@ -54,8 +68,10 @@ struct OnboardingContainerView: View {
     }
 
     #Preview {
-        OnboardingContainerView(viewModel: OnboardingContainerViewModel(onboardingService: OnboardingService(),
-                                dismissAction: {},
-                                onboardingType: .localJSON( "OnboardingResponse")))
+        OnboardingContainerView(
+            viewModel: OnboardingContainerViewModel(onboardingService: OnboardingService(),
+            dismissAction: {},
+            onboardingType: .localJSON( "OnboardingResponse"))
+        )
     }
 }

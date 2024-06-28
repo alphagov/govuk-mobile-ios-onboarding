@@ -9,10 +9,10 @@ class OnboardingService: OnboardingServiceInterface {
     func downloadData(onboardingType: OnboardingType,
                       completionHandler: @escaping (Result<[OnboardingSlide], any Error>) -> Void) {
         switch onboardingType {
-        case .localJSON(let fileName):
+        case .json(let fileName):
             let data = loadJSON(filename: fileName)
             completionHandler(.success(data))
-        case .preFetched(let slides):
+        case .model(let slides):
             completionHandler(.success(slides))
         }
     }

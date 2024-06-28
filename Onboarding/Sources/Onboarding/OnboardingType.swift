@@ -1,6 +1,6 @@
 import Foundation
 
 public enum OnboardingType {
-    case localJSON(String)
-    case preFetched([OnboardingSlide])
+    case json(String)
+    case model([OnboardingSlide])
 }

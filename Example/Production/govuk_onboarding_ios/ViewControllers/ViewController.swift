@@ -10,7 +10,7 @@ class ViewController: UIViewController {
     func setUpViewController() {
         let onboardingModule =
         Onboarding(dismissAction: {})
-        let onboardingViewController = onboardingModule.initialViewController(for: .localJSON( "OnboardingResponse"))
+        let onboardingViewController = onboardingModule.initialViewController(for: .json( "OnboardingResponse"))
         guard let onboardingView = onboardingViewController.view else { return }
         onboardingViewController.didMove(toParent: self)
         view.addSubview(onboardingViewController.view)

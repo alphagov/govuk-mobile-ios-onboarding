@@ -71,7 +71,7 @@ struct OnboardingContainerView: View {
         OnboardingContainerView(
             viewModel: OnboardingContainerViewModel(onboardingService: OnboardingService(),
             dismissAction: {},
-            onboardingType: .localJSON( "OnboardingResponse"))
+            onboardingType: .json( "OnboardingResponse"))
         )
     }
 }

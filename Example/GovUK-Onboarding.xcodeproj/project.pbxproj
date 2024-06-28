@@ -17,6 +17,7 @@
 		5D5018B32BD101F3005ABC1C /* OnboardingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D5018B22BD101F3005ABC1C /* OnboardingTests.swift */; };
 		5D5018BD2BD101F3005ABC1C /* OnboardingUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D5018BC2BD101F3005ABC1C /* OnboardingUITests.swift */; };
 		5D5018BF2BD101F3005ABC1C /* OnboardingUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D5018BE2BD101F3005ABC1C /* OnboardingUITestsLaunchTests.swift */; };
+		5D58E32C2C2ED78F00157F3C /* OnboardingResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 5D58E32B2C2ED78D00157F3C /* OnboardingResponse.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,6 +51,7 @@
 		5D5018B82BD101F3005ABC1C /* govuk_onboarding_ios_ui_tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = govuk_onboarding_ios_ui_tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5D5018BC2BD101F3005ABC1C /* OnboardingUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingUITests.swift; sourceTree = "<group>"; };
 		5D5018BE2BD101F3005ABC1C /* OnboardingUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		5D58E32B2C2ED78D00157F3C /* OnboardingResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = OnboardingResponse.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -137,6 +139,7 @@
 		5D5018CC2BD1080B005ABC1C /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				5D58E32B2C2ED78D00157F3C /* OnboardingResponse.json */,
 				5D5018A42BD101F3005ABC1C /* Assets.xcassets */,
 			);
 			path = Resources;
@@ -304,6 +307,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5D5018A52BD101F3005ABC1C /* Assets.xcassets in Resources */,
+				5D58E32C2C2ED78F00157F3C /* OnboardingResponse.json in Resources */,
 				5D5018A82BD101F3005ABC1C /* Base in Resources */,
 				5D5018A32BD101F0005ABC1C /* Base in Resources */,
 			);

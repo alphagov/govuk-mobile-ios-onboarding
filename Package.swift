@@ -21,7 +21,7 @@ let package = Package(
             path: "Onboarding",
             sources: [
                 "Sources"
-            ],resources: [.process("OnboardingResponse.json")]
+            ]
         ),
         .testTarget(
             name: "OnboardingTests",

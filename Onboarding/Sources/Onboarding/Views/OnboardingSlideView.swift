@@ -12,7 +12,7 @@ struct OnboardingSlideView: View {
         ScrollView {
             VStack {
                 if verticalSizeClass != .compact {
-                    Image(decorative: model.image, bundle: Bundle.module)
+                    Image(decorative: model.image, bundle: .main)
                         .resizable()
                         .scaledToFit()
                         .frame(width: 225, height: 225)

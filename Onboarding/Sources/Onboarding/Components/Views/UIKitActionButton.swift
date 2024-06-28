@@ -3,7 +3,6 @@ import SwiftUI
 import UIKit
 
 struct UIKitActionButton: UIViewRepresentable {
-    typealias UIViewType = UIButton
     var onTap: (() -> Void)
     var title: String
     var backgroundColor: Color

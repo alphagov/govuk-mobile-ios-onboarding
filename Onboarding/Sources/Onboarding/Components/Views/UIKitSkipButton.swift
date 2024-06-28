@@ -2,7 +2,6 @@ import Foundation
 import SwiftUI
 
 struct UIKitSkipButton: UIViewRepresentable {
-    typealias UIViewType = UIButton
     var onTap: (() -> Void)
     var title: String
     var textColor: Color

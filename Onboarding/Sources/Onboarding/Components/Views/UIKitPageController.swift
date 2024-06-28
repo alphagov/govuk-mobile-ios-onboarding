@@ -5,7 +5,6 @@ import SwiftUI
 struct UIKitPageControl: UIViewRepresentable {
     @Binding var currentPage: Int
     var numberOfPages: Int
-    typealias UIViewType = UIPageControl
 
     func makeUIView(context: Context) -> UIPageControl {
         let pageControl = UIPageControl()

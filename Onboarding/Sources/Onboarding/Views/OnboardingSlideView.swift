@@ -1,3 +1,4 @@
+import Foundation
 import SwiftUI
 
 struct OnboardingSlideView: View {
@@ -17,12 +18,16 @@ struct OnboardingSlideView: View {
                         .frame(width: 225, height: 225)
                         .padding([.bottom])
                 }
-                Text(model.title).font(.title).fontWeight(.bold).multilineTextAlignment(.center)
+                Text(model.title)
+                    .font(.title)
+                    .fontWeight(.bold)
+                    .multilineTextAlignment(.center)
                     .frame(maxWidth: .infinity, alignment: .center)
                     .accessibilityLabel(Text(model.title))
                     .accessibility(sortPriority: 3)
                     .padding(.top, verticalSizeClass == .compact ? 32 : 0)
-                Text(model.body).multilineTextAlignment(.center)
+                Text(model.body)
+                    .multilineTextAlignment(.center)
                     .accessibilityLabel(Text(model.body))
                     .accessibility(sortPriority: 2)
                     .padding([.top])
@@ -33,5 +38,7 @@ struct OnboardingSlideView: View {
 }
 
 #Preview {
-    OnboardingSlideView(model: OnboardingSlide(image: "", title: "", body: ""))
+    OnboardingSlideView(
+        model: OnboardingSlide(image: "", title: "", body: "")
+    )
 }

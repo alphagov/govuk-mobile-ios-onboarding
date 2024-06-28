@@ -1,7 +1,7 @@
 import UIKit
 
-class SceneDelegate: UIResponder, UIWindowSceneDelegate {
-
+class TestSceneDelegate: UIResponder,
+                         UIWindowSceneDelegate {
     var window: UIWindow?
 
     func scene(_ scene: UIScene,
@@ -10,8 +10,5 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene)
         else { return }
         window = UIWindow(windowScene: windowScene)
-        window?.rootViewController = UIStoryboard(name: "Main", bundle: .main).instantiateInitialViewController()
-        window?.makeKeyAndVisible()
     }
-
 }

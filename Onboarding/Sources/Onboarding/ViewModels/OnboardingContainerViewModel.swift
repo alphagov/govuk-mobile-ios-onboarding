@@ -6,7 +6,8 @@ import SwiftUI
     @Published var state = State.loading
     let primaryButtonTitle = NSLocalizedString("primaryButtonTitle",
                                                comment: "Localized")
-    let skipButtonAcessibilityHint = "Skip onboarding"
+    let skipButtonAcessibilityHint = NSLocalizedString("skipButtonAcessibilityHint",
+                                                       comment: "Localized")
     let lastButtonTitle = NSLocalizedString("lastButtonTitle",
                                             comment: "Localized")
     let skipButtonTitle = NSLocalizedString("skipButtonTitle",
@@ -26,8 +27,10 @@ import SwiftUI
     }
 
     var actionButtonAccessibilityHint: String {
-        isLastSlide ? "Finish onboarding" : "Go to the next slide"
-    }
+        isLastSlide ? NSLocalizedString("actionButtonlastSlideAccessibilityHint",
+                                         comment: "Localized"):
+                                         NSLocalizedString("actionButtonAccessibilityHint",
+                                         comment: "Localized")}
 
     func action() {
         if isLastSlide {

@@ -57,8 +57,7 @@ struct OnboardingContainerView: View {
                     .opacity(viewModel.isLastSlide ? 0 : 1)
                 }
                 .accessibilityElement(children: .contain)
-            }
-            .animation(.easeInOut)
+            }.animation(.easeIn, value: viewModel.tabIndex)
         }
     }
 

@@ -1,12 +1,12 @@
 import Foundation
 
 protocol OnboardingServiceInterface {
-    func downloadData(onboardingType: OnboardingType,
+    func downloadData(onboardingType: OnboardingSource,
                       completionHandler: @escaping (Result<[OnboardingSlide], Error>) -> Void)
 }
 
 class OnboardingService: OnboardingServiceInterface {
-    func downloadData(onboardingType: OnboardingType,
+    func downloadData(onboardingType: OnboardingSource,
                       completionHandler: @escaping (Result<[OnboardingSlide], any Error>) -> Void) {
         switch onboardingType {
         case .json(let fileName):
@@ -19,7 +19,7 @@ class OnboardingService: OnboardingServiceInterface {
 
     private func loadJSON(filename: String) -> [OnboardingSlide] {
         guard let resourceUrl = Bundle.main.url(
-          forResource: "OnboardingResponse",
+          forResource: filename,
           withExtension: "json"
         ) else {
             return []

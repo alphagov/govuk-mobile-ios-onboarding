@@ -4,18 +4,21 @@ import SwiftUI
   class OnboardingContainerViewModel: ObservableObject {
     @Published var tabIndex: Int = 0
     @Published var state = State.loading
-    @Published var primaryButtonTitle = "Continue"
+    let primaryButtonTitle = NSLocalizedString("primaryButtonTitle",
+                                               comment: "Localized")
     let skipButtonAcessibilityHint = "Skip onboarding"
-    let lastButtonTitle: String = "Done"
-    let skipButtonTitle: String = "Skip"
+    let lastButtonTitle = NSLocalizedString("lastButtonTitle",
+                                            comment: "Localized")
+    let skipButtonTitle = NSLocalizedString("skipButtonTitle",
+                                           comment: "Localized")
     @Published var onboardingSlidesCount: Int = 0
     private let onboardingService: OnboardingServiceInterface
     private let dismissAction: () -> Void
-    private let onboardingType: OnboardingType
+    private let onboardingType: OnboardingSource
 
-    init(onboardingService: OnboardingServiceInterface = OnboardingService(),
+    init(onboardingService: OnboardingServiceInterface,
          dismissAction: @escaping () -> Void,
-         onboardingType: OnboardingType) {
+         onboardingType: OnboardingSource) {
         self.onboardingService = onboardingService
         self.dismissAction = dismissAction
         self.onboardingType = onboardingType

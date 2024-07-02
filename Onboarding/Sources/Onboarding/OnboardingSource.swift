@@ -1,6 +1,6 @@
 import Foundation
 
-public enum OnboardingType {
+public enum OnboardingSource {
     case json(String)
     case model([OnboardingSlide])
 }

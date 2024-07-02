@@ -9,7 +9,6 @@ struct OnboardingContainerView: View {
 
     init(viewModel: OnboardingContainerViewModel) {
         _viewModel = StateObject(wrappedValue: viewModel)
-        UIPageControl.appearance().currentPageIndicatorTintColor = UIColor(themeColor)
     }
 
     var body: some  View {
@@ -43,27 +42,23 @@ struct OnboardingContainerView: View {
                     .accessibilityHint(viewModel.actionButtonAccessibilityHint)
                     .accessibility(sortPriority: 1)
                     .frame(width: 383, height: 50)
-                    if !viewModel.isLastSlide {
-                        UIKitSkipButton(
-                            onTap: {
-                                viewModel.skip()
-                            },
-                            title: viewModel.skipButtonTitle,
-                            textColor: themeColor
-                        )
-                        .accessibilityLabel(Text(viewModel.skipButtonTitle))
-                        .accessibilityHint(viewModel.skipButtonAcessibilityHint)
-                        .accessibility(sortPriority: 0)
-                        .frame(width: 375, height: 44)
-                        .padding(.bottom)
-                    }
-                    if viewModel.isLastSlide && verticalSizeClass != .compact {
-                        Spacer()
-                            .frame(height: 44)
-                            .padding([.bottom])
-                    }
-                }.accessibilityElement(children: .contain)
+                    UIKitSkipButton(
+                        onTap: {
+                            viewModel.skip()
+                        },
+                        title: viewModel.skipButtonTitle,
+                        textColor: themeColor
+                    )
+                    .accessibilityLabel(Text(viewModel.skipButtonTitle))
+                    .accessibilityHint(viewModel.skipButtonAcessibilityHint)
+                    .accessibility(sortPriority: 0)
+                    .frame(width: 375, height: 44)
+                    .padding(.bottom)
+                    .opacity(viewModel.isLastSlide ? 0 : 1)
+                }
+                .accessibilityElement(children: .contain)
             }
+            .animation(.easeInOut)
         }
     }
 

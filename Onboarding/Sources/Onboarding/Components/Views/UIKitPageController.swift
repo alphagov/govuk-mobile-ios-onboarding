@@ -8,7 +8,6 @@ struct UIKitPageControl: UIViewRepresentable {
 
     func makeUIView(context: Context) -> UIPageControl {
         let pageControl = UIPageControl()
-
         pageControl.addTarget(
             context.coordinator,
             action: #selector(Coordinator.valueChanged(_:)),
@@ -16,6 +15,11 @@ struct UIKitPageControl: UIViewRepresentable {
         )
         pageControl.currentPage = currentPage
         pageControl.numberOfPages = numberOfPages
+        pageControl.currentPageIndicatorTintColor = UIColor(
+            Color("AccentColor", bundle: Bundle.module))
+         DispatchQueue.main.async {
+            pageControl.backgroundStyle = .prominent
+         }
         return pageControl
     }
 

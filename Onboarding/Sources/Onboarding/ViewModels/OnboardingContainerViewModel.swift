@@ -1,7 +1,7 @@
 import Foundation
 import SwiftUI
 
-  class OnboardingContainerViewModel: ObservableObject {
+class OnboardingContainerViewModel: ObservableObject {
     @Published var tabIndex: Int = 0
     @Published var state = State.loading
     let primaryButtonTitle = NSLocalizedString("primaryButtonTitle",
@@ -11,7 +11,7 @@ import SwiftUI
     let lastButtonTitle = NSLocalizedString("lastButtonTitle",
                                             comment: "Localized")
     let skipButtonTitle = NSLocalizedString("skipButtonTitle",
-                                           comment: "Localized")
+                                            comment: "Localized")
     @Published var onboardingSlidesCount: Int = 0
     private let onboardingService: OnboardingServiceInterface
     private let dismissAction: () -> Void
@@ -27,10 +27,11 @@ import SwiftUI
     }
 
     var actionButtonAccessibilityHint: String {
-        isLastSlide ? NSLocalizedString("actionButtonlastSlideAccessibilityHint",
-                                         comment: "Localized"):
-                                         NSLocalizedString("actionButtonAccessibilityHint",
-                                         comment: "Localized")}
+        isLastSlide ?
+        NSLocalizedString("actionButtonlastSlideAccessibilityHint",
+                          comment: "Localized") :
+        NSLocalizedString("actionButtonAccessibilityHint",
+                          comment: "Localized")}
 
     func action() {
         if isLastSlide {
@@ -52,15 +53,15 @@ import SwiftUI
         if onboardingSlidesCount - 1 == tabIndex {
             return lastButtonTitle
         } else {
-             return primaryButtonTitle
+            return primaryButtonTitle
         }
     }
 
     private func finishOnboarding() {
-       self.dismissAction()
+        self.dismissAction()
     }
 
-     var isLastSlide: Bool {
+    var isLastSlide: Bool {
         tabIndex == onboardingSlidesCount - 1 ? true : false
     }
 

@@ -9,14 +9,16 @@ public final class Onboarding {
     private let dismissAction: () -> Void
     private let onboardingSource: OnboardingSource
 
-    public init(dismissAction: @escaping () -> Void, onboardingSource: OnboardingSource) {
+    public init(dismissAction: @escaping () -> Void,
+                onboardingSource: OnboardingSource) {
         self.dismissAction = dismissAction
         self.onboardingSource = onboardingSource
     }
 
     public lazy var viewController: UIViewController = {
         let viewModel = OnboardingContainerViewModel(
-            onboardingService: OnboardingService(), dismissAction: dismissAction,
+            onboardingService: OnboardingService(),
+            dismissAction: dismissAction,
             onboardingType: self.onboardingSource
         )
         let containerView = OnboardingContainerView(viewModel: viewModel)

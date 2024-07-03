@@ -42,30 +42,36 @@ struct OnboardingContainerView: View {
                     .accessibilityHint(viewModel.actionButtonAccessibilityHint)
                     .accessibility(sortPriority: 1)
                     .frame(width: 383, height: 50)
-                    UIKitSkipButton(
-                        onTap: {
-                            viewModel.skip()
-                        },
-                        title: viewModel.skipButtonTitle,
-                        textColor: themeColor
-                    )
-                    .accessibilityLabel(Text(viewModel.skipButtonTitle))
-                    .accessibilityHint(viewModel.skipButtonAcessibilityHint)
-                    .accessibility(sortPriority: 0)
-                    .frame(width: 375, height: 44)
-                    .padding(.bottom)
-                    .opacity(viewModel.isLastSlide ? 0 : 1)
+                    if (viewModel.isLastSlide == false &&
+                        verticalSizeClass == .compact) ||
+                        (viewModel.isLastSlide == false
+                         && verticalSizeClass == .regular)
+                        || (viewModel.isLastSlide == true &&
+                            verticalSizeClass == .regular) {
+                        UIKitSkipButton(
+                            onTap: {
+                                viewModel.skip()
+                            },
+                            title: viewModel.skipButtonTitle,
+                            textColor: themeColor
+                        )
+                        .accessibilityHint(viewModel.skipButtonAcessibilityHint)
+                        .accessibility(sortPriority: 0)
+                        .frame(width: 375, height: 44)
+                        .padding(.bottom)
+                        .opacity(viewModel.isLastSlide ? 0 : 1)
+                    }
                 }
                 .accessibilityElement(children: .contain)
             }.animation(.easeIn, value: viewModel.tabIndex)
         }
     }
-
+    
     #Preview {
         OnboardingContainerView(
             viewModel: OnboardingContainerViewModel(onboardingService: OnboardingService(),
-            dismissAction: {},
-            onboardingType: .json("OnboardingResponse"))
+                                                    dismissAction: {},
+                                                    onboardingType: .json("OnboardingResponse"))
         )
     }
 }

@@ -37,7 +37,8 @@ struct OnboardingContainerView: View {
                         textColor: textColor
                     )
                     .accessibilityLabel(
-                        Text(viewModel.isLastSlide ? viewModel.lastButtonTitle:  viewModel.primaryButtonTitle)
+                        Text(viewModel.isLastSlide ? viewModel.lastButtonTitle:
+                                                     viewModel.primaryButtonTitle)
                     )
                     .accessibilityHint(viewModel.actionButtonAccessibilityHint)
                     .accessibility(sortPriority: 1)
@@ -66,7 +67,6 @@ struct OnboardingContainerView: View {
             }.animation(.easeIn, value: viewModel.tabIndex)
         }
     }
-    
     #Preview {
         OnboardingContainerView(
             viewModel: OnboardingContainerViewModel(onboardingService: OnboardingService(),

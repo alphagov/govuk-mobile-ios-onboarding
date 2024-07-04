@@ -65,7 +65,7 @@ class OnboardingContainerViewModel: ObservableObject {
         tabIndex == onboardingSlidesCount - 1 ? true : false
     }
 
-    private func fetchOnboarding() {
+     func fetchOnboarding() {
         onboardingService.downloadData(
             onboardingType: onboardingType,
             completionHandler: { [weak self] data in
@@ -89,7 +89,7 @@ class OnboardingContainerViewModel: ObservableObject {
 }
 
 extension OnboardingContainerViewModel {
-    enum State {
+    enum State: Equatable {
         case loading
         case loaded([OnboardingSlide])
     }

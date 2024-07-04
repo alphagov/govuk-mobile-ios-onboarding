@@ -29,7 +29,8 @@ let package = Package(
             path: "Onboarding",
             sources: [
                 "Tests"
-            ]
+            ],
+            resources : [.process("OnboardingTests/MockOnboardingResponse.json")]
         ),
     ]
 )

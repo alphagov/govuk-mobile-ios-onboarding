@@ -3,16 +3,16 @@ import SwiftUI
 
 struct AdaptiveStack<Content: View>: View {
     @Environment(\.verticalSizeClass) var verticalSizeClass
-    let spaceing: CGFloat
+    let spacing: CGFloat
     let horizontalAlignment: HorizontalAlignment
     let verticalAlignment: VerticalAlignment
     let content: () -> Content
 
-    init(spaceing: CGFloat,
+    init(spacing: CGFloat,
          horizontalAlignment: HorizontalAlignment = .center,
          verticalAlignment: VerticalAlignment = . center,
          @ViewBuilder content: @escaping () -> Content) {
-        self.spaceing = spaceing
+        self.spacing = spacing
         self.horizontalAlignment = horizontalAlignment
         self.verticalAlignment = verticalAlignment
         self.content = content

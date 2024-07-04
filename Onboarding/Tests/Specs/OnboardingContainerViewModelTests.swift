@@ -1,12 +1,13 @@
 import XCTest
 @testable import Onboarding
+
 final class OnboardingContainerViewModelTests: XCTestCase {
     var sut:OnboardingContainerViewModel?
     override func setUpWithError() throws {
         
         sut = OnboardingContainerViewModel(onboardingService: MockOnboardingService(),
                                            dismissAction: {},
-                                           onboardingType: .json(""))
+                                           onboardingType: .json("MockOnboardingResponse"))
     }
     
     override func tearDownWithError() throws {

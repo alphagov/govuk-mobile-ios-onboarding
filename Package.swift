@@ -28,9 +28,10 @@ let package = Package(
             dependencies: ["Onboarding"],
             path: "Onboarding",
             sources: [
-                "Tests"
+                "Tests/Specs",
+                "Tests/Mocks"
             ],
-            resources : [.process("OnboardingTests/MockOnboardingResponse.json")]
+            resources : [.process("Tests/Resources")]
         ),
     ]
 )

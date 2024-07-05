@@ -7,10 +7,12 @@ class OnboardingContainerViewModel: ObservableObject {
     @Published var slideCount: Int = 0
     let skipButtonTitle = NSLocalizedString(
         "skipButtonTitle",
+        bundle: .module,
         comment: ""
     )
     let skipButtonAcessibilityHint = NSLocalizedString(
         "skipButtonAcessibilityHint",
+        bundle: .module,
         comment: ""
     )
     private let onboardingService: OnboardingServiceInterface
@@ -30,7 +32,7 @@ class OnboardingContainerViewModel: ObservableObject {
         let key = isLastSlide ?
         "actionButtonLastSlideAccessibilityHint" :
         "actionButtonAccessibilityHint"
-        return NSLocalizedString(key, comment: "")
+        return NSLocalizedString(key, bundle: .module, comment: "")
     }
 
     func action() {
@@ -51,7 +53,7 @@ class OnboardingContainerViewModel: ObservableObject {
 
     var primaryButtonTitle: String {
         let key = isLastSlide ? "lastButtonTitle" : "primaryButtonTitle"
-        return NSLocalizedString(key, comment: "")
+        return NSLocalizedString(key, bundle: .module, comment: "")
     }
 
     private func finishOnboarding() {

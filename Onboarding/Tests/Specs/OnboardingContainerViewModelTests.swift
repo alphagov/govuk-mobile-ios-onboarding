@@ -17,8 +17,8 @@ final class OnboardingContainerViewModelTests: XCTestCase {
 
         XCTAssertEqual(sut.state, .loading)
         XCTAssertEqual(sut.tabIndex, 0)
-        //        XCTAssertEqual(sut.skipButtonTitle, "Skip")
-        //        XCTAssertEqual(sut.skipButtonAcessibilityHint, "Skip")
+        XCTAssertEqual(sut.skipButtonTitle, "Skip")
+        XCTAssertEqual(sut.skipButtonAcessibilityHint, "Skip onboarding")
     }
 
     func test_init_fetchedSlides_changesState() throws {
@@ -117,7 +117,7 @@ final class OnboardingContainerViewModelTests: XCTestCase {
         ]
         mockOnboardingService._receivedDownloadDataCompletionHander?(.success(expectedSlides))
 
-        XCTAssertEqual(sut.primaryButtonTitle, "primaryButtonTitle") //Continue
+        XCTAssertEqual(sut.primaryButtonTitle, "Continue")
     }
 
     func test_getPrimaryButtonTitle_finalSlide_returnsExpectedTitle() throws {
@@ -134,7 +134,7 @@ final class OnboardingContainerViewModelTests: XCTestCase {
         mockOnboardingService._receivedDownloadDataCompletionHander?(.success(expectedSlides))
         sut.tabIndex = 1
 
-        XCTAssertEqual(sut.primaryButtonTitle, "lastButtonTitle") //Done
+        XCTAssertEqual(sut.primaryButtonTitle, "Done")
     }
 
     func test_isLastSlide_returnsTrueWhenOnTheLastSlide() throws {
@@ -250,7 +250,7 @@ final class OnboardingContainerViewModelTests: XCTestCase {
         mockOnboardingService._receivedDownloadDataCompletionHander?(.success(slides))
 
         sut.tabIndex = 1
-        XCTAssertEqual(sut.actionButtonAccessibilityHint, "actionButtonLastSlideAccessibilityHint")
+        XCTAssertEqual(sut.actionButtonAccessibilityHint, "Finish onboarding")
     }
 
     func test_actionButtonAccessibilityHint_notLastSlide_returnsExpectedResult() throws {
@@ -268,6 +268,6 @@ final class OnboardingContainerViewModelTests: XCTestCase {
         mockOnboardingService._receivedDownloadDataCompletionHander?(.success(slides))
 
         sut.tabIndex = 0
-        XCTAssertEqual(sut.actionButtonAccessibilityHint, "actionButtonAccessibilityHint")
+        XCTAssertEqual(sut.actionButtonAccessibilityHint, "Go to the next slide")
     }
 }

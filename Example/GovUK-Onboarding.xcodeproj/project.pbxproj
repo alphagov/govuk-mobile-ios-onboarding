@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		4E212D342C21C4D600C7D70D /* Onboarding in Frameworks */ = {isa = PBXBuildFile; productRef = 4E212D332C21C4D600C7D70D /* Onboarding */; };
-		4EAC47602C335A3B0016EECB /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4EAC475E2C335A3B0016EECB /* Localizable.strings */; };
 		5D50189C2BD101F0005ABC1C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D50189B2BD101F0005ABC1C /* AppDelegate.swift */; };
 		5D50189E2BD101F0005ABC1C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D50189D2BD101F0005ABC1C /* SceneDelegate.swift */; };
 		5D5018A02BD101F0005ABC1C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D50189F2BD101F0005ABC1C /* ViewController.swift */; };
@@ -44,7 +43,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		4EAC475F2C335A3B0016EECB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		5D5018982BD101F0005ABC1C /* govuk_onboarding_ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = govuk_onboarding_ios.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5D50189B2BD101F0005ABC1C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = ../AppDelegate.swift; sourceTree = "<group>"; };
 		5D50189D2BD101F0005ABC1C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -117,7 +115,6 @@
 				5D5018CD2BD10858005ABC1C /* Storyboards */,
 				5D5018CE2BD10886005ABC1C /* SupportingFiles */,
 				5D5018CB2BD107DF005ABC1C /* ViewControllers */,
-				4EAC475E2C335A3B0016EECB /* Localizable.strings */,
 			);
 			path = govuk_onboarding_ios;
 			sourceTree = "<group>";
@@ -336,7 +333,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4EAC47602C335A3B0016EECB /* Localizable.strings in Resources */,
 				5D5018A52BD101F3005ABC1C /* Assets.xcassets in Resources */,
 				5D58E32C2C2ED78F00157F3C /* OnboardingResponse.json in Resources */,
 				5D5018A82BD101F3005ABC1C /* Base in Resources */,
@@ -430,14 +426,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		4EAC475E2C335A3B0016EECB /* Localizable.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				4EAC475F2C335A3B0016EECB /* en */,
-			);
-			name = Localizable.strings;
-			sourceTree = "<group>";
-		};
 		5D5018A12BD101F0005ABC1C /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (

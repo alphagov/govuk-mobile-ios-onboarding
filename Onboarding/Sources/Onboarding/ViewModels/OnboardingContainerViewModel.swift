@@ -4,34 +4,47 @@ import SwiftUI
 class OnboardingContainerViewModel: ObservableObject {
     @Published var tabIndex: Int = 0
     @Published var state = State.loading
-    let primaryButtonTitle = NSLocalizedString("primaryButtonTitle",
-                                               comment: "Localized")
-    let skipButtonAcessibilityHint = NSLocalizedString("skipButtonAcessibilityHint",
-                                                       comment: "Localized")
-    let lastButtonTitle = NSLocalizedString("lastButtonTitle",
-                                            comment: "Localized")
-    let skipButtonTitle = NSLocalizedString("skipButtonTitle",
-                                            comment: "Localized")
-    @Published var onboardingSlidesCount: Int = 0
+    @Published var slideCount: Int = 0
+    private let nonFinalSlideprimaryButtonTitle = NSLocalizedString(
+        "primaryButtonTitle",
+        comment: ""
+    )
+    private let finalSlidePrimaryButtonTitle = NSLocalizedString(
+        "lastButtonTitle",
+        comment: ""
+    )
+    let skipButtonTitle = NSLocalizedString(
+        "skipButtonTitle",
+        comment: ""
+    )
+    let skipButtonAcessibilityHint = NSLocalizedString(
+        "skipButtonAcessibilityHint",
+        comment: ""
+    )
     private let onboardingService: OnboardingServiceInterface
     private let dismissAction: () -> Void
     private let onboardingType: OnboardingSource
 
     init(onboardingService: OnboardingServiceInterface,
-         dismissAction: @escaping () -> Void,
-         onboardingType: OnboardingSource) {
+         onboardingType: OnboardingSource,
+         dismissAction: @escaping () -> Void) {
         self.onboardingService = onboardingService
-        self.dismissAction = dismissAction
         self.onboardingType = onboardingType
+        self.dismissAction = dismissAction
         fetchOnboarding()
     }
 
     var actionButtonAccessibilityHint: String {
         isLastSlide ?
-        NSLocalizedString("actionButtonlastSlideAccessibilityHint",
-                          comment: "Localized") :
-        NSLocalizedString("actionButtonAccessibilityHint",
-                          comment: "Localized")}
+        NSLocalizedString(
+            "actionButtonlastSlideAccessibilityHint",
+            comment: ""
+        ) :
+        NSLocalizedString(
+            "actionButtonAccessibilityHint",
+            comment: ""
+        )
+    }
 
     func action() {
         if isLastSlide {
@@ -49,35 +62,37 @@ class OnboardingContainerViewModel: ObservableObject {
         finishOnboarding()
     }
 
-    func getActionButtonTitle() -> String {
-        if onboardingSlidesCount - 1 == tabIndex {
-            return lastButtonTitle
+    var primaryButtonTitle: String {
+        if slideCount - 1 == tabIndex {
+            return finalSlidePrimaryButtonTitle
         } else {
-            return primaryButtonTitle
+            return nonFinalSlideprimaryButtonTitle
         }
     }
 
     private func finishOnboarding() {
-        self.dismissAction()
+        dismissAction()
     }
 
     var isLastSlide: Bool {
-        tabIndex == onboardingSlidesCount - 1 ? true : false
+        tabIndex == slideCount - 1 ? true : false
     }
 
-     func fetchOnboarding() {
+     private func fetchOnboarding() {
         onboardingService.downloadData(
             onboardingType: onboardingType,
-            completionHandler: { [weak self] data in
+            completionHandler: { [weak self] slides in
                 guard let self = self else { return }
-                switch data {
+                switch slides {
                 case .success(let onboardingSlides):
                     if onboardingSlides.count > 1 {
-                        self.onboardingSlidesCount = onboardingSlides.count
+                        self.slideCount = onboardingSlides.count
                         DispatchQueue.main.async {
                             self.state = .loaded(onboardingSlides)
                         }
-                    } else { self.finishOnboarding() }
+                    } else {
+                        self.finishOnboarding()
+                    }
                 case .failure:
                     DispatchQueue.main.async {
                         self.finishOnboarding()

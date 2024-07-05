@@ -25,20 +25,19 @@ struct OnboardingContainerView: View {
                 .tabViewStyle(.page(indexDisplayMode: .never))
                 UIKitPageControl(
                     currentPage: $viewModel.tabIndex,
-                    numberOfPages: viewModel.onboardingSlidesCount
+                    numberOfPages: viewModel.slideCount
                 )
                 AdaptiveStack(spacing: 0) {
                     UIKitActionButton(
                         onTap: {
                             viewModel.action()
                         },
-                        title: viewModel.getActionButtonTitle(),
+                        title: viewModel.primaryButtonTitle,
                         backgroundColor: themeColor,
                         textColor: textColor
                     )
                     .accessibilityLabel(
-                        Text(viewModel.isLastSlide ? viewModel.lastButtonTitle:
-                                                     viewModel.primaryButtonTitle)
+                        Text(viewModel.primaryButtonTitle)
                     )
                     .accessibilityHint(viewModel.actionButtonAccessibilityHint)
                     .accessibility(sortPriority: 1)
@@ -69,9 +68,11 @@ struct OnboardingContainerView: View {
     }
     #Preview {
         OnboardingContainerView(
-            viewModel: OnboardingContainerViewModel(onboardingService: OnboardingService(),
-                                                    dismissAction: {},
-                                                    onboardingType: .json("OnboardingResponse"))
+            viewModel: OnboardingContainerViewModel(
+                onboardingService: OnboardingService(),
+                onboardingType: .json("OnboardingResponse"),
+                dismissAction: {}
+            )
         )
     }
 }

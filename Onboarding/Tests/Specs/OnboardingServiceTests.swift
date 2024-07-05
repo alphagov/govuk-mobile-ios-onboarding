@@ -4,7 +4,7 @@ import XCTest
 
 final class OnboardingServiceTests: XCTestCase {
     
-    var sut:OnboardingService!
+    var sut: OnboardingService!
 
     override func setUpWithError() throws {
         sut = OnboardingService()
@@ -21,10 +21,14 @@ final class OnboardingServiceTests: XCTestCase {
         }
     }
     
-    func test_fetchSlides_jsonSource_inValidFileName_returnsCorrectSlides() throws {
+    func test_fetchSlides_jsonSource_inValidFileName_returnsError() throws {
         sut.fetchSlides(source: .json("Mock", .module)) { result in
-            let slides = try? result.get()
-            XCTAssertEqual(slides?.count, 0)
+            switch result {
+            case .failure(OnboardingServiceError.loadJsonError):
+                XCTAssertTrue(true)
+            default:
+                XCTFail("expect to load json error")
+            }
         }
     }
     
@@ -53,4 +57,16 @@ final class OnboardingServiceTests: XCTestCase {
             XCTAssertEqual(slides?.count, 0)
         }
     }
+    
+    func test_fetchSlides_jsonSource_inValidFileJson_returnsError() throws {
+        sut.fetchSlides(source: .json("MockOnboardingResponseInvalid", .module)) { result in
+            switch result {
+            case .failure(DecodingError.dataCorrupted):
+                XCTAssertTrue(true)
+            default:
+                XCTFail("expect to load json error")
+            }
+        }
+    }
+    
 }

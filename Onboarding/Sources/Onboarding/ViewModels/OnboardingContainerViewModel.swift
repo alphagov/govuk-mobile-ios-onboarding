@@ -22,8 +22,8 @@ class OnboardingContainerViewModel: ObservableObject {
         comment: ""
     )
     private let onboardingService: OnboardingServiceInterface
-    private let dismissAction: () -> Void
     private let onboardingType: OnboardingSource
+    private let dismissAction: () -> Void
 
     init(onboardingService: OnboardingServiceInterface,
          onboardingType: OnboardingSource,
@@ -63,11 +63,9 @@ class OnboardingContainerViewModel: ObservableObject {
     }
 
     var primaryButtonTitle: String {
-        if slideCount - 1 == tabIndex {
-            return finalSlidePrimaryButtonTitle
-        } else {
-            return nonFinalSlideprimaryButtonTitle
-        }
+        isLastSlide ?
+        finalSlidePrimaryButtonTitle :
+        nonFinalSlideprimaryButtonTitle
     }
 
     private func finishOnboarding() {

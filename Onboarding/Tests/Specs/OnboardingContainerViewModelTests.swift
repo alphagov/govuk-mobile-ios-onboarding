@@ -78,7 +78,7 @@ final class OnboardingContainerViewModelTests: XCTestCase {
             dismissAction: {}
         )
         switch mockOnboardingService._receivedFetchSlidesSource {
-        case .json(let resource):
+        case .json(let resource, _):
             XCTAssertEqual(resource, expectedResource)
         default:
             XCTFail("Expected a json type")

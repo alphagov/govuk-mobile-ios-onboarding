@@ -9,16 +9,16 @@ class OnboardingService: OnboardingServiceInterface {
     func fetchSlides(source: OnboardingSource,
                      completionHandler: @escaping (Result<[OnboardingSlide], any Error>) -> Void) {
         switch source {
-        case .json(let fileName):
-            let data = loadJSON(filename: fileName)
+        case .json(let fileName, let bundle):
+            let data = loadJSON(filename: fileName, bundle: bundle)
             completionHandler(.success(data))
         case .model(let slides):
             completionHandler(.success(slides))
         }
     }
 
-    private func loadJSON(filename: String) -> [OnboardingSlide] {
-        guard let resourceUrl = Bundle.main.url(
+    private func loadJSON(filename: String, bundle: Bundle) -> [OnboardingSlide] {
+        guard let resourceUrl = bundle.url(
           forResource: filename,
           withExtension: "json"
         ) else {

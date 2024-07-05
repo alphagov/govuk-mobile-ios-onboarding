@@ -3,12 +3,12 @@ import Foundation
 
 class MockOnboardingService: OnboardingServiceInterface {
  
-    var _receivedDownloadDataOnboardingType: OnboardingSource?
-    var _receivedDownloadDataCompletionHander: ((Result<[OnboardingSlide], any Error>) -> Void)?
-    func downloadData(onboardingType: OnboardingSource,
-                      completionHandler: @escaping (Result<[OnboardingSlide], any Error>) -> Void) {
-        _receivedDownloadDataOnboardingType = onboardingType
-        _receivedDownloadDataCompletionHander = completionHandler
+    var _receivedFetchSlidesSource: OnboardingSource?
+    var _receivedFetchSlidesCompletionHander: ((Result<[OnboardingSlide], any Error>) -> Void)?
+    func fetchSlides(source: OnboardingSource,
+                     completionHandler: @escaping (Result<[OnboardingSlide], any Error>) -> Void) {
+        _receivedFetchSlidesSource = source
+        _receivedFetchSlidesCompletionHander = completionHandler
     }
 
 }

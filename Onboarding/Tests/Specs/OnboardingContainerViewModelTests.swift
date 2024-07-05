@@ -44,7 +44,7 @@ final class OnboardingContainerViewModelTests: XCTestCase {
             })
             .store(in: &cancellables)
 
-        mockOnboardingService._receivedDownloadDataCompletionHander?(.success(expectedSlides))
+        mockOnboardingService._receivedFetchSlidesCompletionHander?(.success(expectedSlides))
 
         wait(for: [expectation], timeout: 1)
     }
@@ -63,7 +63,7 @@ final class OnboardingContainerViewModelTests: XCTestCase {
             }
         )
 
-        mockOnboardingService._receivedDownloadDataCompletionHander?(.success([]))
+        mockOnboardingService._receivedFetchSlidesCompletionHander?(.success([]))
 
         wait(for: [expectation], timeout: 1)
     }
@@ -77,7 +77,7 @@ final class OnboardingContainerViewModelTests: XCTestCase {
             onboardingType: .json(expectedResource),
             dismissAction: {}
         )
-        switch mockOnboardingService._receivedDownloadDataOnboardingType {
+        switch mockOnboardingService._receivedFetchSlidesSource {
         case .json(let resource):
             XCTAssertEqual(resource, expectedResource)
         default:
@@ -96,7 +96,7 @@ final class OnboardingContainerViewModelTests: XCTestCase {
             onboardingType: .model(expectedSlides),
             dismissAction: {}
         )
-        switch mockOnboardingService._receivedDownloadDataOnboardingType {
+        switch mockOnboardingService._receivedFetchSlidesSource {
         case .model(let slides):
             XCTAssertEqual(slides, expectedSlides)
         default:
@@ -115,7 +115,7 @@ final class OnboardingContainerViewModelTests: XCTestCase {
             OnboardingSlide(image: "test", title: "test_title", body: "test_body"),
             OnboardingSlide(image: "test1", title: "test_title", body: "test_body")
         ]
-        mockOnboardingService._receivedDownloadDataCompletionHander?(.success(expectedSlides))
+        mockOnboardingService._receivedFetchSlidesCompletionHander?(.success(expectedSlides))
 
         XCTAssertEqual(sut.primaryButtonTitle, "Continue")
     }
@@ -131,7 +131,7 @@ final class OnboardingContainerViewModelTests: XCTestCase {
             OnboardingSlide(image: "test", title: "test_title", body: "test_body"),
             OnboardingSlide(image: "test1", title: "test_title", body: "test_body")
         ]
-        mockOnboardingService._receivedDownloadDataCompletionHander?(.success(expectedSlides))
+        mockOnboardingService._receivedFetchSlidesCompletionHander?(.success(expectedSlides))
         sut.tabIndex = 1
 
         XCTAssertEqual(sut.primaryButtonTitle, "Done")
@@ -148,7 +148,7 @@ final class OnboardingContainerViewModelTests: XCTestCase {
             OnboardingSlide(image: "test", title: "test_title", body: "test_body"),
             OnboardingSlide(image: "test1", title: "test_title", body: "test_body")
         ]
-        mockOnboardingService._receivedDownloadDataCompletionHander?(.success(expectedSlides))
+        mockOnboardingService._receivedFetchSlidesCompletionHander?(.success(expectedSlides))
         sut.tabIndex = 1
 
         XCTAssertTrue(sut.isLastSlide)
@@ -165,7 +165,7 @@ final class OnboardingContainerViewModelTests: XCTestCase {
             OnboardingSlide(image: "test", title: "test_title", body: "test_body"),
             OnboardingSlide(image: "test1", title: "test_title", body: "test_body")
         ]
-        mockOnboardingService._receivedDownloadDataCompletionHander?(.success(expectedSlides))
+        mockOnboardingService._receivedFetchSlidesCompletionHander?(.success(expectedSlides))
         sut.tabIndex = 0
 
         XCTAssertFalse(sut.isLastSlide)
@@ -182,7 +182,7 @@ final class OnboardingContainerViewModelTests: XCTestCase {
             OnboardingSlide(image: "test", title: "test_title", body: "test_body"),
             OnboardingSlide(image: "test1", title: "test_title", body: "test_body")
         ]
-        mockOnboardingService._receivedDownloadDataCompletionHander?(.success(expectedSlides))
+        mockOnboardingService._receivedFetchSlidesCompletionHander?(.success(expectedSlides))
         sut.tabIndex = 0
 
         XCTAssertEqual(sut.tabIndex, 0)
@@ -205,7 +205,7 @@ final class OnboardingContainerViewModelTests: XCTestCase {
             OnboardingSlide(image: "test", title: "test_title", body: "test_body"),
             OnboardingSlide(image: "test1", title: "test_title", body: "test_body")
         ]
-        mockOnboardingService._receivedDownloadDataCompletionHander?(.success(expectedSlides))
+        mockOnboardingService._receivedFetchSlidesCompletionHander?(.success(expectedSlides))
         sut.tabIndex = 1
 
         sut.action()
@@ -228,7 +228,7 @@ final class OnboardingContainerViewModelTests: XCTestCase {
         let slides = [
             OnboardingSlide(image: "test1", title: "test_title", body: "test_body")
         ]
-        mockOnboardingService._receivedDownloadDataCompletionHander?(.success(slides))
+        mockOnboardingService._receivedFetchSlidesCompletionHander?(.success(slides))
 
         sut.skip()
 
@@ -247,7 +247,7 @@ final class OnboardingContainerViewModelTests: XCTestCase {
             OnboardingSlide(image: "test1", title: "test_title", body: "test_body"),
             OnboardingSlide(image: "test2", title: "test_title", body: "test_body")
         ]
-        mockOnboardingService._receivedDownloadDataCompletionHander?(.success(slides))
+        mockOnboardingService._receivedFetchSlidesCompletionHander?(.success(slides))
 
         sut.tabIndex = 1
         XCTAssertEqual(sut.actionButtonAccessibilityHint, "Finish onboarding")
@@ -265,7 +265,7 @@ final class OnboardingContainerViewModelTests: XCTestCase {
             OnboardingSlide(image: "test1", title: "test_title", body: "test_body"),
             OnboardingSlide(image: "test2", title: "test_title", body: "test_body")
         ]
-        mockOnboardingService._receivedDownloadDataCompletionHander?(.success(slides))
+        mockOnboardingService._receivedFetchSlidesCompletionHander?(.success(slides))
 
         sut.tabIndex = 0
         XCTAssertEqual(sut.actionButtonAccessibilityHint, "Go to the next slide")

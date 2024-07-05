@@ -1,14 +1,14 @@
 import Foundation
 
 protocol OnboardingServiceInterface {
-    func downloadData(onboardingType: OnboardingSource,
-                      completionHandler: @escaping (Result<[OnboardingSlide], Error>) -> Void)
+    func fetchSlides(source: OnboardingSource,
+                     completionHandler: @escaping (Result<[OnboardingSlide], Error>) -> Void)
 }
 
 class OnboardingService: OnboardingServiceInterface {
-    func downloadData(onboardingType: OnboardingSource,
-                      completionHandler: @escaping (Result<[OnboardingSlide], any Error>) -> Void) {
-        switch onboardingType {
+    func fetchSlides(source: OnboardingSource,
+                     completionHandler: @escaping (Result<[OnboardingSlide], any Error>) -> Void) {
+        switch source {
         case .json(let fileName):
             let data = loadJSON(filename: fileName)
             completionHandler(.success(data))

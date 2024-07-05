@@ -67,8 +67,8 @@ class OnboardingContainerViewModel: ObservableObject {
     }
 
      private func fetchOnboarding() {
-        onboardingService.downloadData(
-            onboardingType: onboardingType,
+        onboardingService.fetchSlides(
+            source: onboardingType,
             completionHandler: { [weak self] slides in
                 switch slides {
                 case .success(let slides) where slides.count >= 1:

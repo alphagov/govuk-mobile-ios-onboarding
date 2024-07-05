@@ -5,14 +5,6 @@ class OnboardingContainerViewModel: ObservableObject {
     @Published var tabIndex: Int = 0
     @Published var state = State.loading
     @Published var slideCount: Int = 0
-    private let nonFinalSlideprimaryButtonTitle = NSLocalizedString(
-        "primaryButtonTitle",
-        comment: ""
-    )
-    private let finalSlidePrimaryButtonTitle = NSLocalizedString(
-        "lastButtonTitle",
-        comment: ""
-    )
     let skipButtonTitle = NSLocalizedString(
         "skipButtonTitle",
         comment: ""
@@ -35,15 +27,10 @@ class OnboardingContainerViewModel: ObservableObject {
     }
 
     var actionButtonAccessibilityHint: String {
-        isLastSlide ?
-        NSLocalizedString(
-            "actionButtonLastSlideAccessibilityHint",
-            comment: ""
-        ) :
-        NSLocalizedString(
-            "actionButtonAccessibilityHint",
-            comment: ""
-        )
+        let key = isLastSlide ?
+        "actionButtonLastSlideAccessibilityHint" :
+        "actionButtonAccessibilityHint"
+        return NSLocalizedString(key, comment: "")
     }
 
     func action() {
@@ -63,9 +50,8 @@ class OnboardingContainerViewModel: ObservableObject {
     }
 
     var primaryButtonTitle: String {
-        isLastSlide ?
-        finalSlidePrimaryButtonTitle :
-        nonFinalSlideprimaryButtonTitle
+        let key = isLastSlide ? "lastButtonTitle" : "primaryButtonTitle"
+        return NSLocalizedString(key, comment: "")
     }
 
     private func finishOnboarding() {

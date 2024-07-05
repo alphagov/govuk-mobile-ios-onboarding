@@ -37,7 +37,7 @@ class OnboardingContainerViewModel: ObservableObject {
     var actionButtonAccessibilityHint: String {
         isLastSlide ?
         NSLocalizedString(
-            "actionButtonlastSlideAccessibilityHint",
+            "actionButtonLastSlideAccessibilityHint",
             comment: ""
         ) :
         NSLocalizedString(
@@ -71,7 +71,9 @@ class OnboardingContainerViewModel: ObservableObject {
     }
 
     private func finishOnboarding() {
-        dismissAction()
+        DispatchQueue.main.async {
+            self.dismissAction()
+        }
     }
 
     var isLastSlide: Bool {
@@ -82,21 +84,14 @@ class OnboardingContainerViewModel: ObservableObject {
         onboardingService.downloadData(
             onboardingType: onboardingType,
             completionHandler: { [weak self] slides in
-                guard let self = self else { return }
                 switch slides {
-                case .success(let onboardingSlides):
-                    if onboardingSlides.count > 1 {
-                        self.slideCount = onboardingSlides.count
-                        DispatchQueue.main.async {
-                            self.state = .loaded(onboardingSlides)
-                        }
-                    } else {
-                        self.finishOnboarding()
-                    }
-                case .failure:
+                case .success(let slides) where slides.count >= 1:
+                    self?.slideCount = slides.count
                     DispatchQueue.main.async {
-                        self.finishOnboarding()
+                        self?.state = .loaded(slides)
                     }
+                default:
+                    self?.finishOnboarding()
                 }
             }
         )

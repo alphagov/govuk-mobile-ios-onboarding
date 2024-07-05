@@ -5,6 +5,7 @@ import Combine
 
 final class OnboardingContainerViewModelTests: XCTestCase {
 
+    private var sut: OnboardingContainerViewModel?
     private var cancellables = Set<AnyCancellable>()
 
     func test_init_hasCorrectInitialState() throws {
@@ -44,6 +45,25 @@ final class OnboardingContainerViewModelTests: XCTestCase {
             .store(in: &cancellables)
 
         mockOnboardingService._receivedDownloadDataCompletionHander?(.success(expectedSlides))
+
+        wait(for: [expectation], timeout: 1)
+    }
+
+    func test_init_fetchedSlides_emptySlides_completesFlow() throws {
+        let mockOnboardingService = MockOnboardingService()
+
+        let expectedResource = "MockOnboardingResponse"
+
+        let expectation = XCTestExpectation(description: "Empty slides")
+        sut = OnboardingContainerViewModel(
+            onboardingService: mockOnboardingService,
+            onboardingType: .json(expectedResource),
+            dismissAction: {
+                expectation.fulfill()
+            }
+        )
+
+        mockOnboardingService._receivedDownloadDataCompletionHander?(.success([]))
 
         wait(for: [expectation], timeout: 1)
     }
@@ -192,4 +212,62 @@ final class OnboardingContainerViewModelTests: XCTestCase {
         wait(for: [expectation], timeout: 1)
     }
 
+    func test_skip_completesFlow() throws {
+        let mockOnboardingService = MockOnboardingService()
+
+        let expectedResource = "MockOnboardingResponse"
+
+        let expectation = XCTestExpectation(description: "Empty slides")
+        let sut = OnboardingContainerViewModel(
+            onboardingService: mockOnboardingService,
+            onboardingType: .json(expectedResource),
+            dismissAction: {
+                expectation.fulfill()
+            }
+        )
+        let slides = [
+            OnboardingSlide(image: "test1", title: "test_title", body: "test_body")
+        ]
+        mockOnboardingService._receivedDownloadDataCompletionHander?(.success(slides))
+
+        sut.skip()
+
+        wait(for: [expectation], timeout: 1)
+    }
+
+    func test_actionButtonAccessibilityHint_lastSlide_returnsExpectedResult() throws {
+        let mockOnboardingService = MockOnboardingService()
+
+        let sut = OnboardingContainerViewModel(
+            onboardingService: mockOnboardingService,
+            onboardingType: .json("test"),
+            dismissAction: {}
+        )
+        let slides = [
+            OnboardingSlide(image: "test1", title: "test_title", body: "test_body"),
+            OnboardingSlide(image: "test2", title: "test_title", body: "test_body")
+        ]
+        mockOnboardingService._receivedDownloadDataCompletionHander?(.success(slides))
+
+        sut.tabIndex = 1
+        XCTAssertEqual(sut.actionButtonAccessibilityHint, "actionButtonLastSlideAccessibilityHint")
+    }
+
+    func test_actionButtonAccessibilityHint_notLastSlide_returnsExpectedResult() throws {
+        let mockOnboardingService = MockOnboardingService()
+
+        let sut = OnboardingContainerViewModel(
+            onboardingService: mockOnboardingService,
+            onboardingType: .json("test"),
+            dismissAction: {}
+        )
+        let slides = [
+            OnboardingSlide(image: "test1", title: "test_title", body: "test_body"),
+            OnboardingSlide(image: "test2", title: "test_title", body: "test_body")
+        ]
+        mockOnboardingService._receivedDownloadDataCompletionHander?(.success(slides))
+
+        sut.tabIndex = 0
+        XCTAssertEqual(sut.actionButtonAccessibilityHint, "actionButtonAccessibilityHint")
+    }
 }

@@ -14,6 +14,7 @@ struct UIKitPageControl: UIViewRepresentable {
             for: .valueChanged
         )
         pageControl.currentPage = currentPage
+        pageControl.isAccessibilityElement = false
         pageControl.numberOfPages = numberOfPages
         pageControl.currentPageIndicatorTintColor = UIColor(
             Color("AccentColor", bundle: Bundle.module))

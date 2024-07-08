@@ -82,4 +82,20 @@ final class OnboardingUITests: XCTestCase {
         actionButton.tap()
         XCTAssertFalse(skipButton.exists)
     }
+    func test_image_exists_whenInPortraitaMode(){
+        let app = XCUIApplication()
+        app.launch()
+        app/*@START_MENU_TOKEN@*/.staticTexts["Load"]/*[[".buttons[\"Load\"].staticTexts[\"Load\"]",".staticTexts[\"Load\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
+        let image = app.descendants(matching: .image)
+        XCTAssertTrue(image.element.exists)
+    }
+    
+    func test_image_doesNotExists_whenInLandscapeMode(){
+        let app = XCUIApplication()
+        app.launch()
+        app/*@START_MENU_TOKEN@*/.staticTexts["Load"]/*[[".buttons[\"Load\"].staticTexts[\"Load\"]",".staticTexts[\"Load\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
+        XCUIDevice.shared.orientation = .landscapeRight
+        let image = app.descendants(matching: .image)
+        XCTAssertFalse(image.element.exists)
+    }
 }

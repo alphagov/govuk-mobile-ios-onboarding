@@ -1,6 +1,6 @@
-//
-@testable import Onboarding
 import XCTest
+
+@testable import Onboarding
 
 final class OnboardingServiceTests: XCTestCase {
     

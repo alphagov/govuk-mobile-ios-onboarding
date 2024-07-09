@@ -1,7 +1,8 @@
 import Foundation
 import UIKit
 
-public struct OnboardingSlide: Codable, Equatable {
+public struct OnboardingSlide: Codable,
+                               Equatable {
     public let image: String
     public let title: String
     public let body: String

@@ -1,9 +1,10 @@
-name: Pull Request
+name: Branch
 
 on:
-  pull_request:
-    types: [ opened, reopened, synchronize, ready_for_review ]
-    branches: [ develop, main ]
+  push:
+    branches:
+      - main
+      - develop
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -15,7 +16,7 @@ jobs:
   unit-test:
     uses: ./.github/workflows/unit_test.yml
   sonar-scan:
-    uses: ./.github/workflows/sonar_scan_pr.yml
+    uses: ./.github/workflows/sonar_scan_branch.yml
     needs: unit-test
     secrets:
       SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}

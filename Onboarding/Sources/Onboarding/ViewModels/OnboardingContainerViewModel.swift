@@ -73,9 +73,7 @@ class OnboardingContainerViewModel: ObservableObject {
                 switch slides {
                 case .success(let slides) where slides.count >= 1:
                     self?.slideCount = slides.count
-                    DispatchQueue.main.async {
                         self?.state = .loaded(slides)
-                    }
                 default:
                     self?.finishOnboarding()
                 }

@@ -19,7 +19,7 @@ final class OnboardingUITests: XCTestCase {
         XCTAssertTrue(actionButton.exists)
     }
     
-    func test_actionButton_isNotSetToContinueOnLastSlide(){
+    func test_actionButton_isNotSetToContinue_onLastSlide(){
         //Given
         let actionButton = app.buttons["Continue"]
         //When
@@ -38,7 +38,7 @@ final class OnboardingUITests: XCTestCase {
         XCTAssertTrue(titleLabel.exists)
     }
     
-    func test_descriptionlabel_exists() {
+    func test_descriptionLabel_exists() {
         //Given
         let descriptionLabel = app.collectionViews/*@START_MENU_TOKEN@*/.scrollViews/*[[".cells.scrollViews",".scrollViews"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.otherElements
             .staticTexts["Access government services and information on your phone using the GOV.UK app"]

@@ -11,15 +11,15 @@ final class OnboardingUITests: XCTestCase {
     override func tearDownWithError() throws {
         XCUIDevice.shared.orientation = .portrait
     }
-    
-    func test_actionButton_isSetToContinue_ifNotOnLastSlide() {
+
+    func test_actionButton_notOnLastSlide_isSetToContinue() {
         //Given
         let actionButton = app.buttons["Continue"]
         //Then
         XCTAssertTrue(actionButton.exists)
     }
-    
-    func test_actionButton_isNotSetToContinue_onLastSlide(){
+
+    func test_actionButton_onLastSlide_isNotSetToContinue(){
         //Given
         let actionButton = app.buttons["Continue"]
         //When
@@ -46,7 +46,7 @@ final class OnboardingUITests: XCTestCase {
         XCTAssertTrue(descriptionLabel.exists)
     }
     
-    func test_actionButton_isSetToDone_onLastSlide() {
+    func test_actionButton_onLastSlide_isSetToDone() {
         //Given
         let doneActionButton = app.buttons["Done"]
         let continueActionButton = app.buttons["Continue"]
@@ -61,7 +61,7 @@ final class OnboardingUITests: XCTestCase {
         XCTAssertTrue(doneActionButton.isHittable)
     }
     
-    func test_skipButton_exists_whenNotOnLastSlide() {
+    func test_skipButton_whenNotOnLastSlide_exists() {
         //Given
         let skipButton = app.buttons["Skip"]
         //Then
@@ -69,7 +69,7 @@ final class OnboardingUITests: XCTestCase {
         XCTAssertTrue(skipButton.isHittable)
     }
     
-    func test_skipButton_isNotHittable_OnLastSlide() {
+    func test_skipButton_onLastSlide_isNotHittable() {
         //Given
         let skipButton = app.buttons["Skip"]
         let actionButton = app.buttons["Continue"]
@@ -80,14 +80,14 @@ final class OnboardingUITests: XCTestCase {
         XCTAssertFalse(skipButton.isHittable)
     }
     
-    func test_image_exists_whenInPortraitaMode() {
+    func test_image_whenInPortraitaMode_exists() {
         //Given
         let image = app.descendants(matching: .image)
         //Then
         XCTAssertTrue(image.element.exists)
     }
     
-    func test_skipButton_doesNotExists_inLandscapeModeOnTheLastSlide() {
+    func test_skipButton_inLandscapeModeOnTheLastSlide_doesNotExists() {
         //Given
         let actionButton = app.buttons["Continue"]
         let skipButton = app.buttons["Skip"]
@@ -98,7 +98,7 @@ final class OnboardingUITests: XCTestCase {
         //Then
         XCTAssertFalse(skipButton.exists)
     }
-    
+
     func test_pageController_exists(){
         //Given
         let pageController = app.pageIndicators["page 1 of 3"].children(matching: .other).element.children(matching: .other).element(boundBy: 1)
@@ -106,7 +106,7 @@ final class OnboardingUITests: XCTestCase {
         XCTAssertTrue(pageController.exists)
     }
     
-    func test_skipButton_tapped_endsOnboarding() {
+    func test_skipButton_whenTapped_endsOnboarding() {
         //Given
         let skipButton = app.buttons["Skip"]
         let loadButton =  app/*@START_MENU_TOKEN@*/.staticTexts["Load"]/*[[".buttons[\"Load\"].staticTexts[\"Load\"]",".staticTexts[\"Load\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/
@@ -117,7 +117,7 @@ final class OnboardingUITests: XCTestCase {
         XCTAssertFalse(skipButton.exists)
     }
     
-    func test_doneButton_tapped_endsOnboarding() {
+    func test_doneButton_whenTapped_endsOnboarding() {
         //Given
         let doneButton = app.buttons["Done"]
         let loadButton =  app/*@START_MENU_TOKEN@*/.staticTexts["Load"]/*[[".buttons[\"Load\"].staticTexts[\"Load\"]",".staticTexts[\"Load\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/

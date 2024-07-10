@@ -26,7 +26,7 @@ struct OnboardingContainerView: View {
                 UIKitPageControl(
                     currentPage: $viewModel.tabIndex,
                     numberOfPages: viewModel.slideCount
-                )
+                ).padding([.bottom])
                 AdaptiveStack(spacing: 0) {
                     UIKitActionButton(
                         onTap: {

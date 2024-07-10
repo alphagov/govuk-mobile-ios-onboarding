@@ -1,5 +1,5 @@
 import XCTest
-
+import Combine
 final class OnboardingUITests: XCTestCase {
     let app = XCUIApplication()
     
@@ -11,14 +11,14 @@ final class OnboardingUITests: XCTestCase {
     override func tearDownWithError() throws {
         XCUIDevice.shared.orientation = .portrait
     }
-
+    
     func test_actionButton_notOnLastSlide_isSetToContinue() {
         //Given
         let actionButton = app.buttons["Continue"]
         //Then
         XCTAssertTrue(actionButton.exists)
     }
-
+    
     func test_actionButton_onLastSlide_isNotSetToContinue(){
         //Given
         let actionButton = app.buttons["Continue"]
@@ -77,28 +77,31 @@ final class OnboardingUITests: XCTestCase {
         actionButton.tap()
         actionButton.tap()
         //Then
+        XCTAssertTrue(skipButton.exists)
         XCTAssertFalse(skipButton.isHittable)
     }
     
-    func test_image_whenInPortraitaMode_exists() {
+    func test_image_whenInPortraiteMode_exists() {
         //Given
         let image = app.descendants(matching: .image)
         //Then
         XCTAssertTrue(image.element.exists)
     }
     
-    func test_skipButton_inLandscapeModeOnTheLastSlide_doesNotExists() {
+    func test_skipButton_inLandscapeMode_onTheLastSlide_doesNotExists() {
+        
         //Given
         let actionButton = app.buttons["Continue"]
         let skipButton = app.buttons["Skip"]
         //When
-        XCUIDevice.shared.orientation = .landscapeRight
         actionButton.tap()
         actionButton.tap()
+        XCUIDevice.shared.orientation  = .landscapeLeft
         //Then
+        XCTAssertFalse(skipButton.isHittable)
         XCTAssertFalse(skipButton.exists)
     }
-
+    
     func test_skipButton_whenTapped_endsOnboarding() {
         //Given
         let skipButton = app.buttons["Skip"]
@@ -107,6 +110,7 @@ final class OnboardingUITests: XCTestCase {
         skipButton.tap()
         //Then
         XCTAssertTrue(loadButton.exists)
+        XCTAssertTrue(loadButton.isHittable)
         XCTAssertFalse(skipButton.exists)
     }
     
@@ -121,6 +125,7 @@ final class OnboardingUITests: XCTestCase {
         doneButton.tap()
         //Then
         XCTAssertTrue(loadButton.exists)
+        XCTAssertTrue(loadButton.isHittable)
         XCTAssertFalse(doneButton.exists)
     }
 }

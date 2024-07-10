@@ -89,14 +89,13 @@ final class OnboardingUITests: XCTestCase {
     }
     
     func test_skipButton_inLandscapeMode_onTheLastSlide_doesNotExists() {
-        
         //Given
         let actionButton = app.buttons["Continue"]
         let skipButton = app.buttons["Skip"]
         //When
+        XCUIDevice.shared.orientation  = .landscapeRight
         actionButton.tap()
         actionButton.tap()
-        XCUIDevice.shared.orientation  = .landscapeLeft
         //Then
         XCTAssertFalse(skipButton.isHittable)
         XCTAssertFalse(skipButton.exists)

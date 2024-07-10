@@ -26,7 +26,8 @@ struct OnboardingContainerView: View {
                 UIKitPageControl(
                     currentPage: $viewModel.tabIndex,
                     numberOfPages: viewModel.slideCount
-                ).padding([.bottom])
+                )
+                 .padding([.bottom])
                 AdaptiveStack(spacing: 0) {
                     UIKitActionButton(
                         onTap: {
@@ -36,6 +37,7 @@ struct OnboardingContainerView: View {
                         backgroundColor: themeColor,
                         textColor: textColor
                     )
+                    .padding(.leading, verticalSizeClass == .compact ? nil :0)
                     .accessibilityLabel(
                         Text(viewModel.primaryButtonTitle)
                     )
@@ -60,7 +62,6 @@ struct OnboardingContainerView: View {
                         .accessibility(sortPriority: 0)
                         .frame(width: verticalSizeClass == .regular ? 375 : 424,
                                height: 44)
-                        .padding(.bottom)
                         .opacity(viewModel.isLastSlide ? 0 : 1)
                     }
                 }

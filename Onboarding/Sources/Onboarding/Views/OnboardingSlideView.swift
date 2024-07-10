@@ -39,6 +39,8 @@ struct OnboardingSlideView: View {
 
 #Preview {
     OnboardingSlideView(
-        model: OnboardingSlide(image: "", title: "", body: "")
+        model: OnboardingSlide(image: "onboarding_placeholder_screen_1",
+                               title: "Get things done on the go",
+                               body: "GAccess government services and information")
     )
 }

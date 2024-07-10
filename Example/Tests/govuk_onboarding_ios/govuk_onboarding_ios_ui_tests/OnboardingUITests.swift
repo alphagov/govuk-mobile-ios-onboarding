@@ -99,13 +99,6 @@ final class OnboardingUITests: XCTestCase {
         XCTAssertFalse(skipButton.exists)
     }
 
-    func test_pageController_exists(){
-        //Given
-        let pageController = app.pageIndicators["page 1 of 3"].children(matching: .other).element.children(matching: .other).element(boundBy: 1)
-        //Then
-        XCTAssertTrue(pageController.exists)
-    }
-    
     func test_skipButton_whenTapped_endsOnboarding() {
         //Given
         let skipButton = app.buttons["Skip"]

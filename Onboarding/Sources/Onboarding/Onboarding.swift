@@ -1,24 +1,21 @@
-// The Swift Programming Language
-// https://docs.swift.org/swift-book
-
 import Foundation
 import SwiftUI
 import UIKit
 
 public final class Onboarding {
     private let dismissAction: () -> Void
-    private let onboardingSource: OnboardingSource
+    private let source: OnboardingSource
 
-    public init(dismissAction: @escaping () -> Void,
-                onboardingSource: OnboardingSource) {
+    public init(source: OnboardingSource,
+                dismissAction: @escaping () -> Void) {
         self.dismissAction = dismissAction
-        self.onboardingSource = onboardingSource
+        self.source = source
     }
 
     public lazy var viewController: UIViewController = {
         let viewModel = OnboardingContainerViewModel(
             onboardingService: OnboardingService(),
-            onboardingType: onboardingSource,
+            onboardingType: source,
             dismissAction: dismissAction
         )
         let containerView = OnboardingContainerView(viewModel: viewModel)

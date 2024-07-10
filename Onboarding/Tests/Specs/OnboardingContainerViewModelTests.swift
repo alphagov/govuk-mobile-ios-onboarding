@@ -68,9 +68,8 @@ final class OnboardingContainerViewModelTests: XCTestCase {
         wait(for: [expectation], timeout: 1)
     }
 
-    func test_init_jsonType_fetchesSlides() throws {
+    func test_init_json_fetchesSlides() throws {
         let mockOnboardingService = MockOnboardingService()
-
         let expectedResource = "MockOnboardingResponse"
         _ = OnboardingContainerViewModel(
             onboardingService: mockOnboardingService,

@@ -41,7 +41,8 @@ struct OnboardingContainerView: View {
                     )
                     .accessibilityHint(viewModel.actionButtonAccessibilityHint)
                     .accessibility(sortPriority: 1)
-                    .frame(width: 383, height: 50)
+                    .frame(width: verticalSizeClass == .regular ? 383 : 424,
+                           height: 44)
                     if (viewModel.isLastSlide == false &&
                         verticalSizeClass == .compact) ||
                         (viewModel.isLastSlide == false
@@ -57,7 +58,8 @@ struct OnboardingContainerView: View {
                         )
                         .accessibilityHint(viewModel.skipButtonAcessibilityHint)
                         .accessibility(sortPriority: 0)
-                        .frame(width: 375, height: 44)
+                        .frame(width: verticalSizeClass == .regular ? 375 : 424,
+                               height: 44)
                         .padding(.bottom)
                         .opacity(viewModel.isLastSlide ? 0 : 1)
                     }
@@ -66,13 +68,19 @@ struct OnboardingContainerView: View {
             }.animation(.easeIn, value: viewModel.tabIndex)
         }
     }
-    #Preview {
-        OnboardingContainerView(
-            viewModel: OnboardingContainerViewModel(
-                onboardingService: OnboardingService(),
-                onboardingType: .json("OnboardingResponse"),
-                dismissAction: {}
-            )
-        )
-    }
+}
+#Preview {
+    let viewModel = OnboardingContainerViewModel(
+        onboardingService: OnboardingService(),
+        onboardingType: .model([]),
+        dismissAction: {}
+    )
+    viewModel.state = .loaded([OnboardingSlide(
+        image: "onboarding_placeholder_screen_3",
+        title: "Get things done on the go!",
+        body: "Access government services and information on your phone using the GOV.UK app")]
+    )
+    return OnboardingContainerView(
+        viewModel: viewModel
+    )
 }

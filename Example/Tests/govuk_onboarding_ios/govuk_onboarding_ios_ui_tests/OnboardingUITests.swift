@@ -93,9 +93,9 @@ final class OnboardingUITests: XCTestCase {
         let actionButton = app.buttons["Continue"]
         let skipButton = app.buttons["Skip"]
         //When
+        actionButton.tap()
+        actionButton.tap()
         XCUIDevice.shared.orientation  = .landscapeRight
-        actionButton.tap()
-        actionButton.tap()
         //Then
         XCTAssertFalse(skipButton.isHittable)
         XCTAssertFalse(skipButton.exists)

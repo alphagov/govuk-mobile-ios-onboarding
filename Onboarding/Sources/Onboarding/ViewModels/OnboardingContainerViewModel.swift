@@ -5,34 +5,26 @@ class OnboardingContainerViewModel: ObservableObject {
     @Published var tabIndex: Int = 0
     @Published var state = State.loading
     @Published var slideCount: Int = 0
-    let skipButtonTitle = NSLocalizedString(
-        "skipButtonTitle",
-        bundle: .module,
-        comment: ""
-    )
-    let skipButtonAcessibilityHint = NSLocalizedString(
-        "skipButtonAcessibilityHint",
-        bundle: .module,
-        comment: ""
-    )
+    let skipButtonTitle = "skipButtonTitle".localized()
+    let skipButtonAcessibilityHint = "skipButtonAcessibilityHint".localized()
+
     private let onboardingService: OnboardingServiceInterface
-    private let onboardingType: OnboardingSource
+    private let source: OnboardingSource
     private let dismissAction: () -> Void
 
     init(onboardingService: OnboardingServiceInterface,
-         onboardingType: OnboardingSource,
+         source: OnboardingSource,
          dismissAction: @escaping () -> Void) {
         self.onboardingService = onboardingService
-        self.onboardingType = onboardingType
+        self.source = source
         self.dismissAction = dismissAction
         fetchOnboarding()
     }
 
     var actionButtonAccessibilityHint: String {
-        let key = isLastSlide ?
-        "actionButtonLastSlideAccessibilityHint" :
-        "actionButtonAccessibilityHint"
-        return NSLocalizedString(key, bundle: .module, comment: "")
+        return isLastSlide ?
+        "actionButtonLastSlideAccessibilityHint".localized() :
+        "actionButtonAccessibilityHint".localized()
     }
 
     func action() {
@@ -52,8 +44,9 @@ class OnboardingContainerViewModel: ObservableObject {
     }
 
     var primaryButtonTitle: String {
-        let key = isLastSlide ? "lastButtonTitle" : "primaryButtonTitle"
-        return NSLocalizedString(key, bundle: .module, comment: "")
+        return isLastSlide ?
+        "lastButtonTitle".localized() :
+        "primaryButtonTitle".localized()
     }
 
     private func finishOnboarding() {
@@ -68,7 +61,7 @@ class OnboardingContainerViewModel: ObservableObject {
 
      private func fetchOnboarding() {
         onboardingService.fetchSlides(
-            source: onboardingType,
+            source: source,
             completionHandler: { [weak self] slides in
                 switch slides {
                 case .success(let slides) where slides.count >= 1:

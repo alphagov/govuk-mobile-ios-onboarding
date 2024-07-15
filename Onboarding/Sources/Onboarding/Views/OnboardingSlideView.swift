@@ -8,6 +8,7 @@ struct OnboardingSlideView: View {
     init(model: OnboardingSlide) {
         self.model = model
     }
+
     var body: some View {
         ScrollView {
             VStack {

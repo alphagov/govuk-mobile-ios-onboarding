@@ -14,9 +14,7 @@
 		5D5018A32BD101F0005ABC1C /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 5D5018A22BD101F0005ABC1C /* Base */; };
 		5D5018A52BD101F3005ABC1C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5D5018A42BD101F3005ABC1C /* Assets.xcassets */; };
 		5D5018A82BD101F3005ABC1C /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 5D5018A72BD101F3005ABC1C /* Base */; };
-		5D5018B32BD101F3005ABC1C /* OnboardingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D5018B22BD101F3005ABC1C /* OnboardingTests.swift */; };
 		5D5018BD2BD101F3005ABC1C /* OnboardingUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D5018BC2BD101F3005ABC1C /* OnboardingUITests.swift */; };
-		5D5018BF2BD101F3005ABC1C /* OnboardingUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D5018BE2BD101F3005ABC1C /* OnboardingUITestsLaunchTests.swift */; };
 		5D58E32C2C2ED78F00157F3C /* OnboardingResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 5D58E32B2C2ED78D00157F3C /* OnboardingResponse.json */; };
 		5D58E32E2C2EE16300157F3C /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D58E32D2C2EE16300157F3C /* main.swift */; };
 		5D58E3342C2EE20E00157F3C /* TestAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D58E3302C2EE20E00157F3C /* TestAppDelegate.swift */; };
@@ -52,10 +50,8 @@
 		5D5018A72BD101F3005ABC1C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5D5018A92BD101F3005ABC1C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5D5018AE2BD101F3005ABC1C /* govuk_onboarding_ios_unit_tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = govuk_onboarding_ios_unit_tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		5D5018B22BD101F3005ABC1C /* OnboardingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingTests.swift; sourceTree = "<group>"; };
 		5D5018B82BD101F3005ABC1C /* govuk_onboarding_ios_ui_tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = govuk_onboarding_ios_ui_tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5D5018BC2BD101F3005ABC1C /* OnboardingUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingUITests.swift; sourceTree = "<group>"; };
-		5D5018BE2BD101F3005ABC1C /* OnboardingUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		5D58E32B2C2ED78D00157F3C /* OnboardingResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = OnboardingResponse.json; sourceTree = "<group>"; };
 		5D58E32D2C2EE16300157F3C /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		5D58E3302C2EE20E00157F3C /* TestAppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestAppDelegate.swift; sourceTree = "<group>"; };
@@ -122,7 +118,6 @@
 		5D5018B12BD101F3005ABC1C /* govuk_onboarding_ios_unit_tests */ = {
 			isa = PBXGroup;
 			children = (
-				5D5018B22BD101F3005ABC1C /* OnboardingTests.swift */,
 			);
 			path = govuk_onboarding_ios_unit_tests;
 			sourceTree = "<group>";
@@ -131,7 +126,6 @@
 			isa = PBXGroup;
 			children = (
 				5D5018BC2BD101F3005ABC1C /* OnboardingUITests.swift */,
-				5D5018BE2BD101F3005ABC1C /* OnboardingUITestsLaunchTests.swift */,
 			);
 			path = govuk_onboarding_ios_ui_tests;
 			sourceTree = "<group>";
@@ -395,7 +389,6 @@
 			files = (
 				5D58E3342C2EE20E00157F3C /* TestAppDelegate.swift in Sources */,
 				5D58E3362C2EE20E00157F3C /* TestSceneDelegate.swift in Sources */,
-				5D5018B32BD101F3005ABC1C /* OnboardingTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -403,7 +396,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5D5018BF2BD101F3005ABC1C /* OnboardingUITestsLaunchTests.swift in Sources */,
 				5D5018BD2BD101F3005ABC1C /* OnboardingUITests.swift in Sources */,
 				5D58E3352C2EE20E00157F3C /* TestAppDelegate.swift in Sources */,
 				5D58E3372C2EE20E00157F3C /* TestSceneDelegate.swift in Sources */,

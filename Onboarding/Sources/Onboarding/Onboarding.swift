@@ -15,7 +15,7 @@ public final class Onboarding {
     public lazy var viewController: UIViewController = {
         let viewModel = OnboardingContainerViewModel(
             onboardingService: OnboardingService(),
-            onboardingType: source,
+            source: source,
             dismissAction: dismissAction
         )
         let containerView = OnboardingContainerView(viewModel: viewModel)

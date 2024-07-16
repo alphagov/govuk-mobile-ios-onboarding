@@ -31,7 +31,7 @@ struct OnboardingContainerView: View {
                 AdaptiveStack(spacing: 0) {
                     UIKitActionButton(
                         onTap: {
-                            viewModel.action()
+                            viewModel.primaryAction()
                         },
                         title: viewModel.primaryButtonTitle,
                         backgroundColor: themeColor,

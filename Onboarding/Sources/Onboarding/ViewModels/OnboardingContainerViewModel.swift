@@ -5,9 +5,14 @@ class OnboardingContainerViewModel: ObservableObject {
     @Published var tabIndex: Int = 0
     @Published var state = State.loading
     @Published var slideCount: Int = 0
-    let skipButtonTitle = NSLocalizedString(key: "skipButtonTitle",
-                                            bundle: .module)
-    let skipButtonAcessibilityHint = NSLocalizedString(key: "skipButtonAcessibilityHint", bundle: .module)
+    let skipButtonTitle = NSLocalizedString(
+        key: "skipButtonTitle",
+        bundle: .module
+    )
+    let skipButtonAcessibilityHint = NSLocalizedString(
+        key: "skipButtonAcessibilityHint",
+        bundle: .module
+    )
     private let onboardingService: OnboardingServiceInterface
     private let source: OnboardingSource
     private let dismissAction: () -> Void
@@ -22,14 +27,18 @@ class OnboardingContainerViewModel: ObservableObject {
     }
 
     var actionButtonAccessibilityHint: String {
-        return isLastSlide ?
-        NSLocalizedString(key: "actionButtonLastSlideAccessibilityHint",
-                          bundle: .module) :
-        NSLocalizedString(key: "actionButtonAccessibilityHint",
-                          bundle: .module)
+        isLastSlide ?
+        NSLocalizedString(
+            key: "actionButtonLastSlideAccessibilityHint",
+            bundle: .module
+        ) :
+        NSLocalizedString(
+            key: "actionButtonAccessibilityHint",
+            bundle: .module
+        )
     }
 
-    func action() {
+    func primaryAction() {
         if isLastSlide {
             finishOnboarding()
         } else {
@@ -46,17 +55,19 @@ class OnboardingContainerViewModel: ObservableObject {
     }
 
     var primaryButtonTitle: String {
-        return isLastSlide ?
-        NSLocalizedString(key: "lastButtonTitle",
-                          bundle: .module) :
-        NSLocalizedString(key: "primaryButtonTitle",
-                          bundle: .module)
+        isLastSlide ?
+        NSLocalizedString(
+            key: "lastButtonTitle",
+            bundle: .module
+        ) :
+        NSLocalizedString(
+            key: "primaryButtonTitle",
+            bundle: .module
+        )
     }
 
     private func finishOnboarding() {
-        DispatchQueue.main.async {
-            self.dismissAction()
-        }
+        dismissAction()
     }
 
     var isLastSlide: Bool {
@@ -66,16 +77,20 @@ class OnboardingContainerViewModel: ObservableObject {
      private func fetchOnboarding() {
         onboardingService.fetchSlides(
             source: source,
-            completionHandler: { [weak self] slides in
-                switch slides {
-                case .success(let slides) where slides.count >= 1:
-                    self?.slideCount = slides.count
-                        self?.state = .loaded(slides)
-                default:
-                    self?.finishOnboarding()
-                }
+            completionHandler: { [weak self] result in
+                self?.handleSlidesResponse(result: result)
             }
         )
+    }
+
+    private func handleSlidesResponse(result: Result<[OnboardingSlide], Error>) {
+        switch result {
+        case .success(let slides) where slides.count >= 1:
+            slideCount = slides.count
+            state = .loaded(slides)
+        default:
+            finishOnboarding()
+        }
     }
 }
 

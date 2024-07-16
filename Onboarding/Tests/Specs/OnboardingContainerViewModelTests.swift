@@ -170,7 +170,7 @@ final class OnboardingContainerViewModelTests: XCTestCase {
         XCTAssertFalse(sut.isLastSlide)
     }
 
-    func test_action_notLastSlide_incrementsTabIndex() throws {
+    func test_primaryAction_notLastSlide_incrementsTabIndex() throws {
         let mockOnboardingService = MockOnboardingService()
         let sut = OnboardingContainerViewModel(
             onboardingService: mockOnboardingService,
@@ -185,12 +185,12 @@ final class OnboardingContainerViewModelTests: XCTestCase {
         sut.tabIndex = 0
 
         XCTAssertEqual(sut.tabIndex, 0)
-        sut.action()
+        sut.primaryAction()
 
         XCTAssertEqual(sut.tabIndex, 1)
     }
 
-    func test_action_lastSlide_completesFlow() throws {
+    func test_primaryAction_lastSlide_completesFlow() throws {
         let expectation = XCTestExpectation(description: "Final slide expectation")
         let mockOnboardingService = MockOnboardingService()
         let sut = OnboardingContainerViewModel(
@@ -207,7 +207,7 @@ final class OnboardingContainerViewModelTests: XCTestCase {
         mockOnboardingService._receivedFetchSlidesCompletionHander?(.success(expectedSlides))
         sut.tabIndex = 1
 
-        sut.action()
+        sut.primaryAction()
         wait(for: [expectation], timeout: 1)
     }
 

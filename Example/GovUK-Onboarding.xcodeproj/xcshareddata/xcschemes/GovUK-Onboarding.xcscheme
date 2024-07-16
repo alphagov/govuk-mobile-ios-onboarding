@@ -30,7 +30,8 @@
       shouldUseLaunchSchemeArgsEnv = "YES">
       <TestPlans>
          <TestPlanReference
-            reference = "container:../Onboarding.xctestplan">
+            reference = "container:../Onboarding.xctestplan"
+            default = "YES">
          </TestPlanReference>
       </TestPlans>
       <Testables>

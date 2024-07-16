@@ -14,23 +14,16 @@
   "testTargets" : [
     {
       "target" : {
-        "containerPath" : "container:GovUK-Onboarding.xcodeproj",
-        "identifier" : "5D5018B72BD101F3005ABC1C",
-        "name" : "govuk_onboarding_ios_ui_tests"
-      }
-    },
-    {
-      "target" : {
-        "containerPath" : "container:GovUK-Onboarding.xcodeproj",
-        "identifier" : "5D5018AD2BD101F3005ABC1C",
-        "name" : "govuk_onboarding_ios_unit_tests"
-      }
-    },
-    {
-      "target" : {
         "containerPath" : "container:..",
         "identifier" : "OnboardingTests",
         "name" : "OnboardingTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:GovUK-Onboarding.xcodeproj",
+        "identifier" : "5D5018B72BD101F3005ABC1C",
+        "name" : "govuk_onboarding_ios_ui_tests"
       }
     }
   ],

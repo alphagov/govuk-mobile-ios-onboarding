@@ -1,34 +1,130 @@
 import XCTest
 
 final class OnboardingUITests: XCTestCase {
-
+    let app = XCUIApplication()
+    
     override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-
-        // In UI tests it is usually best to stop immediately when a failure occurs.
-        continueAfterFailure = false
-
-        // In UI tests it’s important to set the initial state - such as interface orientation - required for your tests before they run. The setUp method is a good place to do this.
-    }
-
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
-
-    func testExample() throws {
-        // UI tests must launch the application that they test.
-        let app = XCUIApplication()
         app.launch()
-
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+        app/*@START_MENU_TOKEN@*/.staticTexts["Load"]/*[[".buttons[\"Load\"].staticTexts[\"Load\"]",".staticTexts[\"Load\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
     }
-
-    func testLaunchPerformance() throws {
-        if #available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 7.0, *) {
-            // This measures how long it takes to launch your application.
-            measure(metrics: [XCTApplicationLaunchMetric()]) {
-                XCUIApplication().launch()
-            }
-        }
+    
+    override func tearDownWithError() throws {
+        XCUIDevice.shared.orientation = .portrait
+    }
+    
+    func test_actionButton_notOnLastSlide_isSetToContinue() {
+        //Given
+        let actionButton = app.buttons["Continue"]
+        //Then
+        XCTAssertTrue(actionButton.exists)
+    }
+    
+    func test_actionButton_onLastSlide_isNotSetToContinue(){
+        //Given
+        let actionButton = app.buttons["Continue"]
+        //When
+        actionButton.tap()
+        actionButton.tap()
+        //Then
+        XCTAssertFalse(actionButton.exists)
+    }
+    
+    func test_titleLabel_exists() {
+        //Given
+        let scrollViewsQuery = app.collectionViews/*@START_MENU_TOKEN@*/.scrollViews/*[[".cells.scrollViews",".scrollViews"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/
+        let elementsQuery = scrollViewsQuery.otherElements
+        let titleLabel = elementsQuery.staticTexts["Get things done on the go"]
+        //Then
+        XCTAssertTrue(titleLabel.exists)
+    }
+    
+    func test_descriptionLabel_exists() {
+        //Given
+        let descriptionLabel = app.collectionViews/*@START_MENU_TOKEN@*/.scrollViews/*[[".cells.scrollViews",".scrollViews"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.otherElements
+            .staticTexts["Access government services and information on your phone using the GOV.UK app"]
+        //Then
+        XCTAssertTrue(descriptionLabel.exists)
+    }
+    
+    func test_actionButton_onLastSlide_isSetToDone() {
+        //Given
+        let doneActionButton = app.buttons["Done"]
+        let continueActionButton = app.buttons["Continue"]
+        let view = app.collectionViews
+            .scrollViews.containing(.other, identifier:"Vertical scroll bar, 1 page").element
+        //When
+        continueActionButton.tap()
+        continueActionButton.tap()
+        view.swipeLeft()
+        //Then
+        XCTAssertTrue(doneActionButton.exists)
+        XCTAssertTrue(doneActionButton.isHittable)
+    }
+    
+    func test_skipButton_whenNotOnLastSlide_exists() {
+        //Given
+        let skipButton = app.buttons["Skip"]
+        //Then
+        XCTAssertTrue(skipButton.exists)
+        XCTAssertTrue(skipButton.isHittable)
+    }
+    
+    func test_skipButton_onLastSlide_isNotHittable() {
+        //Given
+        let skipButton = app.buttons["Skip"]
+        let actionButton = app.buttons["Continue"]
+        //When
+        actionButton.tap()
+        actionButton.tap()
+        //Then
+        XCTAssertTrue(skipButton.exists)
+        XCTAssertFalse(skipButton.isHittable)
+    }
+    
+    func test_image_whenInPortraiteMode_exists() {
+        //Given
+        let image = app.descendants(matching: .image)
+        //Then
+        XCTAssertTrue(image.element.exists)
+    }
+    
+    func test_skipButton_inLandscapeMode_onTheLastSlide_doesNotExists() {
+        //Given
+        let actionButton = app.buttons["Continue"]
+        let skipButton = app.buttons["Skip"]
+        //When
+        actionButton.tap()
+        actionButton.tap()
+        XCUIDevice.shared.orientation  = .landscapeRight
+        //Then
+        XCTAssertFalse(skipButton.isHittable)
+        XCTAssertFalse(skipButton.exists)
+    }
+    
+    func test_skipButton_whenTapped_endsOnboarding() {
+        //Given
+        let skipButton = app.buttons["Skip"]
+        let loadButton =  app/*@START_MENU_TOKEN@*/.staticTexts["Load"]/*[[".buttons[\"Load\"].staticTexts[\"Load\"]",".staticTexts[\"Load\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/
+        //When
+        skipButton.tap()
+        //Then
+        XCTAssertTrue(loadButton.exists)
+        XCTAssertTrue(loadButton.isHittable)
+        XCTAssertFalse(skipButton.exists)
+    }
+    
+    func test_doneButton_whenTapped_endsOnboarding() {
+        //Given
+        let doneButton = app.buttons["Done"]
+        let loadButton =  app/*@START_MENU_TOKEN@*/.staticTexts["Load"]/*[[".buttons[\"Load\"].staticTexts[\"Load\"]",".staticTexts[\"Load\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/
+        let continueButton = app.buttons["Continue"]
+        //When
+        continueButton.tap()
+        continueButton.tap()
+        doneButton.tap()
+        //Then
+        XCTAssertTrue(loadButton.exists)
+        XCTAssertTrue(loadButton.isHittable)
+        XCTAssertFalse(doneButton.exists)
     }
 }

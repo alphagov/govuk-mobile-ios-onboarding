@@ -18,7 +18,8 @@ platform :ios do
       devices: configuration.scan_devices,
       testplan: configuration.app_test_plan,
       clean: false,
-      prelaunch_simulator: true
+      prelaunch_simulator: true,
+      reset_simulator: true
     )
   end
 

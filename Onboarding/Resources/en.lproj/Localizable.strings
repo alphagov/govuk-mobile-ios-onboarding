@@ -1,0 +1,7 @@
+/* MARK: - Onboarding */
+"lastButtonTitle" = "Done";
+"skipButtonTitle" = "Skip";
+"primaryButtonTitle" = "Continue";
+"actionButtonLastSlideAccessibilityHint" = "Finish onboarding";
+"actionButtonAccessibilityHint" = "Go to the next slide";
+"skipButtonAcessibilityHint" = "Skip onboarding";

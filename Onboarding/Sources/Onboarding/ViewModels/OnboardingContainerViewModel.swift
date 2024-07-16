@@ -6,12 +6,14 @@ class OnboardingContainerViewModel: ObservableObject {
     @Published var state = State.loading
     @Published var slideCount: Int = 0
     let skipButtonTitle = NSLocalizedString(
-        key: "skipButtonTitle",
-        bundle: .module
+        "skipButtonTitle",
+        bundle: .module,
+        comment: ""
     )
     let skipButtonAcessibilityHint = NSLocalizedString(
-        key: "skipButtonAcessibilityHint",
-        bundle: .module
+        "skipButtonAcessibilityHint",
+        bundle: .module,
+        comment: ""
     )
     private let onboardingService: OnboardingServiceInterface
     private let source: OnboardingSource
@@ -29,12 +31,14 @@ class OnboardingContainerViewModel: ObservableObject {
     var actionButtonAccessibilityHint: String {
         isLastSlide ?
         NSLocalizedString(
-            key: "actionButtonLastSlideAccessibilityHint",
-            bundle: .module
+            "actionButtonLastSlideAccessibilityHint",
+            bundle: .module,
+            comment: ""
         ) :
         NSLocalizedString(
-            key: "actionButtonAccessibilityHint",
-            bundle: .module
+            "actionButtonAccessibilityHint",
+            bundle: .module,
+            comment: ""
         )
     }
 
@@ -57,12 +61,14 @@ class OnboardingContainerViewModel: ObservableObject {
     var primaryButtonTitle: String {
         isLastSlide ?
         NSLocalizedString(
-            key: "lastButtonTitle",
-            bundle: .module
+            "lastButtonTitle",
+            bundle: .module,
+            comment: ""
         ) :
         NSLocalizedString(
-            key: "primaryButtonTitle",
-            bundle: .module
+            "primaryButtonTitle",
+            bundle: .module,
+            comment: ""
         )
     }
 
@@ -78,12 +84,12 @@ class OnboardingContainerViewModel: ObservableObject {
         onboardingService.fetchSlides(
             source: source,
             completionHandler: { [weak self] result in
-                self?.handleSlidesResponse(result: result)
+                self?.handleSlidesResult(result: result)
             }
         )
     }
 
-    private func handleSlidesResponse(result: Result<[OnboardingSlide], Error>) {
+    private func handleSlidesResult(result: Result<[OnboardingSlide], Error>) {
         switch result {
         case .success(let slides) where slides.count >= 1:
             slideCount = slides.count

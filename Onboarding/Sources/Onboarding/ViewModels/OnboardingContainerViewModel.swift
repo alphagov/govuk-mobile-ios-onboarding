@@ -71,7 +71,7 @@ class OnboardingContainerViewModel: ObservableObject {
     }
 
     var isLastSlide: Bool {
-        tabIndex == slideCount - 1 ? true : false
+        tabIndex == slideCount - 1
     }
 
      private func fetchOnboarding() {

@@ -16,20 +16,20 @@ let package = Package(
     targets: [
         .target(
             name: "Onboarding",
-            path: "Onboarding",
+            path: "Onboarding/Sources",
             sources: [
-                "Sources/Onboarding"
+                "Onboarding"
             ]
         ),
         .testTarget(
             name: "OnboardingTests",
             dependencies: ["Onboarding"],
-            path: "Onboarding",
+            path: "Onboarding/Tests",
             sources: [
-                "Tests/Specs",
-                "Tests/Mocks"
+                "Specs",
+                "Mocks"
             ],
-            resources : [.process("Tests/Resources")]
+            resources : [.process("Resources")]
         ),
     ]
 )

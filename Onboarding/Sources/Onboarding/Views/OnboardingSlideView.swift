@@ -24,16 +24,15 @@ struct OnboardingSlideView: View {
                     .fontWeight(.bold)
                     .multilineTextAlignment(.center)
                     .frame(maxWidth: .infinity, alignment: .center)
+                    .accessibilityAddTraits(.isHeader)
                     .accessibilityLabel(Text(model.title))
-                    .accessibility(sortPriority: 3)
                     .padding(.top, verticalSizeClass == .compact ? 32 : 0)
                 Text(model.body)
                     .multilineTextAlignment(.center)
                     .accessibilityLabel(Text(model.body))
-                    .accessibility(sortPriority: 2)
                     .padding([.top])
                 Spacer()
-            }.accessibilityElement(children: .contain)
+            }
         }
     }
 }

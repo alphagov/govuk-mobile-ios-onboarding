@@ -13,9 +13,18 @@ let package = Package(
             targets: ["Onboarding"]
         ),
     ],
+    dependencies: [
+        .package(
+            url: "https://github.com/alphagov/govuk-mobile-ios-ui-components", 
+            branch: "feature/govukapp-535-primary-button_2"
+        ),
+    ],
     targets: [
         .target(
             name: "Onboarding",
+            dependencies: [
+              .product(name: "UIComponents", package: "govuk-mobile-ios-ui-components"),
+            ],
             path: "Onboarding/Sources",
             sources: [
                 "Onboarding"

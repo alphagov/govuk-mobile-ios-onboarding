@@ -1,5 +1,6 @@
 import Foundation
 import SwiftUI
+import UIComponents
 
 struct OnboardingContainerView: View {
     @StateObject private var viewModel: OnboardingContainerViewModel
@@ -29,43 +30,30 @@ struct OnboardingContainerView: View {
                 )
                  .padding([.bottom])
                 AdaptiveStack(spacing: 0) {
-                    UIKitActionButton(
-                        onTap: {
-                            viewModel.primaryAction()
-                        },
-                        title: viewModel.primaryButtonTitle,
-                        backgroundColor: themeColor,
-                        textColor: textColor
+                    SwiftUIButton(
+                        .primary,
+                        viewModel: viewModel.primaryButtonViewModel
                     )
                     .padding(.leading, verticalSizeClass == .compact ? nil :0)
-                    .accessibilityLabel(
-                        Text(viewModel.primaryButtonTitle)
-                    )
                     .accessibilityHint(viewModel.actionButtonAccessibilityHint)
                     .accessibility(sortPriority: 1)
-                    .frame(width: verticalSizeClass == .regular ? 383 : 424,
-                           height: 44)
+                    .frame(width: verticalSizeClass == .regular ? 383 : 424)
                     if (viewModel.isLastSlide == false &&
                         verticalSizeClass == .compact) ||
                         (viewModel.isLastSlide == false
                          && verticalSizeClass == .regular)
                         || (viewModel.isLastSlide == true &&
                             verticalSizeClass == .regular) {
-                        UIKitSkipButton(
-                            onTap: {
-                                viewModel.skip()
-                            },
-                            title: viewModel.skipButtonTitle,
-                            textColor: themeColor
+                        SwiftUIButton(
+                            .secondary,
+                            viewModel: viewModel.secondaryButtonViewModel
                         )
                         .accessibilityHint(viewModel.skipButtonAcessibilityHint)
                         .accessibility(sortPriority: 0)
-                        .frame(width: verticalSizeClass == .regular ? 375 : 424,
-                               height: 44)
+                        .frame(width: verticalSizeClass == .regular ? 375 : 424)
                         .opacity(viewModel.isLastSlide ? 0 : 1)
                     }
                 }
-                .accessibilityElement(children: .contain)
             }.animation(.easeIn, value: viewModel.tabIndex)
         }
     }

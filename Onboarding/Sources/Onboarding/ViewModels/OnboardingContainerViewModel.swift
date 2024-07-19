@@ -1,11 +1,12 @@
 import Foundation
 import SwiftUI
+import UIComponents
 
 class OnboardingContainerViewModel: ObservableObject {
     @Published var tabIndex: Int = 0
     @Published var state = State.loading
     @Published var slideCount: Int = 0
-    let skipButtonTitle = NSLocalizedString(
+    private let skipButtonTitle = NSLocalizedString(
         "skipButtonTitle",
         bundle: .module,
         comment: ""
@@ -42,7 +43,7 @@ class OnboardingContainerViewModel: ObservableObject {
         )
     }
 
-    func primaryAction() {
+    private func primaryAction() {
         if isLastSlide {
             finishOnboarding()
         } else {
@@ -54,11 +55,7 @@ class OnboardingContainerViewModel: ObservableObject {
         tabIndex += 1
     }
 
-    func skip() {
-        finishOnboarding()
-    }
-
-    var primaryButtonTitle: String {
+    private var primaryButtonTitle: String {
         isLastSlide ?
         NSLocalizedString(
             "lastButtonTitle",
@@ -78,6 +75,20 @@ class OnboardingContainerViewModel: ObservableObject {
 
     var isLastSlide: Bool {
         tabIndex == slideCount - 1
+    }
+
+    var primaryButtonViewModel: GOVUKButton.ButtonViewModel {
+        .init(
+            localisedTitle: primaryButtonTitle,
+            action: { [weak self] in self?.primaryAction() }
+        )
+    }
+
+    var secondaryButtonViewModel: GOVUKButton.ButtonViewModel {
+        .init(
+            localisedTitle: skipButtonTitle,
+            action: { [weak self] in self?.finishOnboarding() }
+        )
     }
 
      private func fetchOnboarding() {

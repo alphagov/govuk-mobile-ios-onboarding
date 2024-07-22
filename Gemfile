@@ -3,6 +3,6 @@
 source 'https://rubygems.org'
 
 gem 'fastlane'
+gem 'rexml', '>=3.3.2'
 gem 'rubocop'
 gem 'slather'
-gem 'rexml', '>=3.3.2'

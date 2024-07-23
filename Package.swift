@@ -16,7 +16,7 @@ let package = Package(
     dependencies: [
         .package(
             url: "https://github.com/alphagov/govuk-mobile-ios-ui-components", 
-            branch: "feature/govukapp-535-primary-button_2"
+            branch: "feature/govukapp-535-primary-button"
         ),
     ],
     targets: [

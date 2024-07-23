@@ -12,6 +12,9 @@ struct OnboardingSlideView: View {
     var body: some View {
         ScrollView {
             VStack {
+                if verticalSizeClass == . regular {
+                                 Spacer(minLength: 32)
+                             }
                 if verticalSizeClass != .compact {
                     Image(decorative: model.image, bundle: .main)
                         .resizable()
@@ -27,10 +30,11 @@ struct OnboardingSlideView: View {
                     .accessibilityAddTraits(.isHeader)
                     .accessibilityLabel(Text(model.title))
                     .padding(.top, verticalSizeClass == .compact ? 32 : 0)
+                    .padding([.trailing, .leading], 16)
                 Text(model.body)
                     .multilineTextAlignment(.center)
                     .accessibilityLabel(Text(model.body))
-                    .padding([.top])
+                    .padding([.top, .leading, .trailing], 16)
                 Spacer()
             }
         }

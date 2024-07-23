@@ -4,10 +4,7 @@ import UIComponents
 
 struct OnboardingContainerView: View {
     @StateObject private var viewModel: OnboardingContainerViewModel
-    private var themeColor = Color("AccentColor", bundle: Bundle.module)
-    private var textColor =  Color("PrimaryColor", bundle: Bundle.module)
     @Environment(\.verticalSizeClass) var verticalSizeClass
-
     init(viewModel: OnboardingContainerViewModel) {
         _viewModel = StateObject(wrappedValue: viewModel)
     }
@@ -37,23 +34,28 @@ struct OnboardingContainerView: View {
                     .padding(.leading, verticalSizeClass == .compact ? nil :0)
                     .accessibilityHint(viewModel.actionButtonAccessibilityHint)
                     .accessibility(sortPriority: 1)
-                    .frame(width: verticalSizeClass == .regular ? 383 : 424)
+                    .frame(idealWidth: verticalSizeClass == .regular ? 383 : 424, minHeight: 44, idealHeight: 44,
+                                          maxHeight: 44)
                     if (viewModel.isLastSlide == false &&
                         verticalSizeClass == .compact) ||
                         (viewModel.isLastSlide == false
                          && verticalSizeClass == .regular)
                         || (viewModel.isLastSlide == true &&
                             verticalSizeClass == .regular) {
-                        SwiftUIButton(
-                            .secondary,
+                        SwiftUIButton(.secondary,
                             viewModel: viewModel.secondaryButtonViewModel
                         )
                         .accessibilityHint(viewModel.skipButtonAcessibilityHint)
                         .accessibility(sortPriority: 0)
-                        .frame(width: verticalSizeClass == .regular ? 375 : 424)
+                        .frame(idealWidth: verticalSizeClass == .regular ?
+                               375 : 424,
+                               minHeight: 44,
+                               idealHeight: 44,
+                               maxHeight: 44)
                         .opacity(viewModel.isLastSlide ? 0 : 1)
                     }
                 }
+                .padding([.leading, .trailing], verticalSizeClass == .regular ? 16: 24)
             }.animation(.easeIn, value: viewModel.tabIndex)
         }
     }
@@ -69,7 +71,7 @@ struct OnboardingContainerView: View {
         title: "Get things done on the go!",
         body: "Access government services and information on your phone using the GOV.UK app")]
     )
-    return OnboardingContainerView(
-        viewModel: viewModel
-    )
+        return OnboardingContainerView(
+            viewModel: viewModel
+        )
 }

@@ -30,7 +30,6 @@ struct UIKitPageControl: UIViewRepresentable {
             pageControl.currentPageIndicatorTintColor = UIColor(
                 resource: colourResource)
         } else {
-            // Fallback on earlier versions
         }
         return pageControl
    }

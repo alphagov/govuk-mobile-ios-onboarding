@@ -43,7 +43,7 @@ class OnboardingContainerViewModel: ObservableObject {
         )
     }
 
-    private func primaryAction() {
+    func primaryAction() {
         if isLastSlide {
             finishOnboarding()
         } else {
@@ -55,7 +55,7 @@ class OnboardingContainerViewModel: ObservableObject {
         tabIndex += 1
     }
 
-    private var primaryButtonTitle: String {
+    var primaryButtonTitle: String {
         isLastSlide ?
         NSLocalizedString(
             "lastButtonTitle",

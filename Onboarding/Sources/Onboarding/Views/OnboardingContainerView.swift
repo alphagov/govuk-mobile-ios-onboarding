@@ -21,6 +21,7 @@ struct OnboardingContainerView: View {
                     }
                 }
                 .tabViewStyle(.page(indexDisplayMode: .never))
+                Divider().ignoresSafeArea(edges: [.leading, .trailing])
                 UIKitPageControl(
                     currentPage: $viewModel.tabIndex,
                     numberOfPages: viewModel.slideCount
@@ -56,7 +57,8 @@ struct OnboardingContainerView: View {
                     }
                 }
                 .padding([.leading, .trailing], verticalSizeClass == .regular ? 16: 24)
-            }.animation(.easeIn, value: viewModel.tabIndex)
+            }.accessibilityElement(children: .contain)
+            .animation(.easeIn, value: viewModel.tabIndex)
         }
     }
 }

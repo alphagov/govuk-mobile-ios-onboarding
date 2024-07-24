@@ -6,7 +6,7 @@ class OnboardingContainerViewModel: ObservableObject {
     @Published var tabIndex: Int = 0
     @Published var state = State.loading
     @Published var slideCount: Int = 0
-    private let skipButtonTitle = NSLocalizedString(
+    let skipButtonTitle = NSLocalizedString(
         "skipButtonTitle",
         bundle: .module,
         comment: ""

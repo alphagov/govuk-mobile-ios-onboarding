@@ -211,7 +211,7 @@ final class OnboardingContainerViewModelTests: XCTestCase {
         wait(for: [expectation], timeout: 1)
     }
 
-    func test_skip_completesFlow() throws {
+    func test_skip_completesFlow() async throws {
         let mockOnboardingService = MockOnboardingService()
 
         let expectedResource = "MockOnboardingResponse"
@@ -229,9 +229,10 @@ final class OnboardingContainerViewModelTests: XCTestCase {
         ]
         mockOnboardingService._receivedFetchSlidesCompletionHander?(.success(slides))
 
-        sut.skip()
+        let secondaryAction = sut.secondaryButtonViewModel.action
+        try await secondaryAction()
 
-        wait(for: [expectation], timeout: 1)
+       await fulfillment(of: [expectation], timeout: 1)
     }
 
     func test_actionButtonAccessibilityHint_lastSlide_returnsExpectedResult() throws {

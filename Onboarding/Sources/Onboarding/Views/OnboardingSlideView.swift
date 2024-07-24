@@ -36,7 +36,7 @@ struct OnboardingSlideView: View {
                     .accessibilityLabel(Text(model.body))
                     .padding([.top, .leading, .trailing], 16)
                 Spacer()
-            }
+            }.accessibilityElement(children: .contain)
         }
     }
 }

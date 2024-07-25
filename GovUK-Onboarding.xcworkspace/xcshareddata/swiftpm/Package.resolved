@@ -1,13 +1,13 @@
 {
-  "originHash" : "61e0962115e1c5ea9cb7cd54353c689dcd95f8570ca281a9f35eff98ebc785d3",
+  "originHash" : "88c4a85895c079fb809899d769826b9e7d5274c3059a8255f87014b8466d6f97",
   "pins" : [
     {
       "identity" : "govuk-mobile-ios-ui-components",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/alphagov/govuk-mobile-ios-ui-components",
       "state" : {
-        "branch" : "feature/govukapp-535-primary-button",
-        "revision" : "bf185dd8c3842da0ee0f4657afc6eeccc8e18ed4"
+        "branch" : "develop",
+        "revision" : "19d2742bb3e6681c2466e0dc1ba4c29bebbf700c"
       }
     }
   ],

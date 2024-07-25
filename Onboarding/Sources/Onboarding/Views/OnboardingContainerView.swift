@@ -8,7 +8,7 @@ struct OnboardingContainerView: View {
     init(viewModel: OnboardingContainerViewModel) {
         _viewModel = StateObject(wrappedValue: viewModel)
     }
-
+    
     var body: some  View {
         switch viewModel.state {
         case .loading:
@@ -26,7 +26,7 @@ struct OnboardingContainerView: View {
                     currentPage: $viewModel.tabIndex,
                     numberOfPages: viewModel.slideCount
                 )
-                 .padding([.bottom])
+                .padding([.bottom])
                 AdaptiveStack(spacing: 0) {
                     SwiftUIButton(
                         .primary,
@@ -35,8 +35,8 @@ struct OnboardingContainerView: View {
                     .padding(.leading, verticalSizeClass == .compact ? nil :0)
                     .accessibilityHint(viewModel.actionButtonAccessibilityHint)
                     .accessibility(sortPriority: 1)
-                    .frame(idealWidth: verticalSizeClass == .regular ? 383 : 424, minHeight: 44, idealHeight: 44,
-                                          maxHeight: 44)
+                    .frame(minHeight: 44,
+                           idealHeight: 44)
                     if (viewModel.isLastSlide == false &&
                         verticalSizeClass == .compact) ||
                         (viewModel.isLastSlide == false
@@ -44,21 +44,18 @@ struct OnboardingContainerView: View {
                         || (viewModel.isLastSlide == true &&
                             verticalSizeClass == .regular) {
                         SwiftUIButton(.secondary,
-                            viewModel: viewModel.secondaryButtonViewModel
+                                      viewModel: viewModel.secondaryButtonViewModel
                         )
                         .accessibilityHint(viewModel.skipButtonAcessibilityHint)
                         .accessibility(sortPriority: 0)
-                        .frame(idealWidth: verticalSizeClass == .regular ?
-                               375 : 424,
-                               minHeight: 44,
-                               idealHeight: 44,
-                               maxHeight: 44)
+                        .frame(minHeight: 44,
+                               idealHeight: 44)
                         .opacity(viewModel.isLastSlide ? 0 : 1)
                     }
                 }
                 .padding([.leading, .trailing], verticalSizeClass == .regular ? 16: 24)
             }.accessibilityElement(children: .contain)
-            .animation(.easeIn, value: viewModel.tabIndex)
+                .animation(.easeIn, value: viewModel.tabIndex)
         }
     }
 }

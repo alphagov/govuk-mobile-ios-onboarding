@@ -5,10 +5,11 @@ import UIComponents
 struct OnboardingContainerView: View {
     @StateObject private var viewModel: OnboardingContainerViewModel
     @Environment(\.verticalSizeClass) var verticalSizeClass
+
     init(viewModel: OnboardingContainerViewModel) {
         _viewModel = StateObject(wrappedValue: viewModel)
     }
-    
+
     var body: some  View {
         switch viewModel.state {
         case .loading:
@@ -70,7 +71,7 @@ struct OnboardingContainerView: View {
         title: "Get things done on the go!",
         body: "Access government services and information on your phone using the GOV.UK app")]
     )
-        return OnboardingContainerView(
-            viewModel: viewModel
-        )
+    return OnboardingContainerView(
+        viewModel: viewModel
+    )
 }

@@ -52,4 +52,3 @@ struct OnboardingSlideView: View {
                                body: "GAccess government services and information")
     )
 }
-

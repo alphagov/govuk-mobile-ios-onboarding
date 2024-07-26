@@ -14,8 +14,8 @@ struct OnboardingSlideView: View {
         ScrollView {
             VStack {
                 if verticalSizeClass == . regular {
-                                 Spacer(minLength: 32)
-                             }
+                    Spacer(minLength: 32)
+                }
                 if verticalSizeClass != .compact {
                     Image(decorative: model.image, bundle: .main)
                         .resizable()
@@ -39,7 +39,8 @@ struct OnboardingSlideView: View {
                     .accessibilityLabel(Text(model.body))
                     .padding([.top, .leading, .trailing], 16)
                 Spacer()
-            }.accessibilityElement(children: .contain)
+            }
+            .accessibilityElement(children: .contain)
         }
     }
 }
@@ -51,3 +52,4 @@ struct OnboardingSlideView: View {
                                body: "GAccess government services and information")
     )
 }
+

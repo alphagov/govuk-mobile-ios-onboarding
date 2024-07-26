@@ -54,7 +54,7 @@ struct OnboardingContainerView: View {
                             .opacity(viewModel.isLastSlide ? 0 : 1)
                         }
                     }
-                    .padding([.leading, .trailing], verticalSizeClass == .regular ? 16 : 24)
+                    .padding([.leading, .trailing], verticalSizeClass == .regular ? 16 : 0)
                 }
             }
             .accessibilityElement(children: .contain)

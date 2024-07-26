@@ -22,16 +22,17 @@ struct UIKitPageControl: UIViewRepresentable {
             let currentPageIndicator = UIImage(systemName: "circle.fill")
             pageControl.preferredIndicatorImage = pageIndicator
             pageControl.pageIndicatorTintColor = .darkGray
-            pageControl.preferredCurrentPageIndicatorImage =
-            currentPageIndicator
+            pageControl.preferredCurrentPageIndicatorImage = currentPageIndicator
             let colourResource = ColorResource(
                 name: "AccentColor",
-                bundle: .module)
+                bundle: .module
+            )
             pageControl.currentPageIndicatorTintColor = UIColor(
-                resource: colourResource)
+                resource: colourResource
+            )
         }
         return pageControl
-   }
+    }
 
     func updateUIView(_ uiView: UIPageControl, context: Context) {
         if uiView.currentPage != currentPage {

@@ -1,5 +1,6 @@
 import Foundation
 import SwiftUI
+import UIComponents
 
 struct OnboardingSlideView: View {
     private var model: OnboardingSlide
@@ -23,6 +24,7 @@ struct OnboardingSlideView: View {
                         .padding([.bottom])
                 }
                 Text(model.title)
+                    .foregroundColor(Color(UIColor.govUK.text.primary))
                     .font(.title)
                     .fontWeight(.bold)
                     .multilineTextAlignment(.center)
@@ -32,6 +34,7 @@ struct OnboardingSlideView: View {
                     .padding(.top, verticalSizeClass == .compact ? 32 : 0)
                     .padding([.trailing, .leading], 16)
                 Text(model.body)
+                    .foregroundColor(Color(UIColor.govUK.text.primary))
                     .multilineTextAlignment(.center)
                     .accessibilityLabel(Text(model.body))
                     .padding([.top, .leading, .trailing], 16)

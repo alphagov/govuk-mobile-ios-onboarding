@@ -56,8 +56,9 @@ struct OnboardingContainerView: View {
                     }
                     .padding([.leading, .trailing], verticalSizeClass == .regular ? 16 : 24)
                 }
-            }.accessibilityElement(children: .contain)
-                .animation(.easeIn, value: viewModel.tabIndex)
+            }
+            .accessibilityElement(children: .contain)
+            .animation(.easeIn, value: viewModel.tabIndex)
         }
     }
 }

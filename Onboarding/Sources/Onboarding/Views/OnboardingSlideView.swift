@@ -1,5 +1,6 @@
 import Foundation
 import SwiftUI
+import UIComponents
 
 struct OnboardingSlideView: View {
     private var model: OnboardingSlide
@@ -12,6 +13,9 @@ struct OnboardingSlideView: View {
     var body: some View {
         ScrollView {
             VStack {
+                if verticalSizeClass == .regular {
+                    Spacer(minLength: 32)
+                }
                 if verticalSizeClass != .compact {
                     Image(decorative: model.image, bundle: .main)
                         .resizable()
@@ -20,20 +24,23 @@ struct OnboardingSlideView: View {
                         .padding([.bottom])
                 }
                 Text(model.title)
+                    .foregroundColor(Color(UIColor.govUK.text.primary))
                     .font(.title)
                     .fontWeight(.bold)
                     .multilineTextAlignment(.center)
                     .frame(maxWidth: .infinity, alignment: .center)
+                    .accessibilityAddTraits(.isHeader)
                     .accessibilityLabel(Text(model.title))
-                    .accessibility(sortPriority: 3)
                     .padding(.top, verticalSizeClass == .compact ? 32 : 0)
+                    .padding([.trailing, .leading], 16)
                 Text(model.body)
+                    .foregroundColor(Color(UIColor.govUK.text.primary))
                     .multilineTextAlignment(.center)
                     .accessibilityLabel(Text(model.body))
-                    .accessibility(sortPriority: 2)
-                    .padding([.top])
+                    .padding([.top, .leading, .trailing], 16)
                 Spacer()
-            }.accessibilityElement(children: .contain)
+            }
+            .accessibilityElement(children: .contain)
         }
     }
 }

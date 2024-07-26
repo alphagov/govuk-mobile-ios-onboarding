@@ -1,10 +1,9 @@
 import Foundation
 import SwiftUI
+import UIComponents
 
 struct OnboardingContainerView: View {
     @StateObject private var viewModel: OnboardingContainerViewModel
-    private var themeColor = Color("AccentColor", bundle: Bundle.module)
-    private var textColor =  Color("PrimaryColor", bundle: Bundle.module)
     @Environment(\.verticalSizeClass) var verticalSizeClass
 
     init(viewModel: OnboardingContainerViewModel) {
@@ -23,51 +22,49 @@ struct OnboardingContainerView: View {
                     }
                 }
                 .tabViewStyle(.page(indexDisplayMode: .never))
-                UIKitPageControl(
-                    currentPage: $viewModel.tabIndex,
-                    numberOfPages: viewModel.slideCount
-                )
-                 .padding([.bottom])
-                AdaptiveStack(spacing: 0) {
-                    UIKitActionButton(
-                        onTap: {
-                            viewModel.primaryAction()
-                        },
-                        title: viewModel.primaryButtonTitle,
-                        backgroundColor: themeColor,
-                        textColor: textColor
+                Divider().ignoresSafeArea(edges: [.leading, .trailing])
+                VStack(alignment: .center) {
+                    UIKitPageControl(
+                        currentPage: $viewModel.tabIndex,
+                        numberOfPages: viewModel.slideCount
                     )
-                    .padding(.leading, verticalSizeClass == .compact ? nil :0)
-                    .accessibilityLabel(
-                        Text(viewModel.primaryButtonTitle)
-                    )
-                    .accessibilityHint(viewModel.actionButtonAccessibilityHint)
-                    .accessibility(sortPriority: 1)
-                    .frame(width: verticalSizeClass == .regular ? 383 : 424,
-                           height: 44)
-                    if (viewModel.isLastSlide == false &&
-                        verticalSizeClass == .compact) ||
-                        (viewModel.isLastSlide == false
-                         && verticalSizeClass == .regular)
-                        || (viewModel.isLastSlide == true &&
-                            verticalSizeClass == .regular) {
-                        UIKitSkipButton(
-                            onTap: {
-                                viewModel.skip()
-                            },
-                            title: viewModel.skipButtonTitle,
-                            textColor: themeColor
+                    .padding([.bottom])
+                    AdaptiveStack(spacing: 0) {
+                        SwiftUIButton(
+                            .primary,
+                            viewModel: viewModel.primaryButtonViewModel
                         )
-                        .accessibilityHint(viewModel.skipButtonAcessibilityHint)
-                        .accessibility(sortPriority: 0)
-                        .frame(width: verticalSizeClass == .regular ? 375 : 424,
-                               height: 44)
-                        .opacity(viewModel.isLastSlide ? 0 : 1)
+                        .accessibilityHint(viewModel.actionButtonAccessibilityHint)
+                        .accessibility(sortPriority: 1)
+                        .frame(
+                            minHeight: 44,
+                            idealHeight: 44
+                        )
+                        if shouldShowSecondaryButton {
+                            SwiftUIButton(
+                                .secondary,
+                                viewModel: viewModel.secondaryButtonViewModel
+                            )
+                            .accessibilityHint(viewModel.skipButtonAcessibilityHint)
+                            .accessibility(sortPriority: 0)
+                            .frame(
+                                minHeight: 44,
+                                idealHeight: 44
+                            )
+                            .opacity(viewModel.isLastSlide ? 0 : 1)
+                        }
                     }
+                    .padding([.leading, .trailing], verticalSizeClass == .regular ? 16 : 0)
                 }
-                .accessibilityElement(children: .contain)
-            }.animation(.easeIn, value: viewModel.tabIndex)
+            }
+            .accessibilityElement(children: .contain)
+            .animation(.easeIn, value: viewModel.tabIndex)
         }
+    }
+
+    private var shouldShowSecondaryButton: Bool {
+        verticalSizeClass == .regular ||
+        viewModel.isLastSlide == false
     }
 }
 #Preview {

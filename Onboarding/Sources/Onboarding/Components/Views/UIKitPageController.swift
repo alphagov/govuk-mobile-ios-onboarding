@@ -15,9 +15,22 @@ struct UIKitPageControl: UIViewRepresentable {
         )
         pageControl.currentPage = currentPage
         pageControl.numberOfPages = numberOfPages
-        pageControl.currentPageIndicatorTintColor = UIColor(
-            Color("AccentColor", bundle: Bundle.module))
         pageControl.backgroundStyle = .prominent
+
+        if #available(iOS 16.0, *) {
+            let pageIndicator = UIImage(systemName: "circle")
+            let currentPageIndicator = UIImage(systemName: "circle.fill")
+            pageControl.preferredIndicatorImage = pageIndicator
+            pageControl.pageIndicatorTintColor = .darkGray
+            pageControl.preferredCurrentPageIndicatorImage = currentPageIndicator
+            let colourResource = ColorResource(
+                name: "AccentColor",
+                bundle: .module
+            )
+            pageControl.currentPageIndicatorTintColor = UIColor(
+                resource: colourResource
+            )
+        }
         return pageControl
     }
 

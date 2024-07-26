@@ -1,6 +1,5 @@
 import Foundation
 import SwiftUI
-import UIComponents
 
 struct OnboardingSlideView: View {
     private var model: OnboardingSlide
@@ -24,7 +23,6 @@ struct OnboardingSlideView: View {
                         .padding([.bottom])
                 }
                 Text(model.title)
-                    .foregroundColor(UIColor.govUK.text.primary.toColor())
                     .font(.title)
                     .fontWeight(.bold)
                     .multilineTextAlignment(.center)
@@ -34,7 +32,6 @@ struct OnboardingSlideView: View {
                     .padding(.top, verticalSizeClass == .compact ? 32 : 0)
                     .padding([.trailing, .leading], 16)
                 Text(model.body)
-                    .foregroundColor(UIColor.govUK.text.primary.toColor())
                     .multilineTextAlignment(.center)
                     .accessibilityLabel(Text(model.body))
                     .padding([.top, .leading, .trailing], 16)
@@ -50,25 +47,4 @@ struct OnboardingSlideView: View {
                                title: "Get things done on the go",
                                body: "GAccess government services and information")
     )
-}
-
-extension UIColor {
-    // swiftlint:disable:next large_tuple
-    var rgba: (red: CGFloat, green: CGFloat, blue: CGFloat, alpha: CGFloat) {
-        var red: CGFloat = 0
-        var green: CGFloat = 0
-        var blue: CGFloat = 0
-        var alpha: CGFloat = 0
-        getRed(&red, green: &green, blue: &blue, alpha: &alpha)
-
-        return (red, green, blue, alpha)
-    }
-
-    func toColor() -> Color {
-        let rgb = self.rgba
-        return Color(red: Double(rgb.red),
-                     green: Double(rgb.green),
-                     blue: Double(rgb.blue),
-                     opacity: Double(rgb.alpha))
-    }
 }

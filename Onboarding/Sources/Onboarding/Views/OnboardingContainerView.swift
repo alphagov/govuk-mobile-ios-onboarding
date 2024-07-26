@@ -36,21 +36,21 @@ struct OnboardingContainerView: View {
                         )
                         .accessibilityHint(viewModel.actionButtonAccessibilityHint)
                         .accessibility(sortPriority: 1)
-                        .frame(minHeight: 44,
-                               idealHeight: 44)
-                        if (viewModel.isLastSlide == false &&
-                            verticalSizeClass == .compact) ||
-                            (viewModel.isLastSlide == false
-                             && verticalSizeClass == .regular)
-                            || (viewModel.isLastSlide == true &&
-                                verticalSizeClass == .regular) {
-                            SwiftUIButton(.secondary,
-                                          viewModel: viewModel.secondaryButtonViewModel
+                        .frame(
+                            minHeight: 44,
+                            idealHeight: 44
+                        )
+                        if shouldShowSecondaryButton {
+                            SwiftUIButton(
+                                .secondary,
+                                viewModel: viewModel.secondaryButtonViewModel
                             )
                             .accessibilityHint(viewModel.skipButtonAcessibilityHint)
                             .accessibility(sortPriority: 0)
-                            .frame(minHeight: 44,
-                                   idealHeight: 44)
+                            .frame(
+                                minHeight: 44,
+                                idealHeight: 44
+                            )
                             .opacity(viewModel.isLastSlide ? 0 : 1)
                         }
                     }
@@ -60,6 +60,11 @@ struct OnboardingContainerView: View {
             .accessibilityElement(children: .contain)
             .animation(.easeIn, value: viewModel.tabIndex)
         }
+    }
+
+    private var shouldShowSecondaryButton: Bool {
+        verticalSizeClass == .regular ||
+        viewModel.isLastSlide == false
     }
 }
 #Preview {

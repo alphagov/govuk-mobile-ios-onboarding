@@ -23,38 +23,39 @@ struct OnboardingContainerView: View {
                 }
                 .tabViewStyle(.page(indexDisplayMode: .never))
                 Divider().ignoresSafeArea(edges: [.leading, .trailing])
-                UIKitPageControl(
-                    currentPage: $viewModel.tabIndex,
-                    numberOfPages: viewModel.slideCount
-                )
-                .padding([.bottom])
-                AdaptiveStack(spacing: 0) {
-                    SwiftUIButton(
-                        .primary,
-                        viewModel: viewModel.primaryButtonViewModel
+                VStack(alignment: .center) {
+                    UIKitPageControl(
+                        currentPage: $viewModel.tabIndex,
+                        numberOfPages: viewModel.slideCount
                     )
-                    .padding(.leading, verticalSizeClass == .compact ? nil :0)
-                    .accessibilityHint(viewModel.actionButtonAccessibilityHint)
-                    .accessibility(sortPriority: 1)
-                    .frame(minHeight: 44,
-                           idealHeight: 44)
-                    if (viewModel.isLastSlide == false &&
-                        verticalSizeClass == .compact) ||
-                        (viewModel.isLastSlide == false
-                         && verticalSizeClass == .regular)
-                        || (viewModel.isLastSlide == true &&
-                            verticalSizeClass == .regular) {
-                        SwiftUIButton(.secondary,
-                                      viewModel: viewModel.secondaryButtonViewModel
+                    .padding([.bottom])
+                    AdaptiveStack(spacing: 0) {
+                        SwiftUIButton(
+                            .primary,
+                            viewModel: viewModel.primaryButtonViewModel
                         )
-                        .accessibilityHint(viewModel.skipButtonAcessibilityHint)
-                        .accessibility(sortPriority: 0)
+                        .accessibilityHint(viewModel.actionButtonAccessibilityHint)
+                        .accessibility(sortPriority: 1)
                         .frame(minHeight: 44,
                                idealHeight: 44)
-                        .opacity(viewModel.isLastSlide ? 0 : 1)
+                        if (viewModel.isLastSlide == false &&
+                            verticalSizeClass == .compact) ||
+                            (viewModel.isLastSlide == false
+                             && verticalSizeClass == .regular)
+                            || (viewModel.isLastSlide == true &&
+                                verticalSizeClass == .regular) {
+                            SwiftUIButton(.secondary,
+                                          viewModel: viewModel.secondaryButtonViewModel
+                            )
+                            .accessibilityHint(viewModel.skipButtonAcessibilityHint)
+                            .accessibility(sortPriority: 0)
+                            .frame(minHeight: 44,
+                                   idealHeight: 44)
+                            .opacity(viewModel.isLastSlide ? 0 : 1)
+                        }
                     }
+                    .padding([.leading, .trailing], verticalSizeClass == .regular ? 16 : 24)
                 }
-                .padding([.leading, .trailing], verticalSizeClass == .regular ? 16: 24)
             }.accessibilityElement(children: .contain)
                 .animation(.easeIn, value: viewModel.tabIndex)
         }

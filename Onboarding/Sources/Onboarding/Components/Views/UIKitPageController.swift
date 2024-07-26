@@ -29,7 +29,6 @@ struct UIKitPageControl: UIViewRepresentable {
                 bundle: .module)
             pageControl.currentPageIndicatorTintColor = UIColor(
                 resource: colourResource)
-        } else {
         }
         return pageControl
    }

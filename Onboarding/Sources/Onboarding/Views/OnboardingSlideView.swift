@@ -13,7 +13,7 @@ struct OnboardingSlideView: View {
     var body: some View {
         ScrollView {
             VStack {
-                if verticalSizeClass == . regular {
+                if verticalSizeClass == .regular {
                     Spacer(minLength: 32)
                 }
                 if verticalSizeClass != .compact {

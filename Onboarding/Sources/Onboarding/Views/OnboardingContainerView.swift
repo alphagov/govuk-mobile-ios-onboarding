@@ -15,20 +15,22 @@ struct OnboardingContainerView: View {
         case .loading:
             ProgressView()
         case .loaded(let onboardingSlides):
-            VStack {
+            VStack(spacing: 0) {
                 TabView(selection: $viewModel.tabIndex) {
                     ForEach(0..<onboardingSlides.count, id: \.self) { index in
                         OnboardingSlideView(model: onboardingSlides[index])
                     }
                 }
                 .tabViewStyle(.page(indexDisplayMode: .never))
-                Divider().ignoresSafeArea(edges: [.leading, .trailing])
-                VStack(alignment: .center) {
+                VStack(alignment: .center, spacing: 16) {
+                    Divider()
+                        .background(Color(UIColor.govUK.strokes.listDivider))
+                        .ignoresSafeArea(edges: [.leading, .trailing])
+                        .padding([.top], 0)
                     UIKitPageControl(
                         currentPage: $viewModel.tabIndex,
                         numberOfPages: viewModel.slideCount
                     )
-                    .padding([.bottom])
                     AdaptiveStack(spacing: 0) {
                         SwiftUIButton(
                             .primary,

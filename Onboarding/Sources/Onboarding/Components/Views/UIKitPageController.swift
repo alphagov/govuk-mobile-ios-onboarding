@@ -21,15 +21,9 @@ struct UIKitPageControl: UIViewRepresentable {
             let pageIndicator = UIImage(systemName: "circle")
             let currentPageIndicator = UIImage(systemName: "circle.fill")
             pageControl.preferredIndicatorImage = pageIndicator
-            pageControl.pageIndicatorTintColor = .darkGray
+            pageControl.pageIndicatorTintColor = UIColor.govUK.strokes.pageControlInactive
             pageControl.preferredCurrentPageIndicatorImage = currentPageIndicator
-            let colourResource = ColorResource(
-                name: "AccentColor",
-                bundle: .module
-            )
-            pageControl.currentPageIndicatorTintColor = UIColor(
-                resource: colourResource
-            )
+            pageControl.currentPageIndicatorTintColor = UIColor.govUK.fills.surfaceButtonPrimary
         }
         return pageControl
     }

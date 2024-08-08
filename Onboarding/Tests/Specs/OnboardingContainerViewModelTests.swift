@@ -197,7 +197,8 @@ final class OnboardingContainerViewModelTests: XCTestCase {
         let mockOnboardingService = MockOnboardingService()
         let sut = OnboardingContainerViewModel(
             onboardingService: mockOnboardingService,
-            source: .model([]), tracker: OnboardingSlideTracker(),
+            source: .model([]), 
+            tracker: OnboardingSlideTracker(),
             dismissAction: {
                 expectation.fulfill()
             }

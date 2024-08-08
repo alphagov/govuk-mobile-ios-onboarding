@@ -1,5 +1,5 @@
 import Foundation
 
 protocol TrackingInterface {
-   var services: [EventServices] { get }
+    var services: [EventServices] { get }
 }

@@ -1,10 +1,10 @@
 import Foundation
 
-struct Event: TrackingInterface {
+struct OnboardingSlideEvent: TrackingInterface {
     var title: String
     var eventType: EventType
     var services: [EventServices]
-
+    
     init(title: String, eventType: EventType) {
         self.title = title
         self.eventType = eventType
@@ -12,7 +12,7 @@ struct Event: TrackingInterface {
                                params: [title: eventType.log])
         ]}()
     }
-
+    
     enum EventType {
         case actionType(name: ActionType)
         case navigation
@@ -29,7 +29,7 @@ struct Event: TrackingInterface {
             }
         }
     }
-
+    
     enum ActionType: String {
         case nextSlide = "continue"
         case done

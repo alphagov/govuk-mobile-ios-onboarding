@@ -1,11 +1,11 @@
 import Foundation
 
- protocol Tracker {
+protocol Tracker {
     var firebaseService: FirebaseService { get set }
     func track(_ trackable: TrackingInterface)
 }
 
- extension Tracker {
+extension Tracker {
     func track(_ trackable: TrackingInterface) {
         trackable.services.forEach { provider in
             switch provider {

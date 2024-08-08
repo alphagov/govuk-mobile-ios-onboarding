@@ -21,7 +21,7 @@ class OnboardingContainerViewModel: ObservableObject {
     private let onboardingService: OnboardingServiceInterface
     private let source: OnboardingSource
     private let dismissAction: () -> Void
-    
+
     init(onboardingService: OnboardingServiceInterface,
          source: OnboardingSource,
          tracker: Tracker,
@@ -32,7 +32,7 @@ class OnboardingContainerViewModel: ObservableObject {
         self.dismissAction = dismissAction
         fetchOnboarding()
     }
-    
+
     var actionButtonAccessibilityHint: String {
         isLastSlide ?
         NSLocalizedString(
@@ -46,13 +46,13 @@ class OnboardingContainerViewModel: ObservableObject {
             comment: ""
         )
     }
-    
+
     func trackNavigationEvent() {
         tracker.track(OnboardingSlideEvent(title: trackingTitles[tabIndex],
                                            eventType: .navigation))
     }
-    
-    private func trackprimaryActionEvent() {
+
+    private func trackPrimaryActionEvent() {
         tracker.track(
             OnboardingSlideEvent(title: trackingTitles[tabIndex],
                                  eventType: .actionType(
@@ -60,27 +60,27 @@ class OnboardingContainerViewModel: ObservableObject {
                                         .done :
                                             .nextSlide)))
     }
-    
+
     private func trackSecondaryActionEvent() {
         tracker.track(OnboardingSlideEvent(title: trackingTitles[tabIndex],
                                            eventType: .actionType(name: .skip)))
     }
-    
-    
+
+
     func primaryAction() {
         if isLastSlide {
-            trackprimaryActionEvent()
+            trackPrimaryActionEvent()
             finishOnboarding()
         } else {
             navigateToNextSlide()
         }
     }
-    
+
     private func navigateToNextSlide() {
-        trackprimaryActionEvent()
+        trackPrimaryActionEvent()
         tabIndex += 1
     }
-    
+
     var primaryButtonTitle: String {
         isLastSlide ?
         NSLocalizedString(
@@ -94,22 +94,22 @@ class OnboardingContainerViewModel: ObservableObject {
             comment: ""
         )
     }
-    
+
     private func finishOnboarding() {
         dismissAction()
     }
-    
+
     var isLastSlide: Bool {
         tabIndex == slideCount - 1
     }
-    
+
     var primaryButtonViewModel: GOVUKButton.ButtonViewModel {
         .init(
             localisedTitle: primaryButtonTitle,
             action: { [weak self] in self?.primaryAction() }
         )
     }
-    
+
     var secondaryButtonViewModel: GOVUKButton.ButtonViewModel {
         .init(
             localisedTitle: skipButtonTitle,
@@ -119,7 +119,7 @@ class OnboardingContainerViewModel: ObservableObject {
             }
         )
     }
-    
+
     private func fetchOnboarding() {
         onboardingService.fetchSlides(
             source: source,
@@ -128,7 +128,7 @@ class OnboardingContainerViewModel: ObservableObject {
             }
         )
     }
-    
+
     private func handleSlidesResult(result: Result<[OnboardingSlide], Error>) {
         switch result {
         case .success(let slides) where slides.count >= 1:

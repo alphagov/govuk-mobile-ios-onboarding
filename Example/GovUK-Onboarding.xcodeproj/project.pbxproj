@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		4E212D342C21C4D600C7D70D /* Onboarding in Frameworks */ = {isa = PBXBuildFile; productRef = 4E212D332C21C4D600C7D70D /* Onboarding */; };
+		4E47318E2C6507D6009A815C /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 4E47318D2C6507D6009A815C /* FirebaseAnalytics */; };
+		4E4731902C6507D6009A815C /* FirebaseAnalyticsOnDeviceConversion in Frameworks */ = {isa = PBXBuildFile; productRef = 4E47318F2C6507D6009A815C /* FirebaseAnalyticsOnDeviceConversion */; };
+		4E4731922C6507D6009A815C /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */ = {isa = PBXBuildFile; productRef = 4E4731912C6507D6009A815C /* FirebaseAnalyticsWithoutAdIdSupport */; };
 		5D50189C2BD101F0005ABC1C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D50189B2BD101F0005ABC1C /* AppDelegate.swift */; };
 		5D50189E2BD101F0005ABC1C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D50189D2BD101F0005ABC1C /* SceneDelegate.swift */; };
 		5D5018A02BD101F0005ABC1C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D50189F2BD101F0005ABC1C /* ViewController.swift */; };
@@ -53,7 +56,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4E47318E2C6507D6009A815C /* FirebaseAnalytics in Frameworks */,
+				4E4731902C6507D6009A815C /* FirebaseAnalyticsOnDeviceConversion in Frameworks */,
 				4E212D342C21C4D600C7D70D /* Onboarding in Frameworks */,
+				4E4731922C6507D6009A815C /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -210,6 +216,9 @@
 			name = govuk_onboarding_ios;
 			packageProductDependencies = (
 				4E212D332C21C4D600C7D70D /* Onboarding */,
+				4E47318D2C6507D6009A815C /* FirebaseAnalytics */,
+				4E47318F2C6507D6009A815C /* FirebaseAnalyticsOnDeviceConversion */,
+				4E4731912C6507D6009A815C /* FirebaseAnalyticsWithoutAdIdSupport */,
 			);
 			productName = "govuk-mobile-ios-onboarding";
 			productReference = 5D5018982BD101F0005ABC1C /* govuk_onboarding_ios.app */;
@@ -262,6 +271,7 @@
 			);
 			mainGroup = 5D50188F2BD101F0005ABC1C;
 			packageReferences = (
+				4E47318C2C6507D6009A815C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			productRefGroup = 5D5018992BD101F0005ABC1C /* Products */;
 			projectDirPath = "";
@@ -614,10 +624,36 @@
 		};
 /* End XCConfigurationList section */
 
+/* Begin XCRemoteSwiftPackageReference section */
+		4E47318C2C6507D6009A815C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 11.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
 /* Begin XCSwiftPackageProductDependency section */
 		4E212D332C21C4D600C7D70D /* Onboarding */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Onboarding;
+		};
+		4E47318D2C6507D6009A815C /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4E47318C2C6507D6009A815C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+		4E47318F2C6507D6009A815C /* FirebaseAnalyticsOnDeviceConversion */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4E47318C2C6507D6009A815C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalyticsOnDeviceConversion;
+		};
+		4E4731912C6507D6009A815C /* FirebaseAnalyticsWithoutAdIdSupport */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4E47318C2C6507D6009A815C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalyticsWithoutAdIdSupport;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

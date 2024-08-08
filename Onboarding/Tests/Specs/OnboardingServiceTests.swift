@@ -36,13 +36,15 @@ final class OnboardingServiceTests: XCTestCase {
         let slides:[OnboardingSlide] = [
             OnboardingSlide(image: "onboarding_placeholder_screen_1",
                             title: "Get things done on the go",
-                            body: "Access government services and information on your phone using the GOV.UK app"),
+                            body: "Access government services and information on your phone using the GOV.UK app", alias: ""),
             OnboardingSlide(image: "onboarding_placeholder_screen_2",
                             title: "Quickly get back to previous pages",
-                            body: "Pages you've visited are saved so you can easily return to them"),
+                            body: "Pages you've visited are saved so you can easily return to them",
+                            alias:""),
             OnboardingSlide(image: "onboarding_placeholder_screen_3",
                             title: "Tailored to you",
-                            body: "Choose topics that are relevant to you so you can find what you need faster")
+                            body: "Choose topics that are relevant to you so you can find what you need faster",
+                            alias: "")
         ]
         sut.fetchSlides(source: .model(slides)) { result in
             let slides = try? result.get()
@@ -68,5 +70,4 @@ final class OnboardingServiceTests: XCTestCase {
             }
         }
     }
-    
 }

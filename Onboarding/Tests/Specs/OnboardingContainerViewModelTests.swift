@@ -11,7 +11,7 @@ final class OnboardingContainerViewModelTests: XCTestCase {
     func test_init_hasCorrectInitialState() throws {
         let sut = OnboardingContainerViewModel(
             onboardingService: MockOnboardingService(),
-            source: .json("test"),
+            source: .json("test"), tracker: OnboardingSlideTracker(),
             dismissAction: {}
         )
 
@@ -26,13 +26,13 @@ final class OnboardingContainerViewModelTests: XCTestCase {
 
         let expectedResource = "MockOnboardingResponse"
         let expectedSlides = [
-            OnboardingSlide(image: "test", title: "test_title", body: "test_body"),
-            OnboardingSlide(image: "test1", title: "test_title", body: "test_body")
+            OnboardingSlide(image: "test", title: "test_title", body: "test_body", alias: ""),
+            OnboardingSlide(image: "test1", title: "test_title", body: "test_body", alias: "")
         ]
 
         let sut = OnboardingContainerViewModel(
             onboardingService: mockOnboardingService,
-            source: .json(expectedResource),
+            source: .json(expectedResource), tracker: OnboardingSlideTracker(),
             dismissAction: {}
         )
         let expectation = XCTestExpectation(description: "Slide return")
@@ -58,6 +58,7 @@ final class OnboardingContainerViewModelTests: XCTestCase {
         sut = OnboardingContainerViewModel(
             onboardingService: mockOnboardingService,
             source: .json(expectedResource),
+            tracker: OnboardingSlideTracker(),
             dismissAction: {
                 expectation.fulfill()
             }
@@ -73,7 +74,7 @@ final class OnboardingContainerViewModelTests: XCTestCase {
         let expectedResource = "MockOnboardingResponse"
         _ = OnboardingContainerViewModel(
             onboardingService: mockOnboardingService,
-            source: .json(expectedResource),
+            source: .json(expectedResource), tracker: OnboardingSlideTracker(),
             dismissAction: {}
         )
         switch mockOnboardingService._receivedFetchSlidesSource {
@@ -87,12 +88,13 @@ final class OnboardingContainerViewModelTests: XCTestCase {
     func test_init_modelType_fetchesSlides() throws {
         let mockOnboardingService = MockOnboardingService()
         let expectedSlides = [
-            OnboardingSlide(image: "test", title: "test_title", body: "test_body"),
-            OnboardingSlide(image: "test1", title: "test_title", body: "test_body")
+            OnboardingSlide(image: "test", title: "test_title", body: "test_body", alias: ""),
+            OnboardingSlide(image: "test1", title: "test_title", body: "test_body", alias: "")
         ]
         _ = OnboardingContainerViewModel(
             onboardingService: mockOnboardingService,
             source: .model(expectedSlides),
+            tracker: OnboardingSlideTracker(),
             dismissAction: {}
         )
         switch mockOnboardingService._receivedFetchSlidesSource {
@@ -107,12 +109,12 @@ final class OnboardingContainerViewModelTests: XCTestCase {
         let mockOnboardingService = MockOnboardingService()
         let sut = OnboardingContainerViewModel(
             onboardingService: mockOnboardingService,
-            source: .model([]),
+            source: .model([]), tracker: OnboardingSlideTracker(),
             dismissAction: {}
         )
         let expectedSlides = [
-            OnboardingSlide(image: "test", title: "test_title", body: "test_body"),
-            OnboardingSlide(image: "test1", title: "test_title", body: "test_body")
+            OnboardingSlide(image: "test", title: "test_title", body: "test_body", alias: ""),
+            OnboardingSlide(image: "test1", title: "test_title", body: "test_body", alias: "")
         ]
         mockOnboardingService._receivedFetchSlidesCompletionHander?(.success(expectedSlides))
 
@@ -123,12 +125,12 @@ final class OnboardingContainerViewModelTests: XCTestCase {
         let mockOnboardingService = MockOnboardingService()
         let sut = OnboardingContainerViewModel(
             onboardingService: mockOnboardingService,
-            source: .model([]),
+            source: .model([]), tracker: OnboardingSlideTracker(),
             dismissAction: {}
         )
         let expectedSlides = [
-            OnboardingSlide(image: "test", title: "test_title", body: "test_body"),
-            OnboardingSlide(image: "test1", title: "test_title", body: "test_body")
+            OnboardingSlide(image: "test", title: "test_title", body: "test_body", alias: ""),
+            OnboardingSlide(image: "test1", title: "test_title", body: "test_body", alias: "")
         ]
         mockOnboardingService._receivedFetchSlidesCompletionHander?(.success(expectedSlides))
         sut.tabIndex = 1
@@ -140,12 +142,12 @@ final class OnboardingContainerViewModelTests: XCTestCase {
         let mockOnboardingService = MockOnboardingService()
         let sut = OnboardingContainerViewModel(
             onboardingService: mockOnboardingService,
-            source: .model([]),
+            source: .model([]), tracker: OnboardingSlideTracker(),
             dismissAction: {}
         )
         let expectedSlides = [
-            OnboardingSlide(image: "test", title: "test_title", body: "test_body"),
-            OnboardingSlide(image: "test1", title: "test_title", body: "test_body")
+            OnboardingSlide(image: "test", title: "test_title", body: "test_body", alias: ""),
+            OnboardingSlide(image: "test1", title: "test_title", body: "test_body", alias: "")
         ]
         mockOnboardingService._receivedFetchSlidesCompletionHander?(.success(expectedSlides))
         sut.tabIndex = 1
@@ -157,12 +159,12 @@ final class OnboardingContainerViewModelTests: XCTestCase {
         let mockOnboardingService = MockOnboardingService()
         let sut = OnboardingContainerViewModel(
             onboardingService: mockOnboardingService,
-            source: .model([]),
+            source: .model([]), tracker: OnboardingSlideTracker(),
             dismissAction: {}
         )
         let expectedSlides = [
-            OnboardingSlide(image: "test", title: "test_title", body: "test_body"),
-            OnboardingSlide(image: "test1", title: "test_title", body: "test_body")
+            OnboardingSlide(image: "test", title: "test_title", body: "test_body", alias: ""),
+            OnboardingSlide(image: "test1", title: "test_title", body: "test_body", alias: "")
         ]
         mockOnboardingService._receivedFetchSlidesCompletionHander?(.success(expectedSlides))
         sut.tabIndex = 0
@@ -174,12 +176,12 @@ final class OnboardingContainerViewModelTests: XCTestCase {
         let mockOnboardingService = MockOnboardingService()
         let sut = OnboardingContainerViewModel(
             onboardingService: mockOnboardingService,
-            source: .model([]),
+            source: .model([]), tracker: OnboardingSlideTracker(),
             dismissAction: {}
         )
         let expectedSlides = [
-            OnboardingSlide(image: "test", title: "test_title", body: "test_body"),
-            OnboardingSlide(image: "test1", title: "test_title", body: "test_body")
+            OnboardingSlide(image: "test", title: "test_title", body: "test_body", alias: ""),
+            OnboardingSlide(image: "test1", title: "test_title", body: "test_body", alias: "")
         ]
         mockOnboardingService._receivedFetchSlidesCompletionHander?(.success(expectedSlides))
         sut.tabIndex = 0
@@ -195,14 +197,14 @@ final class OnboardingContainerViewModelTests: XCTestCase {
         let mockOnboardingService = MockOnboardingService()
         let sut = OnboardingContainerViewModel(
             onboardingService: mockOnboardingService,
-            source: .model([]),
+            source: .model([]), tracker: OnboardingSlideTracker(),
             dismissAction: {
                 expectation.fulfill()
             }
         )
         let expectedSlides = [
-            OnboardingSlide(image: "test", title: "test_title", body: "test_body"),
-            OnboardingSlide(image: "test1", title: "test_title", body: "test_body")
+            OnboardingSlide(image: "test", title: "test_title", body: "test_body", alias: ""),
+            OnboardingSlide(image: "test1", title: "test_title", body: "test_body", alias: "")
         ]
         mockOnboardingService._receivedFetchSlidesCompletionHander?(.success(expectedSlides))
         sut.tabIndex = 1
@@ -219,13 +221,13 @@ final class OnboardingContainerViewModelTests: XCTestCase {
         let expectation = XCTestExpectation(description: "Empty slides")
         let sut = OnboardingContainerViewModel(
             onboardingService: mockOnboardingService,
-            source: .json(expectedResource),
+            source: .json(expectedResource), tracker: OnboardingSlideTracker(),
             dismissAction: {
                 expectation.fulfill()
             }
         )
         let slides = [
-            OnboardingSlide(image: "test1", title: "test_title", body: "test_body")
+            OnboardingSlide(image: "test1", title: "test_title", body: "test_body", alias: "")
         ]
         mockOnboardingService._receivedFetchSlidesCompletionHander?(.success(slides))
 
@@ -240,12 +242,12 @@ final class OnboardingContainerViewModelTests: XCTestCase {
 
         let sut = OnboardingContainerViewModel(
             onboardingService: mockOnboardingService,
-            source: .json("test"),
+            source: .json("test"), tracker: OnboardingSlideTracker(),
             dismissAction: {}
         )
         let slides = [
-            OnboardingSlide(image: "test1", title: "test_title", body: "test_body"),
-            OnboardingSlide(image: "test2", title: "test_title", body: "test_body")
+            OnboardingSlide(image: "test1", title: "test_title", body: "test_body", alias: ""),
+            OnboardingSlide(image: "test2", title: "test_title", body: "test_body", alias: "")
         ]
         mockOnboardingService._receivedFetchSlidesCompletionHander?(.success(slides))
 
@@ -258,12 +260,12 @@ final class OnboardingContainerViewModelTests: XCTestCase {
 
         let sut = OnboardingContainerViewModel(
             onboardingService: mockOnboardingService,
-            source: .json("test"),
+            source: .json("test"), tracker: OnboardingSlideTracker(),
             dismissAction: {}
         )
         let slides = [
-            OnboardingSlide(image: "test1", title: "test_title", body: "test_body"),
-            OnboardingSlide(image: "test2", title: "test_title", body: "test_body")
+            OnboardingSlide(image: "test1", title: "test_title", body: "test_body", alias: ""),
+            OnboardingSlide(image: "test2", title: "test_title", body: "test_body", alias: "")
         ]
         mockOnboardingService._receivedFetchSlidesCompletionHander?(.success(slides))
 

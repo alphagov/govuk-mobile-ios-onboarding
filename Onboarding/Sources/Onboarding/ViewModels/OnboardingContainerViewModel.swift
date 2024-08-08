@@ -115,7 +115,8 @@ class OnboardingContainerViewModel: ObservableObject {
             localisedTitle: skipButtonTitle,
             action: { [weak self] in
                 self?.trackSecondaryActionEvent()
-                self?.finishOnboarding() }
+                self?.finishOnboarding()
+            }
         )
     }
     

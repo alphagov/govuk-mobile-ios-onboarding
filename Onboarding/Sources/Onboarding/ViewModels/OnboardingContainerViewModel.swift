@@ -54,16 +54,17 @@ class OnboardingContainerViewModel: ObservableObject {
 
     private func trackPrimaryActionEvent() {
         tracker.track(
-            OnboardingSlideEvent(title: trackingTitles[tabIndex],
-                                 eventType: .actionType(
-                                    name: isLastSlide ?
-                                        .done :
-                                            .nextSlide)))
+            OnboardingSlideEvent(
+                title: trackingTitles[tabIndex],
+                eventType: .actionType(
+                                       name: isLastSlide ? .done :
+                                             .nextSlide)))
     }
 
     private func trackSecondaryActionEvent() {
-        tracker.track(OnboardingSlideEvent(title: trackingTitles[tabIndex],
-                                           eventType: .actionType(name: .skip)))
+        tracker.track(
+            OnboardingSlideEvent(title: trackingTitles[tabIndex],
+                                 eventType: .actionType(name: .skip)))
     }
 
 

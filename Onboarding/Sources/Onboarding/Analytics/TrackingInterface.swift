@@ -1,5 +1,5 @@
 import Foundation
 
-protocol TrackingInterface {
-    var services: [EventServices] { get }
+public protocol TrackingInterface {
+    var log: (String, [String: Any]?) { get }
 }

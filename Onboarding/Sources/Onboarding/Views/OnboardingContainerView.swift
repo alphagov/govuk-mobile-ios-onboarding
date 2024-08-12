@@ -74,7 +74,7 @@ struct OnboardingContainerView: View {
 #Preview {
     let viewModel = OnboardingContainerViewModel(
         onboardingService: OnboardingService(),
-        source: .model([]), tracker: OnboardingSlideTracker(),
+        source: .model([]), analyticsService: nil,
         dismissAction: {}
     )
     viewModel.state = .loaded([OnboardingSlide(

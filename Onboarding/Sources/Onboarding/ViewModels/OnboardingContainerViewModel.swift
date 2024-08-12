@@ -6,7 +6,7 @@ class OnboardingContainerViewModel: ObservableObject {
     @Published var tabIndex: Int = 0
     @Published var state = State.loading
     @Published var slideCount: Int = 0
-    private let tracker: Tracker
+    private let analyticsService: AnalyticsService?
     private var trackingTitles: [String] = []
     let skipButtonTitle = NSLocalizedString(
         "skipButtonTitle",
@@ -24,9 +24,9 @@ class OnboardingContainerViewModel: ObservableObject {
 
     init(onboardingService: OnboardingServiceInterface,
          source: OnboardingSource,
-         tracker: Tracker,
+         analyticsService: AnalyticsService?,
          dismissAction: @escaping () -> Void) {
-        self.tracker = tracker
+        self.analyticsService = analyticsService
         self.onboardingService = onboardingService
         self.source = source
         self.dismissAction = dismissAction
@@ -48,25 +48,19 @@ class OnboardingContainerViewModel: ObservableObject {
     }
 
     func trackNavigationEvent() {
-        tracker.track(OnboardingSlideEvent(title: trackingTitles[tabIndex],
-                                           eventType: .navigation))
+        analyticsService?.track(OnbardingNavigationEvent(title: trackingTitles[tabIndex]))
     }
 
     private func trackPrimaryActionEvent() {
-        tracker.track(
-            OnboardingSlideEvent(
-                title: trackingTitles[tabIndex],
-                eventType: .actionType(
-                                       name: isLastSlide ? .done :
-                                             .nextSlide)))
+        analyticsService?.track(
+            OnboardingActionEvent(eventType: isLastSlide ? .done :
+                    .nextSlide))
     }
 
     private func trackSecondaryActionEvent() {
-        tracker.track(
-            OnboardingSlideEvent(title: trackingTitles[tabIndex],
-                                 eventType: .actionType(name: .skip)))
+        analyticsService?.track(
+            OnboardingActionEvent(eventType: .skip))
     }
-
 
     func primaryAction() {
         if isLastSlide {

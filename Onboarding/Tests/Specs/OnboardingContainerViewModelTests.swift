@@ -273,7 +273,9 @@ final class OnboardingContainerViewModelTests: XCTestCase {
         sut.trackSlideView()
         //Then
         XCTAssertEqual(analyticsService._trackOnboardingScreenReceivedScreens.count,1)
-        XCTAssertEqual(analyticsService._trackOnboardingScreenReceivedScreens[0].trackingName, "navigation_1")
+        let screen = analyticsService._trackOnboardingScreenReceivedScreens.first
+        XCTAssertEqual(screen?.trackingName, "navigation_1")
+        XCTAssertEqual(screen?.trackingClass, "OnboardingSlideView")
     }
     
     func  test_primaryAction_onLastSlide_tracksDoneEvent() throws {

@@ -12,7 +12,8 @@ final class OnboardingContainerViewModelTests: XCTestCase {
     func test_init_hasCorrectInitialState() throws {
         let sut = OnboardingContainerViewModel(
             onboardingService: MockOnboardingService(),
-            source: .json("test"), analyticsService: MockAnalyticsService(),
+            source: .json("test"), 
+            analyticsService: MockAnalyticsService(),
             dismissAction: {}
         )
 
@@ -33,7 +34,8 @@ final class OnboardingContainerViewModelTests: XCTestCase {
 
         let sut = OnboardingContainerViewModel(
             onboardingService: mockOnboardingService,
-            source: .json(expectedResource), analyticsService: MockAnalyticsService(),
+            source: .json(expectedResource), 
+            analyticsService: MockAnalyticsService(),
             dismissAction: {}
         )
         let expectation = XCTestExpectation(description: "Slide return")
@@ -75,7 +77,8 @@ final class OnboardingContainerViewModelTests: XCTestCase {
         let expectedResource = "MockOnboardingResponse"
         _ = OnboardingContainerViewModel(
             onboardingService: mockOnboardingService,
-            source: .json(expectedResource), analyticsService: MockAnalyticsService(),
+            source: .json(expectedResource), 
+            analyticsService: MockAnalyticsService(),
             dismissAction: {}
         )
         switch mockOnboardingService._receivedFetchSlidesSource {
@@ -110,7 +113,8 @@ final class OnboardingContainerViewModelTests: XCTestCase {
         let mockOnboardingService = MockOnboardingService()
         let sut = OnboardingContainerViewModel(
             onboardingService: mockOnboardingService,
-            source: .model([]), analyticsService: MockAnalyticsService(),
+            source: .model([]), 
+            analyticsService: MockAnalyticsService(),
             dismissAction: {}
         )
         let expectedSlides = [
@@ -126,7 +130,8 @@ final class OnboardingContainerViewModelTests: XCTestCase {
         let mockOnboardingService = MockOnboardingService()
         let sut = OnboardingContainerViewModel(
             onboardingService: mockOnboardingService,
-            source: .model([]), analyticsService: MockAnalyticsService(),
+            source: .model([]), 
+            analyticsService: MockAnalyticsService(),
             dismissAction: {}
         )
         let expectedSlides = [
@@ -143,7 +148,8 @@ final class OnboardingContainerViewModelTests: XCTestCase {
         let mockOnboardingService = MockOnboardingService()
         let sut = OnboardingContainerViewModel(
             onboardingService: mockOnboardingService,
-            source: .model([]), analyticsService: MockAnalyticsService(),
+            source: .model([]), 
+            analyticsService: MockAnalyticsService(),
             dismissAction: {}
         )
         let expectedSlides = [
@@ -160,7 +166,8 @@ final class OnboardingContainerViewModelTests: XCTestCase {
         let mockOnboardingService = MockOnboardingService()
         let sut = OnboardingContainerViewModel(
             onboardingService: mockOnboardingService,
-            source: .model([]), analyticsService: MockAnalyticsService(),
+            source: .model([]), 
+            analyticsService: MockAnalyticsService(),
             dismissAction: {}
         )
         let expectedSlides = [
@@ -177,7 +184,8 @@ final class OnboardingContainerViewModelTests: XCTestCase {
         let mockOnboardingService = MockOnboardingService()
         let sut = OnboardingContainerViewModel(
             onboardingService: mockOnboardingService,
-            source: .model([]), analyticsService: MockAnalyticsService(),
+            source: .model([]), 
+            analyticsService: MockAnalyticsService(),
             dismissAction: {}
         )
         let expectedSlides = [
@@ -223,7 +231,8 @@ final class OnboardingContainerViewModelTests: XCTestCase {
         let expectation = XCTestExpectation(description: "Empty slides")
         let sut = OnboardingContainerViewModel(
             onboardingService: mockOnboardingService,
-            source: .json(expectedResource), analyticsService: MockAnalyticsService(),
+            source: .json(expectedResource), 
+            analyticsService: MockAnalyticsService(),
             dismissAction: {
                 expectation.fulfill()
             }
@@ -244,7 +253,8 @@ final class OnboardingContainerViewModelTests: XCTestCase {
 
         let sut = OnboardingContainerViewModel(
             onboardingService: mockOnboardingService,
-            source: .json("test"), analyticsService: MockAnalyticsService(),
+            source: .json("test"), 
+            analyticsService: MockAnalyticsService(),
             dismissAction: {}
         )
         let slides = [
@@ -262,7 +272,8 @@ final class OnboardingContainerViewModelTests: XCTestCase {
 
         let sut = OnboardingContainerViewModel(
             onboardingService: mockOnboardingService,
-            source: .json("test"), analyticsService: MockAnalyticsService(),
+            source: .json("test"), 
+            analyticsService: MockAnalyticsService(),
             dismissAction: {}
         )
         let slides = [
@@ -282,7 +293,8 @@ final class OnboardingContainerViewModelTests: XCTestCase {
         
         let sut = OnboardingContainerViewModel(
             onboardingService: mockOnboardingService,
-            source: .json("test"), analyticsService: analyticsService,
+            source: .json("test"), 
+            analyticsService: analyticsService,
             dismissAction: {})
         
         let slides = [
@@ -304,7 +316,8 @@ final class OnboardingContainerViewModelTests: XCTestCase {
         
         let sut = OnboardingContainerViewModel(
             onboardingService: mockOnboardingService,
-            source: .json("test"), analyticsService: analyticsService,
+            source: .json("test"), 
+            analyticsService: analyticsService,
             dismissAction: {})
         
         let slides = [
@@ -327,7 +340,8 @@ final class OnboardingContainerViewModelTests: XCTestCase {
         
         let sut = OnboardingContainerViewModel(
             onboardingService: mockOnboardingService,
-            source: .json("test"), analyticsService: analyticsService,
+            source: .json("test"), 
+            analyticsService: analyticsService,
             dismissAction: {})
         
         let slides = [

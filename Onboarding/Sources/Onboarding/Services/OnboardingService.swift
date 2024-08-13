@@ -19,8 +19,8 @@ class OnboardingService: OnboardingServiceInterface {
 
     private func loadJSON(filename: String, bundle: Bundle) -> Result<[OnboardingSlide], Error> {
         guard let resourceUrl = bundle.url(
-          forResource: filename,
-          withExtension: "json"
+            forResource: filename,
+            withExtension: "json"
         ) else {
             return .failure(OnboardingServiceError.loadJsonError)
         }

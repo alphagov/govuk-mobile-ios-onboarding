@@ -3,7 +3,7 @@ import Onboarding
 
 class ViewController: UIViewController {
 
-    let analyticsService: AnalyticsService?
+    private let analyticsService: AnalyticsService?
 
     init(analyticsService: AnalyticsService?) {
         self.analyticsService = analyticsService

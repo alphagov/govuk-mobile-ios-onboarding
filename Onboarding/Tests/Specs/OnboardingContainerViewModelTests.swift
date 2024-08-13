@@ -334,9 +334,8 @@ final class OnboardingContainerViewModelTests: XCTestCase {
             OnboardingSlide(image: "test1", title: "test_title", body: "test_body", alias: ""),
             OnboardingSlide(image: "test2", title: "test_title", body: "test_body", alias: ""),
             OnboardingSlide(image: "test3", title: "test_title", body: "test_body", alias: "")]
-        
-        mockOnboardingService._receivedFetchSlidesCompletionHander?(.success(slides))
         //When
+        mockOnboardingService._receivedFetchSlidesCompletionHander?(.success(slides))
         sut.primaryAction()
         //Then
         XCTAssertEqual(analyticsService._events.count,1)

@@ -19,7 +19,7 @@ struct OnboardingContainerView: View {
                 TabView(selection: $viewModel.tabIndex) {
                     ForEach(0..<onboardingSlides.count, id: \.self) { index in
                         OnboardingSlideView(model: onboardingSlides[index]).onAppear {
-                            viewModel.trackNavigationEvent()
+                            viewModel.trackSlideView()
                         }
                     }
                 }

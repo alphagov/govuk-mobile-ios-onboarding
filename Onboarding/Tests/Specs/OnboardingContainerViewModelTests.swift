@@ -7,7 +7,7 @@ final class OnboardingContainerViewModelTests: XCTestCase {
 
     private var sut: OnboardingContainerViewModel?
     private var cancellables = Set<AnyCancellable>()
-    
+
     func test_init_hasCorrectInitialState() throws {
         let sut = OnboardingContainerViewModel(
             onboardingService: MockOnboardingService(),
@@ -270,7 +270,7 @@ final class OnboardingContainerViewModelTests: XCTestCase {
         ]
         //When
         mockOnboardingService._receivedFetchSlidesCompletionHander?(.success(expectedSlides))
-        sut.trackNavigationEvent()
+        sut.trackSlideView()
         //Then
         XCTAssertEqual(analyticsService._trackOnboardingScreenReceivedScreens.count,1)
         XCTAssertEqual(analyticsService._trackOnboardingScreenReceivedScreens[0].trackingName, "navigation_1")
@@ -294,7 +294,7 @@ final class OnboardingContainerViewModelTests: XCTestCase {
         sut.primaryAction()
         //Then
         XCTAssertEqual(analyticsService._trackOnboardingEventReceivedEvents.count,2)
-        XCTAssertEqual(analyticsService._trackOnboardingEventReceivedEvents[1].title, "done")
+        XCTAssertEqual(analyticsService._trackOnboardingEventReceivedEvents[1].name, "done")
     }
     
     func  test_primaryAction_notOnLastScreen_tracksContinueEvent() throws {
@@ -314,6 +314,6 @@ final class OnboardingContainerViewModelTests: XCTestCase {
         sut.primaryAction()
         //Then
         XCTAssertEqual(analyticsService._trackOnboardingEventReceivedEvents.count,1)
-        XCTAssertEqual(analyticsService._trackOnboardingEventReceivedEvents[0].title, "continue")
+        XCTAssertEqual(analyticsService._trackOnboardingEventReceivedEvents[0].name, "continue")
     }
 }

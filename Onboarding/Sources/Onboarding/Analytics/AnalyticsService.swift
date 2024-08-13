@@ -1,6 +1,6 @@
 import Foundation
 
-public protocol AnalyticsService {
+public protocol OnboardingAnalyticsService {
     func trackOnboardingEvent(_ event: OnboardingEvent)
     func trackOnboardingScreen(_ screen: OnboardingScreen)
 }

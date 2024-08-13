@@ -1,5 +1,6 @@
 import Foundation
 
 public struct OnboardingEvent {
-    public let title: String
+    public let name: String
+    public let params: [String: Any]?
 }

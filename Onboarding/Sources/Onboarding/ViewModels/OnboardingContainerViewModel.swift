@@ -19,12 +19,12 @@ class OnboardingContainerViewModel: ObservableObject {
     )
     private let onboardingService: OnboardingServiceInterface
     private let source: OnboardingSource
-    private let analyticsService: AnalyticsService?
+    private let analyticsService: OnboardingAnalyticsService?
     private let dismissAction: () -> Void
 
     init(onboardingService: OnboardingServiceInterface,
          source: OnboardingSource,
-         analyticsService: AnalyticsService?,
+         analyticsService: OnboardingAnalyticsService?,
          dismissAction: @escaping () -> Void) {
         self.analyticsService = analyticsService
         self.onboardingService = onboardingService
@@ -47,32 +47,34 @@ class OnboardingContainerViewModel: ObservableObject {
         )
     }
 
-    func trackNavigationEvent() {
+    func trackSlideView() {
         guard trackingTitles.count >= 1 else { return }
         let screen = OnboardingScreen(
             trackingName: trackingTitles[tabIndex],
-            trackingClass: ""
+            trackingClass: "OnboardingSlideView"
         )
         analyticsService?.trackOnboardingScreen(screen)
     }
 
     private func trackPrimaryActionEvent() {
         let event = OnboardingEvent(
-            title: isLastSlide ? "done" : "continue"
+            name: isLastSlide ? "done" : "continue",
+            params: nil
         )
         analyticsService?.trackOnboardingEvent(event)
     }
 
     private func trackSecondaryActionEvent() {
         let event = OnboardingEvent(
-            title: "skip"
+            name: "skip",
+            params: nil
         )
         analyticsService?.trackOnboardingEvent(event)
     }
 
     func primaryAction() {
+        trackPrimaryActionEvent()
         if isLastSlide {
-            trackPrimaryActionEvent()
             finishOnboarding()
         } else {
             navigateToNextSlide()
@@ -80,7 +82,6 @@ class OnboardingContainerViewModel: ObservableObject {
     }
 
     private func navigateToNextSlide() {
-        trackPrimaryActionEvent()
         tabIndex += 1
     }
 

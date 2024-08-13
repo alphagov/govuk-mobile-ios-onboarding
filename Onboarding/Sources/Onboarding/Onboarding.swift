@@ -5,10 +5,10 @@ import UIKit
 public final class Onboarding {
     private let dismissAction: () -> Void
     private let source: OnboardingSource
-    private let analyticsService: AnalyticsService?
+    private let analyticsService: OnboardingAnalyticsService?
 
     public init(source: OnboardingSource,
-                analyticsService: AnalyticsService?,
+                analyticsService: OnboardingAnalyticsService?,
                 dismissAction: @escaping () -> Void) {
         self.dismissAction = dismissAction
         self.analyticsService = analyticsService

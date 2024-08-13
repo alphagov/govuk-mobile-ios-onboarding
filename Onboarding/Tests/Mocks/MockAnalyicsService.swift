@@ -2,7 +2,7 @@ import Foundation
 
 @testable import Onboarding
 
-class MockAnalyticsService: AnalyticsService {
+class MockAnalyticsService: OnboardingAnalyticsService {
 
     var _trackOnboardingEventReceivedEvents: [OnboardingEvent] = []
     func trackOnboardingEvent(_ event: OnboardingEvent) {

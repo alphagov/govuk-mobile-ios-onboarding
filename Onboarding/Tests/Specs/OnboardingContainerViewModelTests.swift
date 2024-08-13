@@ -285,7 +285,8 @@ final class OnboardingContainerViewModelTests: XCTestCase {
             onboardingService: mockOnboardingService,
             source: .json("test"), 
             analyticsService: analyticsService,
-            dismissAction: {})
+            dismissAction: {}
+        )
         
         let expectedSlides = OnboardingSlide.arrange(count: 2)
         //When
@@ -304,9 +305,10 @@ final class OnboardingContainerViewModelTests: XCTestCase {
         
         let sut = OnboardingContainerViewModel(
             onboardingService: mockOnboardingService,
-            source: .json("test"), 
+            source: .json("test"),
             analyticsService: analyticsService,
-            dismissAction: {})
+            dismissAction: {}
+        )
         
         let expectedSlides = OnboardingSlide.arrange(count: 3)
         //When

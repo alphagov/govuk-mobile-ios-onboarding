@@ -36,7 +36,8 @@ final class OnboardingServiceTests: XCTestCase {
         let slides:[OnboardingSlide] = [
             OnboardingSlide(image: "onboarding_placeholder_screen_1",
                             title: "Get things done on the go",
-                            body: "Access government services and information on your phone using the GOV.UK app", alias: ""),
+                            body: "Access government services and information on your phone using the GOV.UK app", 
+                            alias: ""),
             OnboardingSlide(image: "onboarding_placeholder_screen_2",
                             title: "Quickly get back to previous pages",
                             body: "Pages you've visited are saved so you can easily return to them",

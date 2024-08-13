@@ -12,6 +12,6 @@ struct OnbardingNavigationEvent: TrackingInterface {
     }
 
     enum EventType: String {
-        case navigation = "navigation "
+        case navigation
     }
 }

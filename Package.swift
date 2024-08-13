@@ -17,14 +17,13 @@ let package = Package(
         .package(
             url: "https://github.com/alphagov/govuk-mobile-ios-ui-components", 
             branch: "develop"
-        ), .package(url: "https://github.com/firebase/firebase-ios-sdk.git", branch: "main")
+        )
     ],
     targets: [
         .target(
             name: "Onboarding",
             dependencies: [
-              .product(name: "UIComponents", package: "govuk-mobile-ios-ui-components"),
-              .product(name: "FirebaseAnalytics",package: "firebase-ios-sdk")
+              .product(name: "UIComponents", package: "govuk-mobile-ios-ui-components")
             ],
             path: "Onboarding/Sources",
             sources: [

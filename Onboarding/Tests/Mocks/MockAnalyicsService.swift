@@ -2,7 +2,9 @@ import Foundation
 @testable import Onboarding
 
 class MockAnalyticsService:AnalyticsService {
-    func track(_ trackable: TrackingInterface) { }
     
-    
+    var _events:[TrackingInterface] = []
+    func track(_ trackable: TrackingInterface) {
+        _events.append(trackable)
+    }
 }

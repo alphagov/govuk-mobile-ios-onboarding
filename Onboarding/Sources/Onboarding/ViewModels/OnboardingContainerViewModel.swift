@@ -48,6 +48,7 @@ class OnboardingContainerViewModel: ObservableObject {
     }
 
     func trackNavigationEvent() {
+        guard trackingTitles.count >= 1 else { return }
         analyticsService?.track(OnbardingNavigationEvent(title: trackingTitles[tabIndex]))
     }
 

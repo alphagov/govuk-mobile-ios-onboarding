@@ -3,9 +3,9 @@ import Onboarding
 
 class ViewController: UIViewController {
 
-    private let analyticsService: AnalyticsService?
+    private let analyticsService: OnboardingAnalyticsService?
 
-    init(analyticsService: AnalyticsService?) {
+    init(analyticsService: OnboardingAnalyticsService?) {
         self.analyticsService = analyticsService
         super.init()
     }

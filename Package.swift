@@ -36,7 +36,8 @@ let package = Package(
             path: "Onboarding/Tests",
             sources: [
                 "Specs",
-                "Mocks"
+                "Mocks",
+                "Arrangers",
             ],
             resources : [.process("Resources")]
         ),

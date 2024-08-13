@@ -6,7 +6,6 @@ class OnboardingContainerViewModel: ObservableObject {
     @Published var tabIndex: Int = 0
     @Published var state = State.loading
     @Published var slideCount: Int = 0
-    private let analyticsService: AnalyticsService?
     private var trackingTitles: [String] = []
     let skipButtonTitle = NSLocalizedString(
         "skipButtonTitle",
@@ -20,6 +19,7 @@ class OnboardingContainerViewModel: ObservableObject {
     )
     private let onboardingService: OnboardingServiceInterface
     private let source: OnboardingSource
+    private let analyticsService: AnalyticsService?
     private let dismissAction: () -> Void
 
     init(onboardingService: OnboardingServiceInterface,
@@ -49,18 +49,25 @@ class OnboardingContainerViewModel: ObservableObject {
 
     func trackNavigationEvent() {
         guard trackingTitles.count >= 1 else { return }
-        analyticsService?.track(OnbardingNavigationEvent(title: trackingTitles[tabIndex]))
+        let screen = OnboardingScreen(
+            trackingName: trackingTitles[tabIndex],
+            trackingClass: ""
+        )
+        analyticsService?.trackOnboardingScreen(screen)
     }
 
     private func trackPrimaryActionEvent() {
-        analyticsService?.track(
-            OnboardingActionEvent(eventType: isLastSlide ? .done :
-                    .nextSlide))
+        let event = OnboardingEvent(
+            title: isLastSlide ? "done" : "continue"
+        )
+        analyticsService?.trackOnboardingEvent(event)
     }
 
     private func trackSecondaryActionEvent() {
-        analyticsService?.track(
-            OnboardingActionEvent(eventType: .skip))
+        let event = OnboardingEvent(
+            title: "skip"
+        )
+        analyticsService?.trackOnboardingEvent(event)
     }
 
     func primaryAction() {

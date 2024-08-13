@@ -18,7 +18,7 @@ public final class Onboarding {
     public lazy var viewController: UIViewController = {
         let viewModel = OnboardingContainerViewModel(
             onboardingService: OnboardingService(),
-            source: source, 
+            source: source,
             analyticsService: analyticsService,
             dismissAction: dismissAction
         )

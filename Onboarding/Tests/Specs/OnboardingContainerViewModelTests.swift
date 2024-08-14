@@ -200,7 +200,6 @@ final class OnboardingContainerViewModelTests: XCTestCase {
 
     func test_skip_completesFlow() async throws {
         let mockOnboardingService = MockOnboardingService()
-
         let expectedResource = "MockOnboardingResponse"
 
         let expectation = XCTestExpectation(description: "Empty slides")

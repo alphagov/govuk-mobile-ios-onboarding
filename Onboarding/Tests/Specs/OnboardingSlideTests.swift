@@ -8,7 +8,8 @@ class OnboardingSlideTests: XCTestCase {
         let subject = OnboardingSlide(
             image: "test_image",
             title: "test_title",
-            body: "test_body"
+            body: "test_body",
+            alias: ""
         )
 
         XCTAssertEqual(subject.image, "test_image")

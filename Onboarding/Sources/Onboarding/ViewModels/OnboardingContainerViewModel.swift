@@ -6,6 +6,7 @@ class OnboardingContainerViewModel: ObservableObject {
     @Published var tabIndex: Int = 0
     @Published var state = State.loading
     @Published var slideCount: Int = 0
+    private var trackingTitles: [String] = []
     let skipButtonTitle = NSLocalizedString(
         "skipButtonTitle",
         bundle: .module,
@@ -18,11 +19,14 @@ class OnboardingContainerViewModel: ObservableObject {
     )
     private let onboardingService: OnboardingServiceInterface
     private let source: OnboardingSource
+    private let analyticsService: OnboardingAnalyticsService?
     private let dismissAction: () -> Void
 
     init(onboardingService: OnboardingServiceInterface,
          source: OnboardingSource,
+         analyticsService: OnboardingAnalyticsService?,
          dismissAction: @escaping () -> Void) {
+        self.analyticsService = analyticsService
         self.onboardingService = onboardingService
         self.source = source
         self.dismissAction = dismissAction
@@ -43,7 +47,33 @@ class OnboardingContainerViewModel: ObservableObject {
         )
     }
 
+    func trackSlideView() {
+        guard trackingTitles.count >= 1 else { return }
+        let screen = OnboardingScreen(
+            trackingName: trackingTitles[tabIndex],
+            trackingClass: "OnboardingSlideView"
+        )
+        analyticsService?.trackOnboardingScreen(screen)
+    }
+
+    private func trackPrimaryActionEvent() {
+        let event = OnboardingEvent(
+            name: isLastSlide ? "done" : "continue",
+            params: nil
+        )
+        analyticsService?.trackOnboardingEvent(event)
+    }
+
+    private func trackSecondaryActionEvent() {
+        let event = OnboardingEvent(
+            name: "skip",
+            params: nil
+        )
+        analyticsService?.trackOnboardingEvent(event)
+    }
+
     func primaryAction() {
+        trackPrimaryActionEvent()
         if isLastSlide {
             finishOnboarding()
         } else {
@@ -87,11 +117,14 @@ class OnboardingContainerViewModel: ObservableObject {
     var secondaryButtonViewModel: GOVUKButton.ButtonViewModel {
         .init(
             localisedTitle: skipButtonTitle,
-            action: { [weak self] in self?.finishOnboarding() }
+            action: { [weak self] in
+                self?.trackSecondaryActionEvent()
+                self?.finishOnboarding()
+            }
         )
     }
 
-     private func fetchOnboarding() {
+    private func fetchOnboarding() {
         onboardingService.fetchSlides(
             source: source,
             completionHandler: { [weak self] result in
@@ -104,6 +137,7 @@ class OnboardingContainerViewModel: ObservableObject {
         switch result {
         case .success(let slides) where slides.count >= 1:
             slideCount = slides.count
+            trackingTitles = slides.map { $0.alias }
             state = .loaded(slides)
         default:
             finishOnboarding()

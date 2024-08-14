@@ -18,7 +18,9 @@ struct OnboardingContainerView: View {
             VStack(spacing: 0) {
                 TabView(selection: $viewModel.tabIndex) {
                     ForEach(0..<onboardingSlides.count, id: \.self) { index in
-                        OnboardingSlideView(model: onboardingSlides[index])
+                        OnboardingSlideView(model: onboardingSlides[index]).onAppear {
+                            viewModel.trackSlideView()
+                        }
                     }
                 }
                 .tabViewStyle(.page(indexDisplayMode: .never))
@@ -73,12 +75,18 @@ struct OnboardingContainerView: View {
     let viewModel = OnboardingContainerViewModel(
         onboardingService: OnboardingService(),
         source: .model([]),
+        analyticsService: nil,
         dismissAction: {}
     )
-    viewModel.state = .loaded([OnboardingSlide(
-        image: "onboarding_placeholder_screen_3",
-        title: "Get things done on the go!",
-        body: "Access government services and information on your phone using the GOV.UK app")]
+    viewModel.state = .loaded(
+        [
+            OnboardingSlide(
+                image: "onboarding_placeholder_screen_3",
+                title: "Get things done on the go!",
+                body: "Access government services and information on your phone using the GOV.UK app",
+                alias: ""
+            )
+        ]
     )
     return OnboardingContainerView(
         viewModel: viewModel

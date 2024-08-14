@@ -17,13 +17,13 @@ let package = Package(
         .package(
             url: "https://github.com/alphagov/govuk-mobile-ios-ui-components", 
             branch: "develop"
-        ),
+        )
     ],
     targets: [
         .target(
             name: "Onboarding",
             dependencies: [
-              .product(name: "UIComponents", package: "govuk-mobile-ios-ui-components"),
+              .product(name: "UIComponents", package: "govuk-mobile-ios-ui-components")
             ],
             path: "Onboarding/Sources",
             sources: [
@@ -35,8 +35,9 @@ let package = Package(
             dependencies: ["Onboarding"],
             path: "Onboarding/Tests",
             sources: [
+                "Arrangers",
+                "Mocks",
                 "Specs",
-                "Mocks"
             ],
             resources : [.process("Resources")]
         ),

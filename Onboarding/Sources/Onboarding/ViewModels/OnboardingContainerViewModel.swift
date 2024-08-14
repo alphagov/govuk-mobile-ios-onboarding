@@ -32,19 +32,19 @@ class OnboardingContainerViewModel: ObservableObject {
         self.dismissAction = dismissAction
         fetchOnboarding()
     }
-
+    
     var actionButtonAccessibilityHint: String {
         isLastSlide ?
-            NSLocalizedString(
-                "actionButtonLastSlideAccessibilityHint",
-                bundle: .module,
-                comment: ""
-            ) :
-            NSLocalizedString(
-                "actionButtonAccessibilityHint",
-                bundle: .module,
-                comment: ""
-            )
+        NSLocalizedString(
+            "actionButtonLastSlideAccessibilityHint",
+            bundle: .module,
+            comment: ""
+        ) :
+        NSLocalizedString(
+            "actionButtonAccessibilityHint",
+            bundle: .module,
+            comment: ""
+        )
     }
 
     func trackSlideView() {
@@ -84,19 +84,19 @@ class OnboardingContainerViewModel: ObservableObject {
     private func navigateToNextSlide() {
         tabIndex += 1
     }
-
+    
     var primaryButtonTitle: String {
         isLastSlide ?
-            NSLocalizedString(
-                "lastButtonTitle",
-                bundle: .module,
-                comment: ""
-            ) :
-            NSLocalizedString(
-                "primaryButtonTitle",
-                bundle: .module,
-                comment: ""
-            )
+        NSLocalizedString(
+            "lastButtonTitle",
+            bundle: .module,
+            comment: ""
+        ) :
+        NSLocalizedString(
+            "primaryButtonTitle",
+            bundle: .module,
+            comment: ""
+        )
     }
 
     private func finishOnboarding() {

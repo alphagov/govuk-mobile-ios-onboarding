@@ -271,13 +271,13 @@ final class OnboardingContainerViewModelTests: XCTestCase {
         mockOnboardingService._receivedFetchSlidesCompletionHander?(.success(expectedSlides))
         sut.trackSlideView()
         //Then
-        XCTAssertEqual(analyticsService._trackOnboardingScreenReceivedScreens.count,1)
+        XCTAssertEqual(analyticsService._trackOnboardingScreenReceivedScreens.count, 1)
         let screen = analyticsService._trackOnboardingScreenReceivedScreens.first
         XCTAssertEqual(screen?.trackingName, "navigation_1")
         XCTAssertEqual(screen?.trackingClass, "OnboardingSlideView")
     }
     
-    func  test_primaryAction_onLastSlide_tracksDoneEvent() throws {
+    func test_primaryAction_onLastSlide_tracksDoneEvent() throws {
         //Given
         let mockOnboardingService = MockOnboardingService()
         let analyticsService = MockAnalyticsService()
@@ -295,11 +295,11 @@ final class OnboardingContainerViewModelTests: XCTestCase {
         sut.primaryAction()
         sut.primaryAction()
         //Then
-        XCTAssertEqual(analyticsService._trackOnboardingEventReceivedEvents.count,2)
-        XCTAssertEqual(analyticsService._trackOnboardingEventReceivedEvents[1].name, "done")
+        XCTAssertEqual(analyticsService._trackOnboardingEventReceivedEvents.count, 2)
+        XCTAssertEqual(analyticsService._trackOnboardingEventReceivedEvents.last?.name, "done")
     }
     
-    func  test_primaryAction_notOnLastScreen_tracksContinueEvent() throws {
+    func test_primaryAction_notOnLastScreen_tracksContinueEvent() throws {
         //Given
         let mockOnboardingService = MockOnboardingService()
         let analyticsService = MockAnalyticsService()
@@ -316,7 +316,7 @@ final class OnboardingContainerViewModelTests: XCTestCase {
         mockOnboardingService._receivedFetchSlidesCompletionHander?(.success(expectedSlides))
         sut.primaryAction()
         //Then
-        XCTAssertEqual(analyticsService._trackOnboardingEventReceivedEvents.count,1)
-        XCTAssertEqual(analyticsService._trackOnboardingEventReceivedEvents[0].name, "continue")
+        XCTAssertEqual(analyticsService._trackOnboardingEventReceivedEvents.count, 1)
+        XCTAssertEqual(analyticsService._trackOnboardingEventReceivedEvents.first?.name, "continue")
     }
 }

@@ -2,7 +2,7 @@ import UIKit
 import Foundation
 
 let klass: AnyClass = NSClassFromString("govuk_onboarding_ios_unit_tests.TestAppDelegate") ??
-    AppDelegate.self
+AppDelegate.self
 
 let classString = NSStringFromClass(klass)
 

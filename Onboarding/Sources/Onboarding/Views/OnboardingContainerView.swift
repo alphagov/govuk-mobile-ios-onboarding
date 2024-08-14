@@ -68,7 +68,7 @@ struct OnboardingContainerView: View {
 
     private var shouldShowSecondaryButton: Bool {
         verticalSizeClass == .regular ||
-            viewModel.isLastSlide == false
+        viewModel.isLastSlide == false
     }
 }
 #Preview {
@@ -78,11 +78,15 @@ struct OnboardingContainerView: View {
         analyticsService: nil,
         dismissAction: {}
     )
-    viewModel.state = .loaded([OnboardingSlide(
-                                image: "onboarding_placeholder_screen_3",
-                                title: "Get things done on the go!",
-                                body: "Access government services and information on your phone using the GOV.UK app",
-                                alias: "")]
+    viewModel.state = .loaded(
+        [
+            OnboardingSlide(
+                image: "onboarding_placeholder_screen_3",
+                title: "Get things done on the go!",
+                body: "Access government services and information on your phone using the GOV.UK app",
+                alias: ""
+            )
+        ]
     )
     return OnboardingContainerView(
         viewModel: viewModel

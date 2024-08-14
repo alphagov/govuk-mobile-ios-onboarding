@@ -32,7 +32,7 @@ class OnboardingContainerViewModel: ObservableObject {
         self.dismissAction = dismissAction
         fetchOnboarding()
     }
-    
+
     var actionButtonAccessibilityHint: String {
         isLastSlide ?
         NSLocalizedString(
@@ -84,7 +84,7 @@ class OnboardingContainerViewModel: ObservableObject {
     private func navigateToNextSlide() {
         tabIndex += 1
     }
-    
+
     var primaryButtonTitle: String {
         isLastSlide ?
         NSLocalizedString(

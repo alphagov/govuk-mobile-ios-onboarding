@@ -35,9 +35,9 @@ let package = Package(
             dependencies: ["Onboarding"],
             path: "Onboarding/Tests",
             sources: [
-                "Specs",
-                "Mocks",
                 "Arrangers",
+                "Mocks",
+                "Specs",
             ],
             resources : [.process("Resources")]
         ),

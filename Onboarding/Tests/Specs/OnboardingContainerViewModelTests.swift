@@ -261,8 +261,9 @@ final class OnboardingContainerViewModelTests: XCTestCase {
             onboardingService: mockOnboardingService,
             source: .json("test"), 
             analyticsService: analyticsService,
-            dismissAction: {})
-        
+            dismissAction: {}
+        )
+
         let expectedSlides: [OnboardingSlide] = [
             .arrange(alias: "navigation_1"),
             .arrange(alias: "navigation_2"),

@@ -47,6 +47,7 @@ final class OnboardingServiceTests: XCTestCase {
                             body: "Choose topics that are relevant to you so you can find what you need faster",
                             alias: "")
         ]
+        
         sut.fetchSlides(source: .model(slides)) { result in
             let slides = try? result.get()
             XCTAssertEqual(slides?.count, 3)

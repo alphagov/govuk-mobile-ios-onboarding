@@ -9,7 +9,7 @@ class OnboardingSlideTests: XCTestCase {
             image: "test_image",
             title: "test_title",
             body: "test_body",
-            alias: ""
+            name: ""
         )
 
         XCTAssertEqual(subject.image, "test_image")

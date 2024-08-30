@@ -51,7 +51,7 @@ struct OnboardingSlideView: View {
             image: "onboarding_placeholder_screen_1",
             title: "Get things done on the go",
             body: "GAccess government services and information",
-            alias: ""
+            name: ""
         )
     )
 }

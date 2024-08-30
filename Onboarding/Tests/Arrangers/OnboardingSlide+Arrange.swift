@@ -15,12 +15,12 @@ extension OnboardingSlide {
     static func arrange(image: String = UUID().uuidString,
                         title: String = UUID().uuidString,
                         body: String = UUID().uuidString,
-                        alias: String = UUID().uuidString) -> OnboardingSlide {
+                        name: String = UUID().uuidString) -> OnboardingSlide {
         .init(
             image: image,
             title: title,
             body: body,
-            alias: alias
+            name: name
         )
     }
 

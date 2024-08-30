@@ -1,5 +1,6 @@
 import XCTest
 import Combine
+import Foundation
 
 @testable import Onboarding
 
@@ -253,7 +254,6 @@ final class OnboardingContainerViewModelTests: XCTestCase {
     }
     
     func test_trackNavigationEvent_tracksNavigationEvent() throws {
-        //Given
         let mockOnboardingService = MockOnboardingService()
         let analyticsService = MockAnalyticsService()
         
@@ -268,10 +268,9 @@ final class OnboardingContainerViewModelTests: XCTestCase {
             .arrange(title: "test_title_1", name: "navigation_1"),
             .arrange(title: "test_title_2", name: "navigation_2"),
         ]
-        //When
         mockOnboardingService._receivedFetchSlidesCompletionHander?(.success(expectedSlides))
         sut.trackSlideView()
-        //Then
+
         XCTAssertEqual(analyticsService._trackOnboardingScreenReceivedScreens.count, 1)
         let screen = analyticsService._trackOnboardingScreenReceivedScreens.first
         XCTAssertEqual(screen?.trackingName, "navigation_1")
@@ -280,7 +279,6 @@ final class OnboardingContainerViewModelTests: XCTestCase {
     }
     
     func test_primaryAction_onLastSlide_tracksDoneEvent() throws {
-        //Given
         let mockOnboardingService = MockOnboardingService()
         let analyticsService = MockAnalyticsService()
         
@@ -292,18 +290,18 @@ final class OnboardingContainerViewModelTests: XCTestCase {
         )
         
         let expectedSlides = OnboardingSlide.arrange(count: 2)
-        //When
         mockOnboardingService._receivedFetchSlidesCompletionHander?(.success(expectedSlides))
         sut.primaryAction()
         sut.primaryAction()
-        //Then
+
         XCTAssertEqual(analyticsService._trackOnboardingEventReceivedEvents.count, 2)
-        XCTAssertEqual(analyticsService._trackOnboardingEventReceivedEvents.last?.name, "Navigation")
-        XCTAssertEqual(analyticsService._trackOnboardingEventReceivedEvents.last?.params?["text"] as! String, "Done")
+
+        let lastEvent = analyticsService._trackOnboardingEventReceivedEvents.last
+        XCTAssertEqual(lastEvent?.name, "Navigation")
+        XCTAssertEqual(lastEvent?.text, "Done")
     }
     
     func test_primaryAction_notOnLastScreen_tracksContinueEvent() throws {
-        //Given
         let mockOnboardingService = MockOnboardingService()
         let analyticsService = MockAnalyticsService()
         
@@ -315,12 +313,11 @@ final class OnboardingContainerViewModelTests: XCTestCase {
         )
         
         let expectedSlides = OnboardingSlide.arrange(count: 3)
-        //When
         mockOnboardingService._receivedFetchSlidesCompletionHander?(.success(expectedSlides))
         sut.primaryAction()
-        //Then
+
         XCTAssertEqual(analyticsService._trackOnboardingEventReceivedEvents.count, 1)
         XCTAssertEqual(analyticsService._trackOnboardingEventReceivedEvents.first?.name, "Navigation")
-        XCTAssertEqual(analyticsService._trackOnboardingEventReceivedEvents.last?.params?["text"] as! String, "Continue")
+        XCTAssertEqual(analyticsService._trackOnboardingEventReceivedEvents.last?.text, "Continue")
     }
 }

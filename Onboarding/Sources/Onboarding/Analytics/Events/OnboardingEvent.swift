@@ -3,12 +3,12 @@ import Foundation
 public struct OnboardingEvent {
     public let name: String
     public let type: String
-    public let text: String
+    public let text: String?
     public let additionalParams: [String: Any?]?
 
     init(name: String,
          type: String,
-         text: String) {
+         text: String?) {
         self.name = name
         self.type = type
         self.text = text
@@ -31,7 +31,7 @@ extension OnboardingEvent {
         .init(
             name: "Navigation",
             type: "Dot",
-            text: "Dot"
+            text: nil
         )
     }
 }

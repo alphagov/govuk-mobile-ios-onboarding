@@ -339,7 +339,7 @@ final class OnboardingContainerViewModelTests: XCTestCase {
         XCTAssertEqual(analyticsService._trackOnboardingEventReceivedEvents.count, 1)
         let event = analyticsService._trackOnboardingEventReceivedEvents.first
         XCTAssertEqual(event?.name, "Navigation")
-        XCTAssertEqual(event?.text, "Dot")
+        XCTAssertNil(event?.text)
         XCTAssertEqual(event?.type, "Dot")
     }
 }

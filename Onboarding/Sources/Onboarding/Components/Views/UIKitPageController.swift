@@ -5,6 +5,7 @@ import SwiftUI
 struct UIKitPageControl: UIViewRepresentable {
     @Binding var currentPage: Int
     var numberOfPages: Int
+    var didPressAction: () -> Void
 
     func makeUIView(context: Context) -> UIPageControl {
         let pageControl = UIPageControl()
@@ -38,16 +39,23 @@ struct UIKitPageControl: UIViewRepresentable {
     }
 
     func makeCoordinator() -> Coordinator {
-        Coordinator(value: $currentPage)
+        Coordinator(
+            value: $currentPage,
+            didPressAction: didPressAction
+        )
     }
 
     class Coordinator: NSObject {
         var currentPage: Binding<Int>
-        init(value: Binding<Int>) {
+        let didPressAction: () -> Void
+        init(value: Binding<Int>,
+             didPressAction: @escaping () -> Void) {
             self.currentPage = value
+            self.didPressAction = didPressAction
         }
         @objc func valueChanged(_ pageControl: UIPageControl) {
             self.currentPage.wrappedValue = pageControl.currentPage
+            didPressAction()
         }
     }
 }

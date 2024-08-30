@@ -26,4 +26,12 @@ extension OnboardingEvent {
             text: text
         )
     }
+
+    static var dotNavigation: OnboardingEvent {
+        .init(
+            name: "Navigation",
+            type: "Dot",
+            text: "Dot"
+        )
+    }
 }

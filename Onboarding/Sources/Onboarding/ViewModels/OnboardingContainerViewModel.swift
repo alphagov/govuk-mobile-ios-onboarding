@@ -68,6 +68,10 @@ class OnboardingContainerViewModel: ObservableObject {
         analyticsService?.trackOnboardingEvent(event)
     }
 
+    func trackPageControllerPressEvent() {
+        analyticsService?.trackOnboardingEvent(OnboardingEvent.dotNavigation)
+    }
+
     func primaryAction() {
         trackPrimaryActionEvent()
         if isLastSlide {

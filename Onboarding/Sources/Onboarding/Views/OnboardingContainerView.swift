@@ -31,7 +31,10 @@ struct OnboardingContainerView: View {
                         .padding([.top], 0)
                     UIKitPageControl(
                         currentPage: $viewModel.tabIndex,
-                        numberOfPages: viewModel.slideCount
+                        numberOfPages: viewModel.slideCount,
+                        didPressAction: { [weak viewModel] in
+                            viewModel?.trackPageControllerPressEvent()
+                        }
                     )
                     AdaptiveStack(spacing: 0) {
                         SwiftUIButton(

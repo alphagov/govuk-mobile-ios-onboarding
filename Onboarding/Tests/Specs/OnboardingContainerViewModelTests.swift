@@ -265,8 +265,8 @@ final class OnboardingContainerViewModelTests: XCTestCase {
         )
 
         let expectedSlides: [OnboardingSlide] = [
-            .arrange(name: "navigation_1"),
-            .arrange(name: "navigation_2"),
+            .arrange(title: "test_title_1", name: "navigation_1"),
+            .arrange(title: "test_title_2", name: "navigation_2"),
         ]
         //When
         mockOnboardingService._receivedFetchSlidesCompletionHander?(.success(expectedSlides))
@@ -275,6 +275,7 @@ final class OnboardingContainerViewModelTests: XCTestCase {
         XCTAssertEqual(analyticsService._trackOnboardingScreenReceivedScreens.count, 1)
         let screen = analyticsService._trackOnboardingScreenReceivedScreens.first
         XCTAssertEqual(screen?.trackingName, "navigation_1")
+        XCTAssertEqual(screen?.trackingTitle, "test_title_1")
         XCTAssertEqual(screen?.trackingClass, "OnboardingSlideView")
     }
     

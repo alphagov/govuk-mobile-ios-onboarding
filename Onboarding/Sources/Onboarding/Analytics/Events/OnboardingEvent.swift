@@ -13,7 +13,7 @@ public struct OnboardingEvent {
         self.type = type
         self.text = text
         self.additionalParams = [
-            "external": false,
+            "external": false
         ]
     }
 }

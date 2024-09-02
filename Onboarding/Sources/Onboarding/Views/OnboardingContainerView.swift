@@ -31,7 +31,10 @@ struct OnboardingContainerView: View {
                         .padding([.top], 0)
                     UIKitPageControl(
                         currentPage: $viewModel.tabIndex,
-                        numberOfPages: viewModel.slideCount
+                        numberOfPages: viewModel.slideCount,
+                        didPressAction: { [weak viewModel] in
+                            viewModel?.trackPageControllerPressEvent()
+                        }
                     )
                     AdaptiveStack(spacing: 0) {
                         SwiftUIButton(
@@ -84,7 +87,7 @@ struct OnboardingContainerView: View {
                 image: "onboarding_placeholder_screen_3",
                 title: "Get things done on the go!",
                 body: "Access government services and information on your phone using the GOV.UK app",
-                alias: ""
+                name: ""
             )
         ]
     )

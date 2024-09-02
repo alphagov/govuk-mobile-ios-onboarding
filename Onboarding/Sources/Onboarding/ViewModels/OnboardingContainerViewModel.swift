@@ -6,7 +6,7 @@ class OnboardingContainerViewModel: ObservableObject {
     @Published var tabIndex: Int = 0
     @Published var state = State.loading
     @Published var slideCount: Int = 0
-    private var trackingTitles: [String] = []
+    private var slides: [OnboardingSlide] = []
     let skipButtonTitle = NSLocalizedString(
         "skipButtonTitle",
         bundle: .module,
@@ -48,28 +48,28 @@ class OnboardingContainerViewModel: ObservableObject {
     }
 
     func trackSlideView() {
-        guard trackingTitles.count >= 1 else { return }
+        guard slides.count >= 1 else { return }
+        let slide = slides[tabIndex]
         let screen = OnboardingScreen(
-            trackingName: trackingTitles[tabIndex],
-            trackingClass: "OnboardingSlideView"
+            trackingName: slide.name,
+            trackingClass: "OnboardingSlideView",
+            trackingTitle: slide.title
         )
         analyticsService?.trackOnboardingScreen(screen)
     }
 
     private func trackPrimaryActionEvent() {
-        let event = OnboardingEvent(
-            name: isLastSlide ? "done" : "continue",
-            params: nil
-        )
+        let event = OnboardingEvent.buttonNavigation(text: primaryButtonTitle)
         analyticsService?.trackOnboardingEvent(event)
     }
 
     private func trackSecondaryActionEvent() {
-        let event = OnboardingEvent(
-            name: "skip",
-            params: nil
-        )
+        let event = OnboardingEvent.buttonNavigation(text: skipButtonTitle)
         analyticsService?.trackOnboardingEvent(event)
+    }
+
+    func trackPageControllerPressEvent() {
+        analyticsService?.trackOnboardingEvent(OnboardingEvent.dotNavigation)
     }
 
     func primaryAction() {
@@ -110,7 +110,9 @@ class OnboardingContainerViewModel: ObservableObject {
     var primaryButtonViewModel: GOVUKButton.ButtonViewModel {
         .init(
             localisedTitle: primaryButtonTitle,
-            action: { [weak self] in self?.primaryAction() }
+            action: { [weak self] in
+                self?.primaryAction()
+            }
         )
     }
 
@@ -136,8 +138,8 @@ class OnboardingContainerViewModel: ObservableObject {
     private func handleSlidesResult(result: Result<[OnboardingSlide], Error>) {
         switch result {
         case .success(let slides) where slides.count >= 1:
+            self.slides = slides
             slideCount = slides.count
-            trackingTitles = slides.map { $0.alias }
             state = .loaded(slides)
         default:
             finishOnboarding()

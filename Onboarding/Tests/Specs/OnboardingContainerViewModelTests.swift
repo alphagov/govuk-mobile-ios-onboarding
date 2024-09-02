@@ -1,5 +1,6 @@
 import XCTest
 import Combine
+import Foundation
 
 @testable import Onboarding
 
@@ -11,7 +12,7 @@ final class OnboardingContainerViewModelTests: XCTestCase {
     func test_init_hasCorrectInitialState() throws {
         let sut = OnboardingContainerViewModel(
             onboardingService: MockOnboardingService(),
-            source: .json("test"), 
+            source: .json("test"),
             analyticsService: MockAnalyticsService(),
             dismissAction: {}
         )
@@ -30,7 +31,7 @@ final class OnboardingContainerViewModelTests: XCTestCase {
 
         let sut = OnboardingContainerViewModel(
             onboardingService: mockOnboardingService,
-            source: .json(expectedResource), 
+            source: .json(expectedResource),
             analyticsService: MockAnalyticsService(),
             dismissAction: {}
         )
@@ -73,7 +74,7 @@ final class OnboardingContainerViewModelTests: XCTestCase {
         let expectedResource = "MockOnboardingResponse"
         _ = OnboardingContainerViewModel(
             onboardingService: mockOnboardingService,
-            source: .json(expectedResource), 
+            source: .json(expectedResource),
             analyticsService: MockAnalyticsService(),
             dismissAction: {}
         )
@@ -106,7 +107,7 @@ final class OnboardingContainerViewModelTests: XCTestCase {
         let mockOnboardingService = MockOnboardingService()
         let sut = OnboardingContainerViewModel(
             onboardingService: mockOnboardingService,
-            source: .model([]), 
+            source: .model([]),
             analyticsService: MockAnalyticsService(),
             dismissAction: {}
         )
@@ -120,7 +121,7 @@ final class OnboardingContainerViewModelTests: XCTestCase {
         let mockOnboardingService = MockOnboardingService()
         let sut = OnboardingContainerViewModel(
             onboardingService: mockOnboardingService,
-            source: .model([]), 
+            source: .model([]),
             analyticsService: MockAnalyticsService(),
             dismissAction: {}
         )
@@ -135,7 +136,7 @@ final class OnboardingContainerViewModelTests: XCTestCase {
         let mockOnboardingService = MockOnboardingService()
         let sut = OnboardingContainerViewModel(
             onboardingService: mockOnboardingService,
-            source: .model([]), 
+            source: .model([]),
             analyticsService: MockAnalyticsService(),
             dismissAction: {}
         )
@@ -150,7 +151,7 @@ final class OnboardingContainerViewModelTests: XCTestCase {
         let mockOnboardingService = MockOnboardingService()
         let sut = OnboardingContainerViewModel(
             onboardingService: mockOnboardingService,
-            source: .model([]), 
+            source: .model([]),
             analyticsService: MockAnalyticsService(),
             dismissAction: {}
         )
@@ -165,7 +166,7 @@ final class OnboardingContainerViewModelTests: XCTestCase {
         let mockOnboardingService = MockOnboardingService()
         let sut = OnboardingContainerViewModel(
             onboardingService: mockOnboardingService,
-            source: .model([]), 
+            source: .model([]),
             analyticsService: MockAnalyticsService(),
             dismissAction: {}
         )
@@ -184,7 +185,7 @@ final class OnboardingContainerViewModelTests: XCTestCase {
         let mockOnboardingService = MockOnboardingService()
         let sut = OnboardingContainerViewModel(
             onboardingService: mockOnboardingService,
-            source: .model([]), 
+            source: .model([]),
             analyticsService: MockAnalyticsService(),
             dismissAction: {
                 expectation.fulfill()
@@ -205,7 +206,7 @@ final class OnboardingContainerViewModelTests: XCTestCase {
         let expectation = XCTestExpectation(description: "Empty slides")
         let sut = OnboardingContainerViewModel(
             onboardingService: mockOnboardingService,
-            source: .json(expectedResource), 
+            source: .json(expectedResource),
             analyticsService: MockAnalyticsService(),
             dismissAction: {
                 expectation.fulfill()
@@ -217,7 +218,7 @@ final class OnboardingContainerViewModelTests: XCTestCase {
         let secondaryAction = sut.secondaryButtonViewModel.action
         try await secondaryAction()
 
-       await fulfillment(of: [expectation], timeout: 1)
+        await fulfillment(of: [expectation], timeout: 1)
     }
 
     func test_actionButtonAccessibilityHint_lastSlide_returnsExpectedResult() throws {
@@ -225,7 +226,7 @@ final class OnboardingContainerViewModelTests: XCTestCase {
 
         let sut = OnboardingContainerViewModel(
             onboardingService: mockOnboardingService,
-            source: .json("test"), 
+            source: .json("test"),
             analyticsService: MockAnalyticsService(),
             dismissAction: {}
         )
@@ -241,7 +242,7 @@ final class OnboardingContainerViewModelTests: XCTestCase {
 
         let sut = OnboardingContainerViewModel(
             onboardingService: mockOnboardingService,
-            source: .json("test"), 
+            source: .json("test"),
             analyticsService: MockAnalyticsService(),
             dismissAction: {}
         )
@@ -251,73 +252,94 @@ final class OnboardingContainerViewModelTests: XCTestCase {
         sut.tabIndex = 0
         XCTAssertEqual(sut.actionButtonAccessibilityHint, "Go to the next slide")
     }
-    
-    func test_trackNavigationEvent_tracksNavigationEvent() throws {
-        //Given
-        let mockOnboardingService = MockOnboardingService()
-        let analyticsService = MockAnalyticsService()
-        
-        let sut = OnboardingContainerViewModel(
-            onboardingService: mockOnboardingService,
-            source: .json("test"), 
-            analyticsService: analyticsService,
-            dismissAction: {}
-        )
 
-        let expectedSlides: [OnboardingSlide] = [
-            .arrange(alias: "navigation_1"),
-            .arrange(alias: "navigation_2"),
-        ]
-        //When
-        mockOnboardingService._receivedFetchSlidesCompletionHander?(.success(expectedSlides))
-        sut.trackSlideView()
-        //Then
-        XCTAssertEqual(analyticsService._trackOnboardingScreenReceivedScreens.count, 1)
-        let screen = analyticsService._trackOnboardingScreenReceivedScreens.first
-        XCTAssertEqual(screen?.trackingName, "navigation_1")
-        XCTAssertEqual(screen?.trackingClass, "OnboardingSlideView")
-    }
-    
-    func test_primaryAction_onLastSlide_tracksDoneEvent() throws {
-        //Given
+    func test_trackNavigationEvent_tracksNavigationEvent() throws {
         let mockOnboardingService = MockOnboardingService()
         let analyticsService = MockAnalyticsService()
-        
-        let sut = OnboardingContainerViewModel(
-            onboardingService: mockOnboardingService,
-            source: .json("test"), 
-            analyticsService: analyticsService,
-            dismissAction: {}
-        )
-        
-        let expectedSlides = OnboardingSlide.arrange(count: 2)
-        //When
-        mockOnboardingService._receivedFetchSlidesCompletionHander?(.success(expectedSlides))
-        sut.primaryAction()
-        sut.primaryAction()
-        //Then
-        XCTAssertEqual(analyticsService._trackOnboardingEventReceivedEvents.count, 2)
-        XCTAssertEqual(analyticsService._trackOnboardingEventReceivedEvents.last?.name, "done")
-    }
-    
-    func test_primaryAction_notOnLastScreen_tracksContinueEvent() throws {
-        //Given
-        let mockOnboardingService = MockOnboardingService()
-        let analyticsService = MockAnalyticsService()
-        
+
         let sut = OnboardingContainerViewModel(
             onboardingService: mockOnboardingService,
             source: .json("test"),
             analyticsService: analyticsService,
             dismissAction: {}
         )
-        
-        let expectedSlides = OnboardingSlide.arrange(count: 3)
-        //When
+
+        let expectedSlides: [OnboardingSlide] = [
+            .arrange(title: "test_title_1", name: "navigation_1"),
+            .arrange(title: "test_title_2", name: "navigation_2"),
+        ]
+        mockOnboardingService._receivedFetchSlidesCompletionHander?(.success(expectedSlides))
+        sut.trackSlideView()
+
+        XCTAssertEqual(analyticsService._trackOnboardingScreenReceivedScreens.count, 1)
+        let screen = analyticsService._trackOnboardingScreenReceivedScreens.first
+        XCTAssertEqual(screen?.trackingName, "navigation_1")
+        XCTAssertEqual(screen?.trackingTitle, "test_title_1")
+        XCTAssertEqual(screen?.trackingClass, "OnboardingSlideView")
+    }
+
+    func test_primaryAction_onLastSlide_tracksDoneEvent() throws {
+        let mockOnboardingService = MockOnboardingService()
+        let analyticsService = MockAnalyticsService()
+
+        let sut = OnboardingContainerViewModel(
+            onboardingService: mockOnboardingService,
+            source: .json("test"),
+            analyticsService: analyticsService,
+            dismissAction: {}
+        )
+
+        let expectedSlides = OnboardingSlide.arrange(count: 2)
         mockOnboardingService._receivedFetchSlidesCompletionHander?(.success(expectedSlides))
         sut.primaryAction()
-        //Then
+        sut.primaryAction()
+
+        XCTAssertEqual(analyticsService._trackOnboardingEventReceivedEvents.count, 2)
+
+        let lastEvent = analyticsService._trackOnboardingEventReceivedEvents.last
+        XCTAssertEqual(lastEvent?.name, "Navigation")
+        XCTAssertEqual(lastEvent?.text, "Done")
+        XCTAssertEqual(lastEvent?.type, "Button")
+    }
+
+    func test_primaryAction_notOnLastScreen_tracksContinueEvent() throws {
+        let mockOnboardingService = MockOnboardingService()
+        let analyticsService = MockAnalyticsService()
+
+        let sut = OnboardingContainerViewModel(
+            onboardingService: mockOnboardingService,
+            source: .json("test"),
+            analyticsService: analyticsService,
+            dismissAction: {}
+        )
+
+        let expectedSlides = OnboardingSlide.arrange(count: 3)
+        mockOnboardingService._receivedFetchSlidesCompletionHander?(.success(expectedSlides))
+        sut.primaryAction()
+
         XCTAssertEqual(analyticsService._trackOnboardingEventReceivedEvents.count, 1)
-        XCTAssertEqual(analyticsService._trackOnboardingEventReceivedEvents.first?.name, "continue")
+        XCTAssertEqual(analyticsService._trackOnboardingEventReceivedEvents.first?.name, "Navigation")
+        XCTAssertEqual(analyticsService._trackOnboardingEventReceivedEvents.last?.text, "Continue")
+        XCTAssertEqual(analyticsService._trackOnboardingEventReceivedEvents.last?.type, "Button")
+    }
+
+    func test_trackPageControllerPressEvent_tracksEvent() throws {
+        let mockOnboardingService = MockOnboardingService()
+        let analyticsService = MockAnalyticsService()
+
+        let sut = OnboardingContainerViewModel(
+            onboardingService: mockOnboardingService,
+            source: .json("test"),
+            analyticsService: analyticsService,
+            dismissAction: {}
+        )
+
+        sut.trackPageControllerPressEvent()
+
+        XCTAssertEqual(analyticsService._trackOnboardingEventReceivedEvents.count, 1)
+        let event = analyticsService._trackOnboardingEventReceivedEvents.first
+        XCTAssertEqual(event?.name, "Navigation")
+        XCTAssertNil(event?.text)
+        XCTAssertEqual(event?.type, "Dot")
     }
 }

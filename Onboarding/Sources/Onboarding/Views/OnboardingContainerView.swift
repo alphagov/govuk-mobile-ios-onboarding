@@ -36,7 +36,7 @@ struct OnboardingContainerView: View {
                             viewModel?.trackPageControllerPressEvent()
                         }
                     )
-                    AdaptiveStack(spacing: 0) {
+                    AdaptiveStack {
                         SwiftUIButton(
                             .primary,
                             viewModel: viewModel.primaryButtonViewModel

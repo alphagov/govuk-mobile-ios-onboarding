@@ -42,7 +42,6 @@ struct OnboardingContainerView: View {
                             viewModel: viewModel.primaryButtonViewModel
                         )
                         .accessibilityHint(viewModel.actionButtonAccessibilityHint)
-                        .accessibility(sortPriority: 1)
                         .frame(
                             minHeight: 44,
                             idealHeight: 44
@@ -53,7 +52,6 @@ struct OnboardingContainerView: View {
                                 viewModel: viewModel.secondaryButtonViewModel
                             )
                             .accessibilityHint(viewModel.skipButtonAcessibilityHint)
-                            .accessibility(sortPriority: 0)
                             .frame(
                                 minHeight: 44,
                                 idealHeight: 44
@@ -63,9 +61,7 @@ struct OnboardingContainerView: View {
                     }
                     .padding([.leading, .trailing], verticalSizeClass == .regular ? 16 : 0)
                 }
-            }
-            .accessibilityElement(children: .contain)
-            .animation(.easeIn, value: viewModel.tabIndex)
+            }.animation(.easeIn, value: viewModel.tabIndex)
         }
     }
 

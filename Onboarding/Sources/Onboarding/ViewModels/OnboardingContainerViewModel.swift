@@ -111,6 +111,7 @@ class OnboardingContainerViewModel: ObservableObject {
         .init(
             localisedTitle: primaryButtonTitle,
             action: { [weak self] in
+                UIAccessibility.post(notification: .screenChanged, argument: nil)
                 self?.primaryAction()
             }
         )

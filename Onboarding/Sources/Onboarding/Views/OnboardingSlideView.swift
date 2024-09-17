@@ -40,7 +40,7 @@ struct OnboardingSlideView: View {
                         .padding([.top, .leading, .trailing], 16)
                     }.accessibilityElement(children: .combine)
                 Spacer()
-            }
+            }.accessibilityElement(children: .contain)
         }
     }
 }

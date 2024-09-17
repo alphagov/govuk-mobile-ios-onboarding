@@ -323,6 +323,43 @@ final class OnboardingContainerViewModelTests: XCTestCase {
         XCTAssertEqual(analyticsService._trackOnboardingEventReceivedEvents.last?.type, "Button")
     }
 
+    func test_primaryAction_notOnLastScreen_postsScreenChangedNotification() throws {
+        let mockOnboardingService = MockOnboardingService()
+        let accessibilityPoster = MockAccessibilityPoster.self
+        accessibilityPoster._postParams = nil
+        let sut = OnboardingContainerViewModel(
+            onboardingService: mockOnboardingService,
+            source: .json("test"),
+            analyticsService: MockAnalyticsService(),
+            accessibilityPoster: accessibilityPoster,
+            dismissAction: {}
+        )
+        let expectedSlides = OnboardingSlide.arrange(count: 3)
+        mockOnboardingService._receivedFetchSlidesCompletionHander?(.success(expectedSlides))
+        sut.primaryAction()
+
+        XCTAssertEqual(accessibilityPoster._postParams?.0, .screenChanged)
+        XCTAssertNil(accessibilityPoster._postParams?.1)
+    }
+
+    func test_primaryAction_onLastScreen_doesntPostScreenChangedNotification() throws {
+        let mockOnboardingService = MockOnboardingService()
+        let accessibilityPoster = MockAccessibilityPoster.self
+        accessibilityPoster._postParams = nil
+        let sut = OnboardingContainerViewModel(
+            onboardingService: mockOnboardingService,
+            source: .json("test"),
+            analyticsService: MockAnalyticsService(),
+            accessibilityPoster: accessibilityPoster,
+            dismissAction: {}
+        )
+        let expectedSlides = OnboardingSlide.arrange(count: 1)
+        mockOnboardingService._receivedFetchSlidesCompletionHander?(.success(expectedSlides))
+        sut.primaryAction()
+
+        XCTAssertNil(accessibilityPoster._postParams)
+    }
+
     func test_trackPageControllerPressEvent_tracksEvent() throws {
         let mockOnboardingService = MockOnboardingService()
         let analyticsService = MockAnalyticsService()

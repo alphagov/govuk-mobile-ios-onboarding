@@ -4,9 +4,12 @@ import UIKit
 @testable import Onboarding
 
 struct MockAccessibilityPoster: AccessibilityPoster {
-    static var _postParams: (UIAccessibility.Notification, Any?)? = nil
+    static var _receivedPostNotification: UIAccessibility.Notification? = nil
+
+    static var _receivedPostArgument: Any? = nil
 
     static func post(notification: UIAccessibility.Notification, argument: Any?) {
-        _postParams = (notification, argument)
+        _receivedPostNotification = notification
+        _receivedPostArgument = argument
     }
 }

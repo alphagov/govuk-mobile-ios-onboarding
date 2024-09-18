@@ -326,7 +326,8 @@ final class OnboardingContainerViewModelTests: XCTestCase {
     func test_primaryAction_notOnLastScreen_postsScreenChangedNotification() throws {
         let mockOnboardingService = MockOnboardingService()
         let accessibilityPoster = MockAccessibilityPoster.self
-        accessibilityPoster._postParams = nil
+        accessibilityPoster._receivedPostNotification = nil
+        accessibilityPoster._receivedPostArgument = nil
         let sut = OnboardingContainerViewModel(
             onboardingService: mockOnboardingService,
             source: .json("test"),
@@ -338,14 +339,15 @@ final class OnboardingContainerViewModelTests: XCTestCase {
         mockOnboardingService._receivedFetchSlidesCompletionHander?(.success(expectedSlides))
         sut.primaryAction()
 
-        XCTAssertEqual(accessibilityPoster._postParams?.0, .screenChanged)
-        XCTAssertNil(accessibilityPoster._postParams?.1)
+        XCTAssertEqual(accessibilityPoster._receivedPostNotification, .screenChanged)
+        XCTAssertNil(accessibilityPoster._receivedPostArgument)
     }
 
     func test_primaryAction_onLastScreen_doesntPostScreenChangedNotification() throws {
         let mockOnboardingService = MockOnboardingService()
         let accessibilityPoster = MockAccessibilityPoster.self
-        accessibilityPoster._postParams = nil
+        accessibilityPoster._receivedPostNotification = nil
+        accessibilityPoster._receivedPostArgument = nil
         let sut = OnboardingContainerViewModel(
             onboardingService: mockOnboardingService,
             source: .json("test"),
@@ -357,7 +359,8 @@ final class OnboardingContainerViewModelTests: XCTestCase {
         mockOnboardingService._receivedFetchSlidesCompletionHander?(.success(expectedSlides))
         sut.primaryAction()
 
-        XCTAssertNil(accessibilityPoster._postParams)
+        XCTAssertNil(accessibilityPoster._receivedPostNotification)
+        XCTAssertNil(accessibilityPoster._receivedPostArgument)
     }
 
     func test_trackPageControllerPressEvent_tracksEvent() throws {

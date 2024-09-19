@@ -216,7 +216,7 @@ final class OnboardingContainerViewModelTests: XCTestCase {
         mockOnboardingService._receivedFetchSlidesCompletionHander?(.success(expectedSlides))
 
         let secondaryAction = sut.secondaryButtonViewModel.action
-        try await secondaryAction()
+        secondaryAction()
 
         await fulfillment(of: [expectation], timeout: 1)
     }

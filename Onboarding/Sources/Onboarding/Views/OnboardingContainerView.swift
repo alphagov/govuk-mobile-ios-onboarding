@@ -42,7 +42,6 @@ struct OnboardingContainerView: View {
                             viewModel: viewModel.primaryButtonViewModel
                         )
                         .accessibilityHint(viewModel.actionButtonAccessibilityHint)
-                        .accessibility(sortPriority: 1)
                         .frame(
                             minHeight: 44,
                             idealHeight: 44
@@ -53,7 +52,6 @@ struct OnboardingContainerView: View {
                                 viewModel: viewModel.secondaryButtonViewModel
                             )
                             .accessibilityHint(viewModel.skipButtonAcessibilityHint)
-                            .accessibility(sortPriority: 0)
                             .frame(
                                 minHeight: 44,
                                 idealHeight: 44

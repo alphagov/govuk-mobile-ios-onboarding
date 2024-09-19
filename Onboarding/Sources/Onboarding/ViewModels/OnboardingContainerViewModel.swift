@@ -20,15 +20,18 @@ class OnboardingContainerViewModel: ObservableObject {
     private let onboardingService: OnboardingServiceInterface
     private let source: OnboardingSource
     private let analyticsService: OnboardingAnalyticsService?
+    private let accessibilityPoster: AccessibilityPoster.Type
     private let dismissAction: () -> Void
 
     init(onboardingService: OnboardingServiceInterface,
          source: OnboardingSource,
          analyticsService: OnboardingAnalyticsService?,
+         accessibilityPoster: AccessibilityPoster.Type = UIAccessibility.self,
          dismissAction: @escaping () -> Void) {
         self.analyticsService = analyticsService
         self.onboardingService = onboardingService
         self.source = source
+        self.accessibilityPoster = accessibilityPoster
         self.dismissAction = dismissAction
         fetchOnboarding()
     }
@@ -78,6 +81,7 @@ class OnboardingContainerViewModel: ObservableObject {
             finishOnboarding()
         } else {
             navigateToNextSlide()
+            accessibilityPoster.post(notification: .screenChanged, argument: nil)
         }
     }
 

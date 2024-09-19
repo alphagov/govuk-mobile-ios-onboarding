@@ -24,6 +24,7 @@ struct OnboardingContainerView: View {
                     }
                 }
                 .tabViewStyle(.page(indexDisplayMode: .never))
+                .accessibilityIdentifier("container.tabview")
                 VStack(alignment: .center, spacing: 16) {
                     Divider()
                         .background(Color(UIColor.govUK.strokes.listDivider))

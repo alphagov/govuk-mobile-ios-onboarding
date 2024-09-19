@@ -47,16 +47,14 @@ final class OnboardingUITests: XCTestCase {
     }
     
     func test_actionButton_onLastSlide_isSetToDone() {
-        //Given
         let doneActionButton = app.buttons["Done"]
         let continueActionButton = app.buttons["Continue"]
-        let view = app.collectionViews
-            .scrollViews.containing(.other, identifier:"Vertical scroll bar, 1 page").element
-        //When
+
         continueActionButton.tap()
-        continueActionButton.tap()
-        view.swipeLeft()
-        //Then
+
+        let tabView = app.collectionViews["container.tabview"]
+        tabView.swipeLeft()
+
         XCTAssertTrue(doneActionButton.exists)
         XCTAssertTrue(doneActionButton.isHittable)
     }

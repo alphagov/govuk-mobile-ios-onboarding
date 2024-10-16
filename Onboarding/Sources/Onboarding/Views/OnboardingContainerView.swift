@@ -83,7 +83,7 @@ struct OnboardingContainerView: View {
     viewModel.state = .loaded(
         [
             OnboardingSlide(
-                image: "onboarding_placeholder_screen_3",
+                image: "onboarding_screen_3",
                 title: "Get things done on the go!",
                 body: "Access government services and information on your phone using the GOV.UK app",
                 name: ""

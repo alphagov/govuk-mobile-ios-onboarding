@@ -20,7 +20,7 @@ struct OnboardingSlideView: View {
                     Image(decorative: model.image, bundle: .main)
                         .resizable()
                         .scaledToFit()
-                        .frame(width: 225, height: 225)
+                        .frame(width: 250, height: 250)
                         .padding([.bottom])
                 }
                 VStack {

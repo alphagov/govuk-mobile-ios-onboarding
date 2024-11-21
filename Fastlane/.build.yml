@@ -8,7 +8,7 @@ default: &DEFAULTS
     test_plan: Onboarding
   scan:
     devices:
-      - iPhone 16 Pro
+      - iPhone 16 Pro (18.1)
 
 unit:
   <<: *DEFAULTS

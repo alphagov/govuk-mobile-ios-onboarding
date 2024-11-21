@@ -65,6 +65,7 @@ struct OnboardingContainerView: View {
             }
             .accessibilityElement(children: .contain)
             .animation(.easeIn, value: viewModel.tabIndex)
+            .navigationBarHidden(true)
         }
     }
 

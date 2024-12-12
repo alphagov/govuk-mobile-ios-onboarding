@@ -16,7 +16,7 @@ let package = Package(
     dependencies: [
         .package(
             url: "https://github.com/alphagov/govuk-mobile-ios-ui-components", 
-            branch: "GOVUKAPP-1016-increase-version-support-to-ios-16"
+            branch: "develop"
         )
     ],
     targets: [

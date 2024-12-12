@@ -24,7 +24,7 @@ struct UIKitPageControl: UIViewRepresentable {
         pageControl.pageIndicatorTintColor = UIColor.govUK.strokes.pageControlInactive
         pageControl.preferredCurrentPageIndicatorImage = currentPageIndicator
         pageControl.currentPageIndicatorTintColor = UIColor.govUK.fills.surfaceButtonPrimary
-        
+
         return pageControl
     }
 

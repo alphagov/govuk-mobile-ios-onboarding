@@ -19,7 +19,6 @@ platform :ios do
       testplan: configuration.app_test_plan,
       clean: false,
       prelaunch_simulator: true,
-      reset_simulator: true,
       output_directory: configuration.scan_output_directory
     )
   end

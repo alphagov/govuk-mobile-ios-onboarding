@@ -6,7 +6,7 @@ import PackageDescription
 let package = Package(
     name: "Onboarding",
     defaultLocalization: "en",
-    platforms: [.iOS(.v14)],
+    platforms: [.iOS(.v16)],
     products: [
         .library(
             name: "Onboarding",
@@ -16,7 +16,7 @@ let package = Package(
     dependencies: [
         .package(
             url: "https://github.com/alphagov/govuk-mobile-ios-ui-components", 
-            branch: "develop"
+            branch: "GOVUKAPP-1016-increase-version-support-to-ios-16"
         )
     ],
     targets: [

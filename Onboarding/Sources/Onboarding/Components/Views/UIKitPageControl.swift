@@ -18,14 +18,13 @@ struct UIKitPageControl: UIViewRepresentable {
         pageControl.numberOfPages = numberOfPages
         pageControl.backgroundStyle = .prominent
 
-        if #available(iOS 16.0, *) {
-            let pageIndicator = UIImage(systemName: "circle")
-            let currentPageIndicator = UIImage(systemName: "circle.fill")
-            pageControl.preferredIndicatorImage = pageIndicator
-            pageControl.pageIndicatorTintColor = UIColor.govUK.strokes.pageControlInactive
-            pageControl.preferredCurrentPageIndicatorImage = currentPageIndicator
-            pageControl.currentPageIndicatorTintColor = UIColor.govUK.fills.surfaceButtonPrimary
-        }
+        let pageIndicator = UIImage(systemName: "circle")
+        let currentPageIndicator = UIImage(systemName: "circle.fill")
+        pageControl.preferredIndicatorImage = pageIndicator
+        pageControl.pageIndicatorTintColor = UIColor.govUK.strokes.pageControlInactive
+        pageControl.preferredCurrentPageIndicatorImage = currentPageIndicator
+        pageControl.currentPageIndicatorTintColor = UIColor.govUK.fills.surfaceButtonPrimary
+
         return pageControl
     }
 

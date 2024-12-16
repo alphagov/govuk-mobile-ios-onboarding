@@ -19,7 +19,7 @@ platform :ios do
       testplan: configuration.app_test_plan,
       clean: false,
       prelaunch_simulator: true,
-      reset_simulator: true
+      output_directory: configuration.scan_output_directory
     )
   end
 
@@ -28,7 +28,7 @@ platform :ios do
       workspace: configuration.app_workspace,
       proj: configuration.app_project,
       scheme: configuration.app_scheme,
-      output_directory: configuration.app_output_directory,
+      output_directory: configuration.scan_output_directory,
       sonarqube_xml: true
     )
   end

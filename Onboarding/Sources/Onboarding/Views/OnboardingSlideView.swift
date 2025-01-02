@@ -33,12 +33,13 @@ struct OnboardingSlideView: View {
                         .accessibilityLabel(Text(model.title))
                         .padding(.top, verticalSizeClass == .compact ? 32 : 0)
                         .padding([.trailing, .leading], 16)
+                        .accessibilityAddTraits(.isHeader)
                     Text(model.body)
                         .foregroundColor(Color(UIColor.govUK.text.primary))
                         .multilineTextAlignment(.center)
                         .accessibilityLabel(Text(model.body))
                         .padding([.top, .leading, .trailing], 16)
-                    }.accessibilityElement(children: .combine)
+                    }
                 Spacer()
             }.accessibilityElement(children: .contain)
         }

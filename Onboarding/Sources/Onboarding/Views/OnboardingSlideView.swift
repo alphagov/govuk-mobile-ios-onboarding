@@ -6,6 +6,14 @@ struct OnboardingSlideView: View {
     private var model: OnboardingSlide
     @Environment(\.verticalSizeClass) var verticalSizeClass
 
+    enum FocusableFields: Hashable {
+        case title
+        case body
+    }
+
+    @AccessibilityFocusState(for: .voiceOver)
+    private var focus: FocusableFields?
+
     init(model: OnboardingSlide) {
         self.model = model
     }
@@ -23,7 +31,6 @@ struct OnboardingSlideView: View {
                         .frame(width: 225, height: 225)
                         .padding([.bottom])
                 }
-                VStack {
                     Text(model.title)
                         .foregroundColor(Color(UIColor.govUK.text.primary))
                         .font(.title)
@@ -34,14 +41,15 @@ struct OnboardingSlideView: View {
                         .padding(.top, verticalSizeClass == .compact ? 32 : 0)
                         .padding([.trailing, .leading], 16)
                         .accessibilityAddTraits(.isHeader)
+                        .accessibilityFocused($focus, equals: .title)
                     Text(model.body)
                         .foregroundColor(Color(UIColor.govUK.text.primary))
                         .multilineTextAlignment(.center)
                         .accessibilityLabel(Text(model.body))
+                        .accessibilityFocused($focus, equals: .body)
                         .padding([.top, .leading, .trailing], 16)
-                    }
                 Spacer()
-            }.accessibilityElement(children: .contain)
+            }
         }
     }
 }

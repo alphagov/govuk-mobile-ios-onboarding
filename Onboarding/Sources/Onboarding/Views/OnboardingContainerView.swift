@@ -11,6 +11,9 @@ struct OnboardingContainerView: View {
     }
 
     var body: some  View {
+        let layout = verticalSizeClass == .compact ?
+        AnyLayout(HStackLayout()) :
+        AnyLayout(VStackLayout())
         switch viewModel.state {
         case .loading:
             ProgressView()
@@ -37,7 +40,7 @@ struct OnboardingContainerView: View {
                             viewModel?.trackPageControllerPressEvent()
                         }
                     )
-                    AdaptiveStack {
+                    layout {
                         SwiftUIButton(
                             .primary,
                             viewModel: viewModel.primaryButtonViewModel
@@ -74,6 +77,7 @@ struct OnboardingContainerView: View {
         viewModel.isLastSlide == false
     }
 }
+
 #Preview {
     let viewModel = OnboardingContainerViewModel(
         onboardingService: OnboardingService(),

@@ -33,13 +33,15 @@ struct OnboardingContainerView: View {
                         .background(Color(UIColor.govUK.strokes.listDivider))
                         .ignoresSafeArea(edges: [.leading, .trailing])
                         .padding([.top], 0)
-                    UIKitPageControl(
-                        currentPage: $viewModel.tabIndex,
-                        numberOfPages: viewModel.slideCount,
-                        didPressAction: { [weak viewModel] in
-                            viewModel?.trackPageControllerPressEvent()
-                        }
-                    )
+                    if viewModel.slideCount > 1 {
+                        UIKitPageControl(
+                            currentPage: $viewModel.tabIndex,
+                            numberOfPages: viewModel.slideCount,
+                            didPressAction: { [weak viewModel] in
+                                viewModel?.trackPageControllerPressEvent()
+                            }
+                        )
+                    }
                     layout {
                         SwiftUIButton(
                             .primary,

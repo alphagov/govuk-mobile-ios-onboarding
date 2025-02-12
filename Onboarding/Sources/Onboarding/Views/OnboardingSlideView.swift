@@ -17,6 +17,19 @@ struct OnboardingSlideView: View {
     }
 
     var body: some View {
+        bouncableScrollView
+    }
+
+    private var bouncableScrollView: some View {
+        if #available(iOS 16.4, *) {
+            return scrollView
+                .scrollBounceBehavior(.basedOnSize)
+        } else {
+            return scrollView
+        }
+    }
+
+    private var scrollView: some View {
         ScrollView {
             VStack {
                 if verticalSizeClass == .regular {
@@ -29,23 +42,23 @@ struct OnboardingSlideView: View {
                         .frame(width: 225, height: 225)
                         .padding([.bottom])
                 }
-                    Text(model.title)
-                        .foregroundColor(Color(UIColor.govUK.text.primary))
-                        .font(.title)
-                        .fontWeight(.bold)
-                        .multilineTextAlignment(.center)
-                        .frame(maxWidth: .infinity, alignment: .center)
-                        .accessibilityLabel(Text(model.title))
-                        .padding(.top, verticalSizeClass == .compact ? 32 : 0)
-                        .padding([.trailing, .leading], 16)
-                        .accessibilityAddTraits(.isHeader)
-                        .accessibilityFocused($focus, equals: .title)
-                    Text(model.body)
-                        .foregroundColor(Color(UIColor.govUK.text.primary))
-                        .multilineTextAlignment(.center)
-                        .accessibilityLabel(Text(model.body))
-                        .accessibilityFocused($focus, equals: .body)
-                        .padding([.top, .leading, .trailing], 16)
+                Text(model.title)
+                    .foregroundColor(Color(UIColor.govUK.text.primary))
+                    .font(.title)
+                    .fontWeight(.bold)
+                    .multilineTextAlignment(.center)
+                    .frame(maxWidth: .infinity, alignment: .center)
+                    .accessibilityLabel(Text(model.title))
+                    .padding(.top, verticalSizeClass == .compact ? 32 : 0)
+                    .padding([.trailing, .leading], 16)
+                    .accessibilityAddTraits(.isHeader)
+                    .accessibilityFocused($focus, equals: .title)
+                Text(model.body)
+                    .foregroundColor(Color(UIColor.govUK.text.primary))
+                    .multilineTextAlignment(.center)
+                    .accessibilityLabel(Text(model.body))
+                    .accessibilityFocused($focus, equals: .body)
+                    .padding([.top, .leading, .trailing], 16)
                 Spacer()
             }.accessibilityElement(children: .contain)
         }

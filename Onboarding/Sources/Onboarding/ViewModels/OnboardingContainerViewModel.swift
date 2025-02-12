@@ -21,17 +21,20 @@ class OnboardingContainerViewModel: ObservableObject {
     private let source: OnboardingSource
     private let analyticsService: OnboardingAnalyticsService?
     private let accessibilityPoster: AccessibilityPoster.Type
+    private let completeAction: () -> Void
     private let dismissAction: () -> Void
 
     init(onboardingService: OnboardingServiceInterface,
          source: OnboardingSource,
          analyticsService: OnboardingAnalyticsService?,
          accessibilityPoster: AccessibilityPoster.Type = UIAccessibility.self,
+         completeAction: @escaping () -> Void,
          dismissAction: @escaping () -> Void) {
         self.analyticsService = analyticsService
         self.onboardingService = onboardingService
         self.source = source
         self.accessibilityPoster = accessibilityPoster
+        self.completeAction = completeAction
         self.dismissAction = dismissAction
         fetchOnboarding()
     }
@@ -104,6 +107,10 @@ class OnboardingContainerViewModel: ObservableObject {
     }
 
     private func finishOnboarding() {
+        completeAction()
+    }
+
+    private func skipOnboarding() {
         dismissAction()
     }
 
@@ -125,7 +132,7 @@ class OnboardingContainerViewModel: ObservableObject {
             localisedTitle: skipButtonTitle,
             action: { [weak self] in
                 self?.trackSecondaryActionEvent()
-                self?.finishOnboarding()
+                self?.skipOnboarding()
             }
         )
     }

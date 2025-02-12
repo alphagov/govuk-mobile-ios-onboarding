@@ -62,7 +62,7 @@ struct OnboardingContainerView: View {
                                 minHeight: 44,
                                 idealHeight: 44
                             )
-                            .opacity(viewModel.isLastSlide ? 0 : 1)
+                            .opacity(shouldAlphaSecondaryButton ? 0 : 1)
                         }
                     }
                     .padding([.leading, .trailing], verticalSizeClass == .regular ? 16 : 0)
@@ -74,9 +74,15 @@ struct OnboardingContainerView: View {
         }
     }
 
+    private var shouldAlphaSecondaryButton: Bool {
+        viewModel.isLastSlide && viewModel.slideCount > 1
+    }
+
     private var shouldShowSecondaryButton: Bool {
+        // Regular check here is to provide white space below continue
         verticalSizeClass == .regular ||
-        viewModel.isLastSlide == false
+        viewModel.isLastSlide == false ||
+        viewModel.slideCount == 1
     }
 }
 
@@ -85,6 +91,7 @@ struct OnboardingContainerView: View {
         onboardingService: OnboardingService(),
         source: .model([]),
         analyticsService: nil,
+        completeAction: {},
         dismissAction: {}
     )
     viewModel.state = .loaded(

@@ -10,24 +10,35 @@ struct OnboardingContainerView: View {
         _viewModel = StateObject(wrappedValue: viewModel)
     }
 
-    var body: some  View {
+    var body: some View {
         let layout = verticalSizeClass == .compact ?
         AnyLayout(HStackLayout()) :
         AnyLayout(VStackLayout())
         switch viewModel.state {
         case .loading:
             ProgressView()
-        case .loaded(let onboardingSlides):
+        case .loaded(let viewModels):
             VStack(spacing: 0) {
                 TabView(selection: $viewModel.tabIndex) {
-                    ForEach(0..<onboardingSlides.count, id: \.self) { index in
-                        OnboardingSlideView(model: onboardingSlides[index]).onAppear {
-                            viewModel.trackSlideView()
+                    ForEach(0..<viewModels.count, id: \.self) { index in
+                        OnboardingSlideView(viewModel: viewModels[index]).onAppear {
+                            //                            viewModel.trackSlideView()
                         }
                     }
                 }
-                .tabViewStyle(.page(indexDisplayMode: .never))
-                .accessibilityIdentifier("container.tabview")
+                .onAppear {
+                    viewModel.callAnimation(index: 0)
+                }.animation(.easeIn, value: viewModel.tabIndex)
+                    .onChange(
+                        of: viewModel.tabIndex,
+                        perform: { newValue in
+                            withAnimation {
+                                viewModel.callAnimation(index: newValue)
+                            }
+                        }
+                    )
+                    .tabViewStyle(.page(indexDisplayMode: .never))
+                    .accessibilityIdentifier("container.tabview")
                 VStack(alignment: .center, spacing: 16) {
                     Divider()
                         .background(Color(UIColor.govUK.strokes.listDivider))
@@ -38,7 +49,7 @@ struct OnboardingContainerView: View {
                             currentPage: $viewModel.tabIndex,
                             numberOfPages: viewModel.slideCount,
                             didPressAction: { [weak viewModel] in
-                                viewModel?.trackPageControllerPressEvent()
+                                //                                viewModel?.trackPageControllerPressEvent()
                             }
                         )
                     }
@@ -47,7 +58,7 @@ struct OnboardingContainerView: View {
                             .primary,
                             viewModel: viewModel.primaryButtonViewModel
                         )
-                        .accessibilityHint(viewModel.actionButtonAccessibilityHint)
+                        //                        .accessibilityHint(viewModel.actionButtonAccessibilityHint)
                         .frame(
                             minHeight: 44,
                             idealHeight: 44
@@ -57,7 +68,7 @@ struct OnboardingContainerView: View {
                                 .secondary,
                                 viewModel: viewModel.secondaryButtonViewModel
                             )
-                            .accessibilityHint(viewModel.skipButtonAcessibilityHint)
+                            //                            .accessibilityHint(viewModel.skipButtonAcessibilityHint)
                             .frame(
                                 minHeight: 44,
                                 idealHeight: 44
@@ -86,25 +97,25 @@ struct OnboardingContainerView: View {
     }
 }
 
-#Preview {
-    let viewModel = OnboardingContainerViewModel(
-        onboardingService: OnboardingService(),
-        source: .model([]),
-        analyticsService: nil,
-        completeAction: {},
-        dismissAction: {}
-    )
-    viewModel.state = .loaded(
-        [
-            OnboardingSlide(
-                image: "onboarding_screen_3",
-                title: "Get things done on the go!",
-                body: "Access government services and information on your phone using the GOV.UK app",
-                name: ""
-            )
-        ]
-    )
-    return OnboardingContainerView(
-        viewModel: viewModel
-    )
-}
+//#Preview {
+//    let viewModel = OnboardingContainerViewModel(
+//        onboardingService: OnboardingService(),
+//        source: .model([]),
+//        analyticsService: nil,
+//        completeAction: {},
+//        dismissAction: {}
+//    )
+//    viewModel.state = .loaded(
+//        [
+//            OnboardingSlide(
+//                image: "onboarding_screen_3",
+//                title: "Get things done on the go!",
+//                body: "Access government services and information on your phone using the GOV.UK app",
+//                name: ""
+//            )
+//        ]
+//    )
+//    return OnboardingContainerView(
+//        viewModel: viewModel
+//    )
+//}

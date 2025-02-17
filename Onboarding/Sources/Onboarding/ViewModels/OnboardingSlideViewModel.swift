@@ -8,13 +8,13 @@ public protocol OnboardingSlideViewModelInterface: ObservableObject {
     var body: String { get }
     var name: String { get }
     var contentView: AnyView { get }
-    var contentViewPublisher: AnyPublisher<AnyView, Never> { get }
+    var contentViewUpdatePublisher: AnyPublisher<AnyView, Never> { get }
 
-    func startAnimation()
+    func willShow()
 }
 
 extension OnboardingSlideViewModelInterface {
-    public var contentViewPublisher: AnyPublisher<AnyView, Never> {
+    public var contentViewUpdatePublisher: AnyPublisher<AnyView, Never> {
         Empty<AnyView, Never>().eraseToAnyPublisher()
     }
 }

@@ -21,9 +21,9 @@ struct OnboardingSlideView: View {
     var body: some View {
         bouncableScrollView
             .onReceive(
-                viewModel.contentViewPublisher,
-                perform: { result in
-                    self.contentView = result
+                viewModel.contentViewUpdatePublisher,
+                perform: { view in
+                    self.contentView = view
                 }
             )
     }

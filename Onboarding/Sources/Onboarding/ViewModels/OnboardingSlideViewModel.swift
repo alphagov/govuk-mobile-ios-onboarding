@@ -1,27 +1,20 @@
 import Foundation
 import SwiftUICore
 
-open class OnboardingSlideViewModel: ObservableObject {
+import Combine
 
-    public let slide: OnboardingSlide
+public protocol OnboardingSlideViewModelInterface: ObservableObject {
+    var title: String { get }
+    var body: String { get }
+    var name: String { get }
+    var contentView: AnyView { get }
+    var contentViewPublisher: AnyPublisher<AnyView, Never> { get }
 
-    public init(slide: OnboardingSlide) {
-        self.slide = slide
+    func startAnimation()
+}
+
+extension OnboardingSlideViewModelInterface {
+    public var contentViewPublisher: AnyPublisher<AnyView, Never> {
+        Empty<AnyView, Never>().eraseToAnyPublisher()
     }
-
-    open var title: String {
-        slide.title
-    }
-
-    open var body: String {
-        slide.body
-    }
-
-    open var image: AnyView {
-        fatalError("This needs overriding")
-    }
-
-    open func startAnimation() { }
-
-    open func trackSlideView() { }
 }

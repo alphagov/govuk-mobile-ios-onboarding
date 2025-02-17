@@ -6,7 +6,7 @@ class OnboardingContainerViewModel: ObservableObject {
     @Published var tabIndex: Int = 0
     @Published var state = State.loading
     @Published var slideCount: Int = 0
-    private var slides: [OnboardingSlideViewModel] = []
+    private var slides: [any OnboardingSlideViewModelInterface] = []
     let skipButtonTitle = "Skip"
     private let onboardingService: OnboardingSlideProvider
     private let analyticsService: OnboardingAnalyticsService?
@@ -52,6 +52,17 @@ class OnboardingContainerViewModel: ObservableObject {
         completeAction()
     }
 
+    func trackSlideView() {
+        guard slides.count >= 1 else { return }
+        let slide = slides[tabIndex]
+        let screen = OnboardingScreen(
+            trackingName: slide.name,
+            trackingClass: "OnboardingSlideView",
+            trackingTitle: slide.title
+        )
+        analyticsService?.trackOnboardingScreen(screen)
+    }
+
     private func dismissOnboarding() {
         dismissAction()
     }
@@ -86,7 +97,7 @@ class OnboardingContainerViewModel: ObservableObject {
         )
     }
 
-    private func handleSlidesResult(result: Result<[OnboardingSlideViewModel], Error>) {
+    private func handleSlidesResult(result: Result<[any OnboardingSlideViewModelInterface], Error>) {
         switch result {
         case .success(let viewModels) where viewModels.count >= 1:
             self.slides = viewModels
@@ -101,6 +112,6 @@ class OnboardingContainerViewModel: ObservableObject {
 extension OnboardingContainerViewModel {
     enum State {
         case loading
-        case loaded([OnboardingSlideViewModel])
+        case loaded([any OnboardingSlideViewModelInterface])
     }
 }

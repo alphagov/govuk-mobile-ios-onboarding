@@ -3,7 +3,7 @@ import SwiftUI
 import UIComponents
 
 struct OnboardingSlideView: View {
-    @ObservedObject private var viewModel: OnboardingSlideViewModel
+    private var viewModel: any OnboardingSlideViewModelInterface
     @Environment(\.verticalSizeClass) var verticalSizeClass
     private enum FocusableLabels: Hashable {
         case title
@@ -11,13 +11,21 @@ struct OnboardingSlideView: View {
     }
     @AccessibilityFocusState(for: .voiceOver)
     private var focus: FocusableLabels?
+    @State var contentView: AnyView
 
-    init(viewModel: OnboardingSlideViewModel) {
+    init(viewModel: any OnboardingSlideViewModelInterface) {
         self.viewModel = viewModel
+        self.contentView = viewModel.contentView
     }
 
     var body: some View {
         bouncableScrollView
+            .onReceive(
+                viewModel.contentViewPublisher,
+                perform: { result in
+                    self.contentView = result
+                }
+            )
     }
 
     private var bouncableScrollView: some View {
@@ -62,7 +70,7 @@ struct OnboardingSlideView: View {
 
     var imageContainer: some View {
         VStack {
-            viewModel.image
+            contentView
                 .scaledToFit()
                 .frame(width: 290, height: 290)
                 .padding([.bottom])

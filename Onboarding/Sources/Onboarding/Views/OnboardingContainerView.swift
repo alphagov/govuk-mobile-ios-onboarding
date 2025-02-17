@@ -21,19 +21,17 @@ struct OnboardingContainerView: View {
             VStack(spacing: 0) {
                 TabView(selection: $viewModel.tabIndex) {
                     ForEach(0..<viewModels.count, id: \.self) { index in
-                        OnboardingSlideView(viewModel: viewModels[index]).onAppear {
-                            viewModel.trackSlideView()
-                        }
+                        OnboardingSlideView(viewModel: viewModels[index])
                     }
                 }
                 .onAppear {
-                    viewModel.callAnimation(index: 0)
+                    viewModel.didShow(index: 0)
                 }.animation(.easeIn, value: viewModel.tabIndex)
                     .onChange(
                         of: viewModel.tabIndex,
                         perform: { newValue in
                             withAnimation {
-                                viewModel.callAnimation(index: newValue)
+                                viewModel.didShow(index: newValue)
                             }
                         }
                     )

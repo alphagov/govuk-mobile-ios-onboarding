@@ -36,8 +36,10 @@ class OnboardingContainerViewModel: ObservableObject {
         }
     }
 
-    func callAnimation(index: Int) {
-        slides[index].startAnimation()
+    func didShow(index: Int) {
+        let slide = slides[index]
+        slide.didAppear()
+        trackSlideView(slide: slide)
     }
 
     private func navigateToNextSlide() {
@@ -52,9 +54,7 @@ class OnboardingContainerViewModel: ObservableObject {
         completeAction()
     }
 
-    func trackSlideView() {
-        guard slides.count >= 1 else { return }
-        let slide = slides[tabIndex]
+    private func trackSlideView(slide: any OnboardingSlideViewModelInterface) {
         let screen = OnboardingScreen(
             trackingName: slide.name,
             trackingClass: "OnboardingSlideView",

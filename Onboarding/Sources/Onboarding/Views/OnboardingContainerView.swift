@@ -47,7 +47,7 @@ struct OnboardingContainerView: View {
                             currentPage: $viewModel.tabIndex,
                             numberOfPages: viewModel.slideCount,
                             didPressAction: { [weak viewModel] in
-                                //                                viewModel?.trackPageControllerPressEvent()
+                                viewModel?.trackPageControllerPressEvent()
                             }
                         )
                     }

@@ -68,18 +68,22 @@ class OnboardingContainerViewModel: ObservableObject {
     }
 
     var primaryButtonViewModel: GOVUKButton.ButtonViewModel {
-        .init(
-            localisedTitle: slides[tabIndex].primaryButtonTitle,
+        let title = slides[tabIndex].primaryButtonTitle
+        return .init(
+            localisedTitle: title,
             action: { [weak self] in
+                self?.trackButtonActionEvent(title: title)
                 self?.primaryAction()
             }
         )
     }
 
     var secondaryButtonViewModel: GOVUKButton.ButtonViewModel {
-        .init(
-            localisedTitle: skipButtonTitle,
+        let title = skipButtonTitle
+        return .init(
+            localisedTitle: title,
             action: { [weak self] in
+                self?.trackButtonActionEvent(title: title)
                 self?.dismissOnboarding()
             }
         )
@@ -102,6 +106,15 @@ class OnboardingContainerViewModel: ObservableObject {
         default:
             finishOnboarding()
         }
+    }
+
+    func trackPageControllerPressEvent() {
+        analyticsService?.trackOnboardingEvent(OnboardingEvent.dotNavigation)
+    }
+
+    private func trackButtonActionEvent(title: String) {
+        let event = OnboardingEvent.buttonNavigation(text: title)
+        analyticsService?.trackOnboardingEvent(event)
     }
 }
 

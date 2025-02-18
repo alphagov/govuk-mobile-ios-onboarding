@@ -46,10 +46,6 @@ class OnboardingContainerViewModel: ObservableObject {
         tabIndex += 1
     }
 
-    var primaryButtonTitle: String {
-        isLastSlide ? "Continue" : "Next"
-    }
-
     private func finishOnboarding() {
         completeAction()
     }
@@ -73,7 +69,7 @@ class OnboardingContainerViewModel: ObservableObject {
 
     var primaryButtonViewModel: GOVUKButton.ButtonViewModel {
         .init(
-            localisedTitle: primaryButtonTitle,
+            localisedTitle: slides[tabIndex].primaryButtonTitle,
             action: { [weak self] in
                 self?.primaryAction()
             }

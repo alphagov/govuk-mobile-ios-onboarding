@@ -7,7 +7,6 @@ class OnboardingContainerViewModel: ObservableObject {
     @Published var state = State.loading
     @Published var slideCount: Int = 0
     private var slides: [any OnboardingSlideViewModelInterface] = []
-    let skipButtonTitle = "Skip"
     private let onboardingService: OnboardingSlideProvider
     private let analyticsService: OnboardingAnalyticsService?
     private let accessibilityPoster: AccessibilityPoster.Type
@@ -79,7 +78,7 @@ class OnboardingContainerViewModel: ObservableObject {
     }
 
     var secondaryButtonViewModel: GOVUKButton.ButtonViewModel {
-        let title = skipButtonTitle
+        let title = slides[tabIndex].secondaryButtonTitle
         return .init(
             localisedTitle: title,
             action: { [weak self] in

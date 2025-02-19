@@ -3,7 +3,9 @@ import SwiftUI
 
 @testable import Onboarding
 
-class MockSlideViewModel: OnboardingSlideViewModelInterface {
+class MockSlideViewModel: OnboardingSlideViewModelInterface,
+                          Equatable {
+
     var title: String
     var body: String = "Body"
     var name: String
@@ -20,4 +22,12 @@ class MockSlideViewModel: OnboardingSlideViewModelInterface {
     }
 
     func didAppear() { }
+
+    static func == (lhs: MockSlideViewModel, rhs: MockSlideViewModel) -> Bool {
+        lhs.title == rhs.title &&
+        lhs.name == rhs.name &&
+        lhs.body == rhs.body &&
+        lhs.primaryButtonTitle == rhs.primaryButtonTitle &&
+        lhs.secondaryButtonTitle == rhs.secondaryButtonTitle
+    }
 }

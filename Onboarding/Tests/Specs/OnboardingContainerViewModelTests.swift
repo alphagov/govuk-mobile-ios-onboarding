@@ -29,13 +29,10 @@ final class OnboardingContainerViewModelTests: XCTestCase {
     func test_init_fetchedSlides_changesState() throws {
         let mockOnboardingService = MockOnboardingSlideProvider()
 
-        let expectedSlides = OnboardingSlide.arrange(count: 2).map {
-            OnboardingSlideImageViewModel(
-                slide: $0,
-                primaryButtonTitle: "primary test",
-                secondaryButtonTitle: "secondary test"
-            )
-        }
+        let expectedSlides = [
+            MockSlideViewModel(title: UUID().uuidString),
+            MockSlideViewModel(title: UUID().uuidString)
+        ]
 
         let sut = OnboardingContainerViewModel(
             slideProvider: mockOnboardingService,
@@ -47,7 +44,8 @@ final class OnboardingContainerViewModelTests: XCTestCase {
         switch sut.state {
         case .loaded(let viewModels):
             XCTAssert(viewModels.count == expectedSlides.count)
-            XCTAssert(viewModels.first?.title == expectedSlides.first?.title)
+            let castViewModels = viewModels as? [MockSlideViewModel]
+            XCTAssert(castViewModels == expectedSlides)
         default:
             XCTFail("Expected loaded")
         }
@@ -79,13 +77,10 @@ final class OnboardingContainerViewModelTests: XCTestCase {
             completeAction: {},
             dismissAction: {}
         )
-        let expectedSlides = OnboardingSlide.arrange(count: 2).enumerated().map {
-            OnboardingSlideImageViewModel(
-                slide: $0.element,
-                primaryButtonTitle: "Primary \($0.offset)",
-                secondaryButtonTitle: "Secondary \($0.offset)"
-            )
-        }
+        let expectedSlides = [
+            MockSlideViewModel(primaryButtonTitle: "Primary 0"),
+            MockSlideViewModel(primaryButtonTitle: "Primary 1")
+        ]
         mockSlideProvider._receivedFetchSlidesCompletionHander?(.success(expectedSlides))
 
         sut.tabIndex = 0

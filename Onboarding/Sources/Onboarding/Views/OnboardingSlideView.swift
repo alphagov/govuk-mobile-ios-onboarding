@@ -5,12 +5,12 @@ import UIComponents
 struct OnboardingSlideView: View {
     private var viewModel: any OnboardingSlideViewModelInterface
     @Environment(\.verticalSizeClass) var verticalSizeClass
-    private enum FocusableLabel: Hashable {
+    private enum FocusableLabels: Hashable {
         case title
         case body
     }
     @AccessibilityFocusState(for: .voiceOver)
-    private var focus: FocusableLabel?
+    private var focus: FocusableLabels?
     @State var contentView: AnyView
 
     init(viewModel: any OnboardingSlideViewModelInterface) {
@@ -57,12 +57,14 @@ struct OnboardingSlideView: View {
                     .padding([.trailing, .leading], 16)
                     .accessibilityAddTraits(.isHeader)
                     .accessibilityFocused($focus, equals: .title)
+                    .accessibilitySortPriority(1)
                 Text(viewModel.body)
                     .foregroundColor(Color(UIColor.govUK.text.primary))
                     .multilineTextAlignment(.center)
                     .accessibilityLabel(Text(viewModel.body))
                     .accessibilityFocused($focus, equals: .body)
                     .padding([.top, .leading, .trailing], 16)
+                    .accessibilitySortPriority(0)
                 Spacer()
             }.accessibilityElement(children: .contain)
         }
@@ -77,14 +79,3 @@ struct OnboardingSlideView: View {
         }
     }
 }
-
-// #Preview {
-//    OnboardingSlideView(
-//        model: OnboardingSlide(
-//            image: "onboarding_screen_1",
-//            title: "Get things done on the go",
-//            body: "GAccess government services and information",
-//            name: ""
-//        )
-//    )
-// }

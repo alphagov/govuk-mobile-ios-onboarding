@@ -10,6 +10,7 @@ public class OnboardingSlideImageViewModel: OnboardingSlideViewModelInterface {
     public let secondaryButtonTitle: String
 
     public init(slide: OnboardingSlide,
+                bundle: Bundle = .main,
                 primaryButtonTitle: String,
                 secondaryButtonTitle: String) {
         self.title = slide.title
@@ -18,7 +19,7 @@ public class OnboardingSlideImageViewModel: OnboardingSlideViewModelInterface {
         self.primaryButtonTitle = primaryButtonTitle
         self.secondaryButtonTitle = secondaryButtonTitle
         self.contentView = AnyView(
-            Image(slide.image)
+            Image(decorative: slide.image, bundle: bundle)
         )
     }
 

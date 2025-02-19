@@ -5,12 +5,12 @@ import UIComponents
 struct OnboardingSlideView: View {
     private var viewModel: any OnboardingSlideViewModelInterface
     @Environment(\.verticalSizeClass) var verticalSizeClass
-    private enum FocusableLabels: Hashable {
+    private enum FocusableLabel: Hashable {
         case title
         case body
     }
     @AccessibilityFocusState(for: .voiceOver)
-    private var focus: FocusableLabels?
+    private var focus: FocusableLabel?
     @State var contentView: AnyView
 
     init(viewModel: any OnboardingSlideViewModelInterface) {

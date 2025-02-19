@@ -20,7 +20,7 @@ public final class Onboarding {
 
     public lazy var viewController: UIViewController = {
         let viewModel = OnboardingContainerViewModel(
-            onboardingService: slideProvider,
+            slideProvider: slideProvider,
             analyticsService: analyticsService,
             completeAction: completeAction,
             dismissAction: dismissAction

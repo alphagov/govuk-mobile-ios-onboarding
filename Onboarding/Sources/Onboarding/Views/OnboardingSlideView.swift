@@ -78,7 +78,7 @@ struct OnboardingSlideView: View {
     }
 }
 
-//#Preview {
+// #Preview {
 //    OnboardingSlideView(
 //        model: OnboardingSlide(
 //            image: "onboarding_screen_1",
@@ -87,4 +87,4 @@ struct OnboardingSlideView: View {
 //            name: ""
 //        )
 //    )
-//}
+// }

@@ -25,6 +25,9 @@ final class OnboardingUITests: XCTestCase {
         //When
         actionButton.tap()
         actionButton.tap()
+
+        sleep(1)
+
         //Then
         XCTAssertFalse(actionButton.exists)
     }
@@ -58,7 +61,7 @@ final class OnboardingUITests: XCTestCase {
         XCTAssertTrue(doneActionButton.exists)
         XCTAssertTrue(doneActionButton.isHittable)
     }
-    
+
     func test_skipButton_whenNotOnLastSlide_exists() {
         //Given
         let skipButton = app.buttons["Skip"]

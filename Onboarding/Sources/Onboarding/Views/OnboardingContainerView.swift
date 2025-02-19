@@ -56,7 +56,7 @@ struct OnboardingContainerView: View {
                             .primary,
                             viewModel: viewModel.primaryButtonViewModel
                         )
-                        //                        .accessibilityHint(viewModel.actionButtonAccessibilityHint)
+                        .accessibilityHint(viewModel.primaryButtonAccessibilityHint)
                         .frame(
                             minHeight: 44,
                             idealHeight: 44
@@ -66,7 +66,7 @@ struct OnboardingContainerView: View {
                                 .secondary,
                                 viewModel: viewModel.secondaryButtonViewModel
                             )
-                            //                            .accessibilityHint(viewModel.skipButtonAcessibilityHint)
+                            .accessibilityHint(viewModel.secondaryButtonAccessibilityHint)
                             .frame(
                                 minHeight: 44,
                                 idealHeight: 44
@@ -95,7 +95,7 @@ struct OnboardingContainerView: View {
     }
 }
 
-//#Preview {
+// #Preview {
 //    let viewModel = OnboardingContainerViewModel(
 //        onboardingService: OnboardingService(),
 //        source: .model([]),
@@ -116,4 +116,4 @@ struct OnboardingContainerView: View {
 //    return OnboardingContainerView(
 //        viewModel: viewModel
 //    )
-//}
+// }

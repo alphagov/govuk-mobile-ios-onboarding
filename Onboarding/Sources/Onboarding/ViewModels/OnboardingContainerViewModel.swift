@@ -7,32 +7,23 @@ class OnboardingContainerViewModel: ObservableObject {
     @Published var state = State.loading
     @Published var slideCount: Int = 0
     private var slides: [any OnboardingSlideViewModelInterface] = []
-    private let onboardingService: OnboardingSlideProvider
+    private let slideProvider: OnboardingSlideProvider
     private let analyticsService: OnboardingAnalyticsService?
     private let accessibilityPoster: AccessibilityPoster.Type
     private let completeAction: () -> Void
     private let dismissAction: () -> Void
 
-    init(onboardingService: OnboardingSlideProvider,
+    init(slideProvider: OnboardingSlideProvider,
          analyticsService: OnboardingAnalyticsService?,
          accessibilityPoster: AccessibilityPoster.Type = UIAccessibility.self,
          completeAction: @escaping () -> Void,
          dismissAction: @escaping () -> Void) {
         self.analyticsService = analyticsService
-        self.onboardingService = onboardingService
+        self.slideProvider = slideProvider
         self.accessibilityPoster = accessibilityPoster
         self.completeAction = completeAction
         self.dismissAction = dismissAction
         fetchOnboarding()
-    }
-
-    func primaryAction() {
-        if isLastSlide {
-            finishOnboarding()
-        } else {
-            navigateToNextSlide()
-            accessibilityPoster.post(notification: .screenChanged, argument: nil)
-        }
     }
 
     func didShow(index: Int) {
@@ -66,6 +57,28 @@ class OnboardingContainerViewModel: ObservableObject {
         tabIndex == slideCount - 1
     }
 
+    var primaryButtonAccessibilityHint: String {
+        isLastSlide ?
+        NSLocalizedString(
+            "actionButtonLastSlideAccessibilityHint",
+            bundle: .module,
+            comment: ""
+        ) :
+        NSLocalizedString(
+            "actionButtonAccessibilityHint",
+            bundle: .module,
+            comment: ""
+        )
+    }
+
+    var secondaryButtonAccessibilityHint: String {
+        NSLocalizedString(
+            "skipButtonAcessibilityHint",
+            bundle: .module,
+            comment: ""
+        )
+    }
+
     var primaryButtonViewModel: GOVUKButton.ButtonViewModel {
         let title = slides[tabIndex].primaryButtonTitle
         return .init(
@@ -75,6 +88,15 @@ class OnboardingContainerViewModel: ObservableObject {
                 self?.primaryAction()
             }
         )
+    }
+
+    private func primaryAction() {
+        if isLastSlide {
+            finishOnboarding()
+        } else {
+            navigateToNextSlide()
+            accessibilityPoster.post(notification: .screenChanged, argument: nil)
+        }
     }
 
     var secondaryButtonViewModel: GOVUKButton.ButtonViewModel {
@@ -89,7 +111,7 @@ class OnboardingContainerViewModel: ObservableObject {
     }
 
     private func fetchOnboarding() {
-        onboardingService.fetchSlides(
+        slideProvider.fetchSlides(
             completion: { [weak self] result in
                 self?.handleSlidesResult(result: result)
             }
@@ -103,7 +125,7 @@ class OnboardingContainerViewModel: ObservableObject {
             slideCount = viewModels.count
             state = .loaded(self.slides)
         default:
-            finishOnboarding()
+            dismissOnboarding()
         }
     }
 

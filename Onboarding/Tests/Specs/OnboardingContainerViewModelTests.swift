@@ -217,9 +217,10 @@ final class OnboardingContainerViewModelTests: XCTestCase {
 
         sut.tabIndex = 1
         XCTAssertEqual(sut.primaryButtonAccessibilityHint, "Finish onboarding")
+        XCTAssertEqual(sut.secondaryButtonAccessibilityHint, "Skip onboarding")
     }
 
-    func test_actionButtonAccessibilityHint_notLastSlide_returnsExpectedResult() throws {
+    func test_accessibilityHints_notLastSlide_returnsExpectedResult() throws {
         let mockOnboardingService = MockOnboardingSlideProvider()
 
         let sut = OnboardingContainerViewModel(
@@ -236,6 +237,7 @@ final class OnboardingContainerViewModelTests: XCTestCase {
 
         sut.tabIndex = 0
         XCTAssertEqual(sut.primaryButtonAccessibilityHint, "Go to the next slide")
+        XCTAssertEqual(sut.secondaryButtonAccessibilityHint, "Skip onboarding")
     }
 
     func test_trackNavigationEvent_tracksNavigationEvent() throws {

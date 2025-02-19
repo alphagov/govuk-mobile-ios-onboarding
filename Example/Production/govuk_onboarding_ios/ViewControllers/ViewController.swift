@@ -32,10 +32,7 @@ class ViewController: UIViewController {
     }
 }
 
-typealias OnboardingSlideProviderResult = Result<[any OnboardingSlideViewModelInterface], any Error>
-typealias OnboardingSlideProviderCompletion = (OnboardingSlideProviderResult) -> Void
 struct TestOnboardingSlideProvider: OnboardingSlideProvider {
-
     func fetchSlides(completion: @escaping OnboardingSlideProviderCompletion) {
         let json = loadJSON(filename: "OnboardingResponse")
         let slides = json.enumerated().map({

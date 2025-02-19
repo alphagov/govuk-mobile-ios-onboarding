@@ -26,8 +26,6 @@ final class OnboardingUITests: XCTestCase {
         actionButton.tap()
         actionButton.tap()
 
-        sleep(1)
-
         //Then
         XCTAssertFalse(actionButton.exists)
     }

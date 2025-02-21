@@ -23,5 +23,5 @@ public class OnboardingSlideImageViewModel: OnboardingSlideViewModelInterface {
         )
     }
 
-    public func didAppear() { }
+    public func didAppear() { /* Do nothing */ }
 }

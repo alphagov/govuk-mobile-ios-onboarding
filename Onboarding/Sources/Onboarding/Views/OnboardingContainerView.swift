@@ -105,26 +105,3 @@ struct OnboardingContainerView: View {
         viewModel.slideCount == 1
     }
 }
-
-// #Preview {
-//    let viewModel = OnboardingContainerViewModel(
-//        onboardingService: OnboardingService(),
-//        source: .model([]),
-//        analyticsService: nil,
-//        completeAction: {},
-//        dismissAction: {}
-//    )
-//    viewModel.state = .loaded(
-//        [
-//            OnboardingSlide(
-//                image: "onboarding_screen_3",
-//                title: "Get things done on the go!",
-//                body: "Access government services and information on your phone using the GOV.UK app",
-//                name: ""
-//            )
-//        ]
-//    )
-//    return OnboardingContainerView(
-//        viewModel: viewModel
-//    )
-// }

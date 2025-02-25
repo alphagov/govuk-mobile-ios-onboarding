@@ -6,37 +6,58 @@ class OnboardingContainerViewModel: ObservableObject {
     @Published var tabIndex: Int = 0
     @Published var state = State.loading
     @Published var slideCount: Int = 0
-    private var slides: [OnboardingSlide] = []
-    let skipButtonTitle = NSLocalizedString(
-        "skipButtonTitle",
-        bundle: .module,
-        comment: ""
-    )
-    let skipButtonAcessibilityHint = NSLocalizedString(
-        "skipButtonAcessibilityHint",
-        bundle: .module,
-        comment: ""
-    )
-    private let onboardingService: OnboardingServiceInterface
-    private let source: OnboardingSource
+    private var slides: [any OnboardingSlideViewModelInterface] = []
+    private let slideProvider: OnboardingSlideProvider
     private let analyticsService: OnboardingAnalyticsService?
     private let accessibilityPoster: AccessibilityPoster.Type
+    private let completeAction: () -> Void
     private let dismissAction: () -> Void
 
-    init(onboardingService: OnboardingServiceInterface,
-         source: OnboardingSource,
+    init(slideProvider: OnboardingSlideProvider,
          analyticsService: OnboardingAnalyticsService?,
          accessibilityPoster: AccessibilityPoster.Type = UIAccessibility.self,
+         completeAction: @escaping () -> Void,
          dismissAction: @escaping () -> Void) {
         self.analyticsService = analyticsService
-        self.onboardingService = onboardingService
-        self.source = source
+        self.slideProvider = slideProvider
         self.accessibilityPoster = accessibilityPoster
+        self.completeAction = completeAction
         self.dismissAction = dismissAction
         fetchOnboarding()
     }
 
-    var actionButtonAccessibilityHint: String {
+    func didShow(index: Int) {
+        let slide = slides[index]
+        slide.didAppear()
+        trackSlideView(slide: slide)
+    }
+
+    private func navigateToNextSlide() {
+        tabIndex += 1
+    }
+
+    private func finishOnboarding() {
+        completeAction()
+    }
+
+    private func trackSlideView(slide: any OnboardingSlideViewModelInterface) {
+        let screen = OnboardingScreen(
+            trackingName: slide.name,
+            trackingClass: "OnboardingSlideView",
+            trackingTitle: slide.title
+        )
+        analyticsService?.trackOnboardingScreen(screen)
+    }
+
+    private func dismissOnboarding() {
+        dismissAction()
+    }
+
+    var isLastSlide: Bool {
+        tabIndex == slideCount - 1
+    }
+
+    var primaryButtonAccessibilityHint: String {
         isLastSlide ?
         NSLocalizedString(
             "actionButtonLastSlideAccessibilityHint",
@@ -50,33 +71,26 @@ class OnboardingContainerViewModel: ObservableObject {
         )
     }
 
-    func trackSlideView() {
-        guard slides.count >= 1 else { return }
-        let slide = slides[tabIndex]
-        let screen = OnboardingScreen(
-            trackingName: slide.name,
-            trackingClass: "OnboardingSlideView",
-            trackingTitle: slide.title
+    var secondaryButtonAccessibilityHint: String {
+        NSLocalizedString(
+            "skipButtonAcessibilityHint",
+            bundle: .module,
+            comment: ""
         )
-        analyticsService?.trackOnboardingScreen(screen)
     }
 
-    private func trackPrimaryActionEvent() {
-        let event = OnboardingEvent.buttonNavigation(text: primaryButtonTitle)
-        analyticsService?.trackOnboardingEvent(event)
+    var primaryButtonViewModel: GOVUKButton.ButtonViewModel {
+        let title = slides[tabIndex].primaryButtonTitle
+        return .init(
+            localisedTitle: title,
+            action: { [weak self] in
+                self?.trackButtonActionEvent(title: title)
+                self?.primaryAction()
+            }
+        )
     }
 
-    private func trackSecondaryActionEvent() {
-        let event = OnboardingEvent.buttonNavigation(text: skipButtonTitle)
-        analyticsService?.trackOnboardingEvent(event)
-    }
-
-    func trackPageControllerPressEvent() {
-        analyticsService?.trackOnboardingEvent(OnboardingEvent.dotNavigation)
-    }
-
-    func primaryAction() {
-        trackPrimaryActionEvent()
+    private func primaryAction() {
         if isLastSlide {
             finishOnboarding()
         } else {
@@ -85,75 +99,49 @@ class OnboardingContainerViewModel: ObservableObject {
         }
     }
 
-    private func navigateToNextSlide() {
-        tabIndex += 1
-    }
-
-    var primaryButtonTitle: String {
-        isLastSlide ?
-        NSLocalizedString(
-            "lastButtonTitle",
-            bundle: .module,
-            comment: ""
-        ) :
-        NSLocalizedString(
-            "primaryButtonTitle",
-            bundle: .module,
-            comment: ""
-        )
-    }
-
-    private func finishOnboarding() {
-        dismissAction()
-    }
-
-    var isLastSlide: Bool {
-        tabIndex == slideCount - 1
-    }
-
-    var primaryButtonViewModel: GOVUKButton.ButtonViewModel {
-        .init(
-            localisedTitle: primaryButtonTitle,
-            action: { [weak self] in
-                self?.primaryAction()
-            }
-        )
-    }
-
     var secondaryButtonViewModel: GOVUKButton.ButtonViewModel {
-        .init(
-            localisedTitle: skipButtonTitle,
+        let title = slides[tabIndex].secondaryButtonTitle
+        return .init(
+            localisedTitle: title,
             action: { [weak self] in
-                self?.trackSecondaryActionEvent()
-                self?.finishOnboarding()
+                self?.trackButtonActionEvent(title: title)
+                self?.dismissOnboarding()
             }
         )
     }
 
     private func fetchOnboarding() {
-        onboardingService.fetchSlides(
-            source: source,
-            completionHandler: { [weak self] result in
+        slideProvider.fetchSlides(
+            completion: { [weak self] result in
                 self?.handleSlidesResult(result: result)
             }
         )
     }
 
-    private func handleSlidesResult(result: Result<[OnboardingSlide], Error>) {
+    private func handleSlidesResult(result: Result<[any OnboardingSlideViewModelInterface], Error>) {
         switch result {
-        case .success(let slides) where slides.count >= 1:
-            self.slides = slides
-            slideCount = slides.count
-            state = .loaded(slides)
+        case .success(let viewModels) where viewModels.count >= 1:
+            self.slides = viewModels
+            slideCount = viewModels.count
+            state = .loaded(self.slides)
         default:
-            finishOnboarding()
+            dismissOnboarding()
         }
+    }
+
+    func trackPageControllerPressEvent() {
+        analyticsService?.trackOnboardingEvent(OnboardingEvent.dotNavigation)
+    }
+
+    private func trackButtonActionEvent(title: String) {
+        let event = OnboardingEvent.buttonNavigation(text: title)
+        analyticsService?.trackOnboardingEvent(event)
     }
 }
 
 extension OnboardingContainerViewModel {
-    enum State: Equatable {
+    enum State {
         case loading
-        case loaded([OnboardingSlide])
+        case loaded([any OnboardingSlideViewModelInterface])
     }
 }

@@ -1,5 +1,4 @@
 import Foundation
-import UIKit
 
 public struct OnboardingSlide: Codable,
                                Equatable {

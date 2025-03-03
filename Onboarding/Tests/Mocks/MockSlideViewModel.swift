@@ -11,7 +11,9 @@ class MockSlideViewModel: OnboardingSlideViewModelInterface,
     var name: String
     var contentView: AnyView = AnyView(EmptyView())
     var primaryButtonTitle: String
+    var primaryButtonAccessibilityHint: String? = nil
     var secondaryButtonTitle: String = "Secondary"
+    var secondaryButtonAccessibilityHint: String? = nil
 
     init(title: String = "Title",
          name: String = "Name",
@@ -19,6 +21,8 @@ class MockSlideViewModel: OnboardingSlideViewModelInterface,
         self.title = title
         self.name = name
         self.primaryButtonTitle = primaryButtonTitle
+        self.primaryButtonAccessibilityHint = primaryButtonTitle + " accessibility hint"
+        self.secondaryButtonAccessibilityHint = secondaryButtonTitle + " accessibility hint"
     }
 
     func didAppear() { }

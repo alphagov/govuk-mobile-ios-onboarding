@@ -38,8 +38,7 @@ let package = Package(
                 "Arrangers",
                 "Mocks",
                 "Specs",
-            ],
-            resources : [.process("Resources")]
+            ]
         ),
     ]
 )

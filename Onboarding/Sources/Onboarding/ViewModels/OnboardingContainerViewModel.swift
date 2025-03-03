@@ -58,25 +58,11 @@ class OnboardingContainerViewModel: ObservableObject {
     }
 
     var primaryButtonAccessibilityHint: String {
-        isLastSlide ?
-        NSLocalizedString(
-            "actionButtonLastSlideAccessibilityHint",
-            bundle: .module,
-            comment: ""
-        ) :
-        NSLocalizedString(
-            "actionButtonAccessibilityHint",
-            bundle: .module,
-            comment: ""
-        )
+        slides[tabIndex].primaryButtonAccessibilityHint ?? ""
     }
 
     var secondaryButtonAccessibilityHint: String {
-        NSLocalizedString(
-            "skipButtonAcessibilityHint",
-            bundle: .module,
-            comment: ""
-        )
+        slides[tabIndex].secondaryButtonAccessibilityHint ?? ""
     }
 
     var primaryButtonViewModel: GOVUKButton.ButtonViewModel {

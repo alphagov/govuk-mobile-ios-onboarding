@@ -14,7 +14,9 @@ struct OnboardingSlideImageViewModelTests {
         let sut = OnboardingSlideImageViewModel(
             slide: expectedSlide,
             primaryButtonTitle: expectedPrimaryButtonTitle,
-            secondaryButtonTitle: expectedSecondaryButtonTitle
+            primaryButtonAccessibilityHint: nil,
+            secondaryButtonTitle: expectedSecondaryButtonTitle,
+            secondaryButtonAccessibilityHint: nil
         )
 
         #expect(sut.title == expectedSlide.title)

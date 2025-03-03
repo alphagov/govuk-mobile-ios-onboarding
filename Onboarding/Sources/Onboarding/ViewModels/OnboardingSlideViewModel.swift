@@ -10,7 +10,9 @@ public protocol OnboardingSlideViewModelInterface: ObservableObject {
     var contentView: AnyView { get }
     var contentViewUpdatePublisher: AnyPublisher<AnyView, Never> { get }
     var primaryButtonTitle: String { get }
+    var primaryButtonAccessibilityHint: String? { get }
     var secondaryButtonTitle: String { get }
+    var secondaryButtonAccessibilityHint: String? { get }
 
     func didAppear()
 }

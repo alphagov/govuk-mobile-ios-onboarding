@@ -39,7 +39,9 @@ struct TestOnboardingSlideProvider: OnboardingSlideProvider {
             OnboardingSlideImageViewModel(
                 slide: $0.element,
                 primaryButtonTitle: $0.offset == (json.count - 1) ? "Done": "Continue",
-                secondaryButtonTitle: "Skip"
+                primaryButtonAccessibilityHint: nil,
+                secondaryButtonTitle: "Skip",
+                secondaryButtonAccessibilityHint: nil
             )
         })
         completion(.success(slides))

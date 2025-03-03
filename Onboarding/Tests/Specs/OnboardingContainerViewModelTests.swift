@@ -205,14 +205,14 @@ final class OnboardingContainerViewModelTests: XCTestCase {
             dismissAction: {}
         )
         let expectedSlides = [
-            MockSlideViewModel(),
-            MockSlideViewModel()
+            MockSlideViewModel(primaryButtonTitle: "first"),
+            MockSlideViewModel(primaryButtonTitle: "second")
         ]
         mockOnboardingService._receivedFetchSlidesCompletionHander?(.success(expectedSlides))
 
         sut.tabIndex = 1
-        XCTAssertEqual(sut.primaryButtonAccessibilityHint, "Finish onboarding")
-        XCTAssertEqual(sut.secondaryButtonAccessibilityHint, "Skip onboarding")
+        XCTAssertEqual(sut.primaryButtonAccessibilityHint, "second accessibility hint")
+        XCTAssertEqual(sut.secondaryButtonAccessibilityHint, "Secondary accessibility hint")
     }
 
     func test_accessibilityHints_notLastSlide_returnsExpectedResult() throws {
@@ -225,14 +225,14 @@ final class OnboardingContainerViewModelTests: XCTestCase {
             dismissAction: {}
         )
         let expectedSlides = [
-            MockSlideViewModel(),
-            MockSlideViewModel()
+            MockSlideViewModel(primaryButtonTitle: "first"),
+            MockSlideViewModel(primaryButtonTitle: "second")
         ]
         mockOnboardingService._receivedFetchSlidesCompletionHander?(.success(expectedSlides))
 
         sut.tabIndex = 0
-        XCTAssertEqual(sut.primaryButtonAccessibilityHint, "Go to the next slide")
-        XCTAssertEqual(sut.secondaryButtonAccessibilityHint, "Skip onboarding")
+        XCTAssertEqual(sut.primaryButtonAccessibilityHint, "first accessibility hint")
+        XCTAssertEqual(sut.secondaryButtonAccessibilityHint, "Secondary accessibility hint")
     }
 
     func test_trackNavigationEvent_tracksNavigationEvent() throws {

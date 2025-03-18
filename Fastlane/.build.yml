@@ -8,7 +8,7 @@ default: &DEFAULTS
   scan:
     output_directory: test_output
     devices:
-      - iPhone 16 Pro (18.1)
+      - iPhone 16 Pro (18.2)
 
 unit:
   <<: *DEFAULTS

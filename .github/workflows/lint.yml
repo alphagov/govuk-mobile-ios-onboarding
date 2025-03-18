@@ -21,11 +21,6 @@ jobs:
         with:
           bundler-cache: true
 
-      - name: Rubocop
-        uses: reviewdog/action-rubocop@8d644c0bec100610e92c9fafa1fe114a8ae66c36 #pin@v2.11.1
-        with:
-          use_bundler: true
-
       - name: SwiftLint
         uses: norio-nomura/action-swiftlint@9f4dcd7fd46b4e75d7935cf2f4df406d5cae3684 #pin@3.2.1
         if: always()
